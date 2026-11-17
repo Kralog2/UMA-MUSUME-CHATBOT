@@ -1,12 +1,21 @@
-"""Consola del chatbot completo: python -m src.chat_console"""
+"""Inicia una conversación interactiva con el chatbot desde la terminal.
+
+Permite seleccionar el modelo, enviar mensajes, reiniciar el diálogo y salir.
+"""
 from src.conversation.dialogue_manager import DialogueManager
 from src.models.predictor_adapter import construir_predictor
 from pathlib import Path
+import argparse
 
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
-    dm=DialogueManager(construir_predictor(), ROOT/"data/game")
+    """Configura el modelo seleccionado y procesa los mensajes de la consola."""
+    parser=argparse.ArgumentParser(description="Chatbot Uma Musume")
+    parser.add_argument("--modelo", choices=["original", "reforzado"], default="original")
+    args=parser.parse_args()
+    ruta=ROOT/"artifacts"/("modelo_reforzado_etapa3.joblib" if args.modelo=="reforzado" else "mejor_modelo.joblib")
+    dm=DialogueManager(construir_predictor(ruta), ROOT/"data/game")
     print("Asistente Uma Musume | salir: cerrar | /reiniciar: nueva conversación")
     while True:
         try:

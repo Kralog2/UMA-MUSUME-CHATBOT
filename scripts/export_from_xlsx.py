@@ -18,12 +18,14 @@ UMBRAL_CONFIANZA = 0.30
 
 
 def norm(t):
+    """Normaliza texto para detectar duplicados y fugas entre conjuntos."""
     t = unicodedata.normalize("NFKD", str(t).lower())
     t = "".join(c for c in t if not unicodedata.combining(c))
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", t)).strip()
 
 
 def limpiar(df):
+    """Elimina columnas y filas vacías y limpia espacios en los datos de una hoja."""
     df = df.loc[:, [c for c in df.columns if not str(c).startswith("Unnamed")]].copy()
     df.columns = [str(c).strip() for c in df.columns]
     df = df.apply(lambda col: col.map(lambda v: v.strip() if isinstance(v, str) else v))
@@ -31,6 +33,7 @@ def limpiar(df):
 
 
 def main(xlsx):
+    """Exporta las hojas del libro, genera JSON y valida los datos requeridos."""
     hojas = {k: limpiar(v) for k, v in pd.read_excel(xlsx, sheet_name=None, dtype=str, keep_default_na=False).items()}
     out = RAIZ / "data"
     for hoja, archivo in [("Characters", "characters.csv"), ("Knowledge", "knowledge.csv"), ("Cards", "cards.csv"),

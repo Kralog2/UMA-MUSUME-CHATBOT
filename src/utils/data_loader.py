@@ -1,9 +1,10 @@
-"""Carga CSV con columnas texto,intencion y valida su formato."""
+"""Carga y valida datasets CSV con las columnas texto e intencion requeridas."""
 from pathlib import Path
 import pandas as pd
 
 
 def cargar_dataset(ruta):
+    """Lee un CSV, valida sus columnas y devuelve filas limpias y no vacías."""
     df = pd.read_csv(ruta, encoding="utf-8-sig")
     faltantes = {"texto", "intencion"} - set(df.columns)
     if faltantes:

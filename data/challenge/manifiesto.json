@@ -1,0 +1,8 @@
+{
+  "origen": "Preguntas redactadas específicamente para esta etapa; no se derivan automáticamente del test anterior; pendiente revisión humana de etiquetas.",
+  "refuerzo_total": 73,
+  "desafio_total": 68,
+  "desafio_por_intencion": 4,
+  "hash_sha256_desafio": "2e9dbcdc5032e3617f2d2d9f32de38735573e994e2f683ecc007a49eee0508f7",
+  "advertencia": "Evaluación nueva separada, pero elaborada por el asistente (sintética); no equivale a muestras reales de usuarios. No optimizar el modelo ni los umbrales mirando sus resultados."
+}

@@ -1,4 +1,8 @@
-"""Entrenamiento reproducible de SVM con calibración interna (solo train)."""
+"""Entrena y evalúa un SVM calibrado, guardando el modelo y sus métricas.
+
+La calibración se ajusta con validación cruzada sobre train; test se usa solo
+para informar una reevaluación del conjunto previamente empleado.
+"""
 from pathlib import Path
 import json
 import joblib
@@ -15,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def construir_modelo_base():
+    """Construye el pipeline TF-IDF y SVM lineal sin calibración."""
     return Pipeline([
         ("tfidf", crear_vectorizador()),
         ("clasificador", LinearSVC(class_weight="balanced", random_state=42)),
@@ -22,6 +27,7 @@ def construir_modelo_base():
 
 
 def entrenar():
+    """Valida los datos, entrena y calibra el SVM, y guarda modelo y resultados."""
     train = cargar_dataset(ROOT / "data/raw/train.csv")
     test = cargar_dataset(ROOT / "data/raw/test.csv")
     assert set(test.intencion) <= set(train.intencion), "El test tiene intenciones que no están en train"

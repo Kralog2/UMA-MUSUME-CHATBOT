@@ -1,0 +1,69 @@
+﻿texto,intencion
+¿Qué supports pondrías en un equipo de carreras de milla?,cartas_recomendadas
+Quiero elegir cartas para entrenar a Mejiro McQueen,cartas_recomendadas
+¿Me recomiendas algunas cartas centradas en inteligencia?,cartas_recomendadas
+Sugiere un deck de cartas sin gastar mucho,cartas_recomendadas
+"Acabo de empezar, ¿qué función cumple una support card?",cartas_soporte
+¿Las cartas SR y SSR hacen cosas diferentes?,cartas_soporte
+Explícame cómo operan las cartas durante un entrenamiento,cartas_soporte
+No sé para qué hay cartas de velocidad y de fuerza,cartas_soporte
+"Bueno, hasta mañana",despedida
+"Muchas gracias, nos leemos luego",despedida
+"Me voy, chao",despedida
+Hasta la próxima conversación,despedida
+¿En qué carreras debería poner a Vodka?,distancia_pista_recomendada
+"Para Taiki Shuttle, ¿cuál pista conviene más?",distancia_pista_recomendada
+Dime el estilo y la distancia ideales para una uma concreta,distancia_pista_recomendada
+Quiero elegir el terreno adecuado para mi corredora,distancia_pista_recomendada
+¿Qué quiere decir tener C en césped?,distancias_aptitudes
+¿A qué se refieren las categorías de distancia?,distancias_aptitudes
+¿Cómo leo las letras de aptitud de una corredora?,distancias_aptitudes
+No comprendo la distinción entre milla y media distancia,distancias_aptitudes
+¿Cuánto tarda en hervir una papa?,fuera_dominio
+¿Qué significa la palabra democracia?,fuera_dominio
+¿Puedes decirme la capital de Noruega?,fuera_dominio
+¿Cómo limpio el filtro de mi lavadora?,fuera_dominio
+¿En qué skills conviene invertir los puntos?,habilidades_comprar
+"Me sobran puntos de habilidad, ¿qué compro?",habilidades_comprar
+¿Cuáles habilidades son buenas para una carrera de milla?,habilidades_comprar
+¿Qué skills me ayudan a mantener el ritmo?,habilidades_comprar
+¿Qué se transmite de los padres a una corredora?,herencias
+¿Cómo se aprovechan los factores de herencia?,herencias
+Explícame la crianza y los legados en Uma Musume,herencias
+¿Qué utilidad tienen las herencias azules?,herencias
+¿Qué habilidades trae la carta de Super Creek?,info_carta
+Háblame de los bonos de la carta Fine Motion,info_carta
+¿Qué información hay sobre la SSR de Kitasan Black?,info_carta
+¿Cuál es el efecto de esta carta al subir su límite?,info_carta
+Quiero conocer los atributos de Sakura Bakushin O,info_personaje
+Dime las características de Haru Urara,info_personaje
+¿Qué sabes de las aptitudes de Mejiro McQueen?,info_personaje
+Cuéntame sobre el perfil de Gold Ship,info_personaje
+¿Qué modo de entrenamiento resulta más fácil para empezar?,mejor_escenario
+Quiero saber qué escenario elegir como novato,mejor_escenario
+¿En qué se diferencian los modos URA y Unity?,mejor_escenario
+¿Con cuál escenario se progresa mejor?,mejor_escenario
+¿Puedes darme una explicación más completa?,pedir_mas_detalle
+"No entendí lo último, ¿me das un ejemplo?",pedir_mas_detalle
+Profundiza en la recomendación anterior,pedir_mas_detalle
+¿A qué te refieres exactamente con eso?,pedir_mas_detalle
+¿Cuál es la utilidad de los relojes que recibo?,recompensas_items
+¿Qué puedo comprar usando zapatos del juego?,recompensas_items
+¿Qué función tienen los obsequios por competir en carreras?,recompensas_items
+¿Qué se hace con las bandas de ganador?,recompensas_items
+"Qué onda, ¿me ayudas?",saludo
+"Buenas tardes, bot",saludo
+"Hola, tengo una consulta",saludo
+"Hey, ¿estás ahí?",saludo
+¿Qué impacto tiene la estadística Guts?,stats_funcion
+¿Cómo afecta Wit al desempeño de la corredora?,stats_funcion
+Explícame la diferencia entre velocidad y resistencia,stats_funcion
+¿Qué hace el atributo Power durante una carrera?,stats_funcion
+¿Cuál es la forma de mejorar una support card que ya tengo?,subir_nivel
+¿Qué puedo hacer con dos copias de la misma carta?,subir_nivel
+¿Cómo aumento el nivel máximo de una carta?,subir_nivel
+¿Dónde se potencian las cartas de apoyo?,subir_nivel
+"No conozco el juego, ¿qué corredora es fácil de criar?",uma_facil_entrenar
+¿Qué uma me conviene si soy completamente principiante?,uma_facil_entrenar
+¿Cuál personaje es menos difícil para aprender?,uma_facil_entrenar
+Recomienda una chica caballo sencilla para empezar a entrenar,uma_facil_entrenar

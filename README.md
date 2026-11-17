@@ -50,3 +50,44 @@ Este test utiliza **el clasificador SVM real**, no el provisional. Sus resultado
 2. Afinar el rechazo `fuera_dominio` frente a `desconocido` con validación.
 3. Crear API por sesión para frontend y tests de integración HTTP.
 4. Completar notebook de comparación de dos clasificadores y documentación de procedencia.
+
+## Etapa 2: diagnóstico reproducible (17/11/2026)
+
+Se añade análisis OOF *solo con entrenamiento*, comparación de tres estrategias y auditoría de similitud:
+
+```powershell
+python -m src.evaluation.diagnostico_cv
+python -m src.evaluation.auditoria_datos
+```
+
+Leer el informe completo en [`docs/ETAPA_2_DIAGNOSTICO.md`](docs/ETAPA_2_DIAGNOSTICO.md). Se conservan el modelo desplegado, los datasets, el umbral actual y la lógica conversacional; no se vuelve a ajustar sobre el test antiguo.
+
+## Etapa 3: refuerzo y nuevo desafío de evaluación (17/11/2026)
+
+Se conserva **intacta** la versión anterior como predeterminada. Hay un modelo adicional optativo, entrenado con 73 ejemplos nuevos **sin modificar** los datasets originales:
+
+```powershell
+python -m src.models.train_reforzado
+python -m src.chat_console --modelo reforzado
+python tests/run_conversation_tests.py --modelo reforzado
+```
+
+La comparación en validación cruzada, los 68 ejemplos de evaluación nueva (no empleados en entrenamiento), los resultados y la lista exacta de archivos están en [`docs/ETAPA_3_REFUERZO_EVALUACION.md`](docs/ETAPA_3_REFUERZO_EVALUACION.md). La evaluación independiente ya se ejecutó **una vez** y su resultado queda congelado. No ajustaremos el modelo a partir de las respuestas del desafío.
+
+## Etapa 4: API HTTP para frontend
+
+Instala las dependencias y ejecuta desde la raíz del repositorio:
+
+```powershell
+python -m pip install -r requirements.txt
+python -m uvicorn src.api.app:app --reload --host 127.0.0.1 --port 8000
+```
+
+Abre http://127.0.0.1:8000/docs para probar los endpoints desde el navegador.
+
+```powershell
+python tests/test_api.py
+python tests/run_conversation_tests.py --modelo reforzado
+```
+
+La API usa **el SVM reforzado** por defecto. Incluye sesiones aisladas por UUID y reinicio de contexto. El contrato y ejemplo para Next.js están en [`docs/ETAPA_4_API_FRONTEND.md`](docs/ETAPA_4_API_FRONTEND.md).
