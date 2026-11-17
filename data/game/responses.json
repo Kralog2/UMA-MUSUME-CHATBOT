@@ -1,0 +1,112 @@
+{
+  "_aclarar_personaje": [
+    "¿De qué personaje hablas? Dime su nombre para revisar sus aptitudes.",
+    "Necesito saber qué personaje entrenas para recomendarte una pista y distancia.",
+    "Dime qué uma estás usando y te ayudo."
+  ],
+  "_distancia_pista_personaje": [
+    "Para {personaje}, sus mejores aptitudes (A) son: pista {pistas}, distancia {distancias} y estilo {estilos}. Te conviene correr ahí.",
+    "{personaje} rinde mejor en pista {pistas}, distancias {distancias} y con estilo {estilos}.",
+    "Según su ficha, {personaje} tiene aptitud A en pista {pistas}, distancia {distancias} y estilo {estilos}."
+  ],
+  "_fallback": [
+    "No estoy seguro de haber entendido. ¿Te refieres a personajes, stats, cartas, habilidades o escenarios?",
+    "No encontré una respuesta clara. ¿Podrías reformular tu pregunta sobre Umamusume?",
+    "Perdona, no logré identificar tu pregunta. Prueba con algo como \"¿para qué sirve cada stat?\"."
+  ],
+  "_sin_aptitud_A": [
+    "{personaje} no tiene aptitud A en {categoria}. Su mejor opción es {mejor}.",
+    "En {categoria}, {personaje} no llega a A; lo mejor que tiene es {mejor}.",
+    "Para {categoria}, la mejor aptitud de {personaje} es {mejor}."
+  ],
+  "_uma_facil_sin_datos": [
+    "Una uma fácil de entrenar tiene aptitud A en la distancia y el estilo de sus carreras objetivo. Dime una uma y reviso sus aptitudes.",
+    "Busca una uma con muchas aptitudes A. Si me dices cuál te interesa, te cuento sus aptitudes.",
+    "Lo más sencillo es elegir una uma con aptitud A en distancia, pista y estilo. ¿Cuál tienes en mente?"
+  ],
+  "cartas_recomendadas": [
+    "Para {escenario}, estas cartas están bien valoradas en mi base de datos: {lista_cartas}.",
+    "Cartas recomendadas para {escenario}: {lista_cartas}. Si no tienes SSR, algunas SR también funcionan.",
+    "Mi recomendación para {escenario}: {lista_cartas}."
+  ],
+  "cartas_soporte": [
+    "Las cartas de soporte son personajes que llevas contigo al entrenar: forman un mazo de 6 cartas, aparecen en los entrenamientos, dan bonificaciones, eventos y habilidades. Hay tipos Speed, Stamina, Power, Guts, Wit y Amigo, y rarezas R, SR y SSR.",
+    "Una carta de soporte acompaña a tu uma durante el modo carrera. Al entrenar con ella aumentas el vínculo y obtienes más stats, y además activa eventos que dan habilidades. Su tipo indica qué stat favorece y la rareza (R, SR, SSR) indica su fuerza.",
+    "Piensa en las cartas de soporte como tu equipo de apoyo: seis cartas que aparecen en los entrenamientos y potencian el stat de su tipo. Existen cartas de Speed, Stamina, Power, Guts, Wit y de tipo Amigo, con rarezas R, SR y SSR."
+  ],
+  "despedida": [
+    "¡Hasta luego, entrenador! Mucha suerte en tus carreras.",
+    "¡Nos vemos! Vuelve cuando quieras resolver más dudas del juego.",
+    "¡Gracias por conversar! Que tus umas ganen todas sus carreras."
+  ],
+  "distancia_pista_recomendada": [
+    "Elige la distancia, pista y estilo en los que tu uma tenga aptitud A o S. Si hay empate, usa la distancia que se ajuste a sus stats: Sprint y Mile priorizan Speed y Power; Media, Speed con Stamina o Power; Larga, Speed y Stamina.",
+    "Revisa las aptitudes de tu uma y corre en su mejor combinación de pista (pasto o tierra), distancia y estilo. Con poco Stamina evita las distancias largas, y con mucha velocidad y Power rinde bien en Sprint o Mile.",
+    "Lo más seguro es competir donde la aptitud sea A o S. Si me dices qué personaje entrenas, puedo consultar sus aptitudes y decirte en qué pista y distancia le conviene más."
+  ],
+  "distancias_aptitudes": [
+    "Las distancias son Sprint (1000 a 1400 m), Mile (1600 a 1800 m), Media (2000 a 2400 m) y Larga (2500 m en adelante). Cada uma tiene una letra de aptitud (de G a S) para cada distancia, pista (Turf pasto o Dirt tierra) y estilo de carrera; mientras mejor la letra, mejor rendimiento.",
+    "La aptitud indica qué tan bien corre una uma según distancia, pista y estilo. Va de G (muy mala) a S (la mejor). Las distancias son Sprint, Mile, Media y Larga, y los estilos son Escapista (Front Runner), Líder (Pace Chaser), Cierre (Late Surger) y Remate (End Closer).",
+    "Cada personaje tiene letras de aptitud para tipo de pista (pasto o tierra), distancia (Sprint, Mile, Media, Larga) y estilo de carrera. Lo ideal es correr con aptitud A o S, porque letras bajas reducen su rendimiento."
+  ],
+  "fuera_dominio": [
+    "Solo puedo ayudarte con Umamusume: Pretty Derby (URA Finale y Unity Cup). ¿Quieres saber de personajes, stats, cartas o habilidades?",
+    "Eso queda fuera de mi tema. Puedo responder dudas sobre entrenamiento, cartas de soporte, herencias y más de Umamusume.",
+    "No tengo información sobre eso. Intenta preguntarme algo sobre el juego, por ejemplo qué hace cada stat."
+  ],
+  "habilidades_comprar": [
+    "Gasta tus puntos de habilidad en las que encajen con la distancia y el estilo de tu uma: de velocidad y aceleración, de recuperación (importantes en carreras largas) y las pasivas que suben stats o aptitudes. Las doradas son mejores, aunque cuestan más, y los hints reducen el costo.",
+    "Prioriza habilidades de recuperación si corres distancias largas, de aceleración si tu uma tiene mucho Power y de velocidad en general. Compra primero las de tu estilo de carrera y aprovecha los hints para abaratarlas.",
+    "Con tus puntos de habilidad compra primero las que coincidan con tu distancia y estilo, luego las de recuperación y aceleración, y al final las demás. Wit alto ayuda a que se activen."
+  ],
+  "herencias": [
+    "La herencia (legado) permite usar umas ya entrenadas como padres de una nueva carrera. Te transmiten chispas (sparks): azules dan stats, rosas aptitudes, verdes la habilidad única y blancas habilidades o carreras.",
+    "Al iniciar una carrera eliges padres entre tus umas anteriores. Sus chispas se heredan y pueden darte stats extra, mejores aptitudes y habilidades, por lo que buenos padres hacen más fuerte a tu nueva uma.",
+    "Heredar sirve para aprovechar el trabajo de carreras anteriores: tus umas previas pasan chispas de stats, aptitud y habilidades a la nueva. También puedes prestar el legado de un amigo."
+  ],
+  "info_carta": [
+    "{carta} ({rareza}, tipo {stat}) sirve para {escenario}. {habilidad_txt}Con {lb} (nivel {nivel}): amistad {amistad}%, eficiencia de entrenamiento {entrenamiento}%, prioridad de especialidad {prioridad}, bono de carrera {race_bonus}%, amistad inicial {amistad_inicial} y bono de stat {bono_stat}. {nota}",
+    "La carta {carta} es {rareza} de tipo {stat} para {escenario}. {habilidad_txt}En {lb} (nivel {nivel}) da {amistad}% de amistad, {entrenamiento}% de eficiencia, {race_bonus}% de bono de carrera y {bono_stat}. {nota}",
+    "{carta}: {rareza} de {stat}, recomendada para {escenario}. {habilidad_txt}Con {lb}: prioridad {prioridad}, amistad inicial {amistad_inicial}, bono de stat {bono_stat}. {nota}"
+  ],
+  "info_personaje": [
+    "{personaje}: aptitud A en pista {pistas}, distancia {distancias} y estilo {estilos}. Crecimiento: {crecimiento}. Objetivos de stats: {objetivos}.",
+    "Ficha de {personaje}. Aptitudes A: pista {pistas}, distancia {distancias}, estilo {estilos}. Crece en {crecimiento}. Para sus objetivos necesitas {objetivos}.",
+    "Sobre {personaje}: corre mejor en {pistas}, {distancias} y estilo {estilos}. Crecimiento: {crecimiento}. Metas de stats: {objetivos}."
+  ],
+  "mejor_escenario": [
+    "Para empezar se recomienda URA Finale: es el escenario original, con carreras objetivo fijas y el ciclo básico de entrenamiento. Unity Cup, el segundo escenario, agrega equipos, batallas de equipo y entrenamiento en equipo.",
+    "Empieza con URA Finale, que enseña lo básico y es el más sencillo. Cuando lo domines, pasa a Unity Cup, donde entrenas también a tu equipo y los límites de stats son más altos.",
+    "Los dos escenarios que cubro son URA Finale (básico, ideal para aprender) y Unity Cup (con equipos y más mecánicas). Para novatos recomiendo URA Finale."
+  ],
+  "pedir_mas_detalle": [
+    "Claro, ampliando sobre {tema}:",
+    "Con gusto te explico más sobre {tema}:",
+    "Sobre {tema}, un detalle más:"
+  ],
+  "recompensas_items": [
+    "Zapatos (racing shoes) y estandartes (sashes) se usan para subir el nivel de potencial de tus umas. Los zapatos caen al azar al correr y los estandartes se obtienen al ganar carreras G1 específicas. Los relojes (alarm clocks) permiten reintentar una carrera objetivo fallida.",
+    "Los zapatos y estandartes son materiales para desbloquear niveles de potencial. Los relojes sirven para repetir una carrera objetivo que perdiste en el modo carrera; se recomienda no gastarlos sin necesidad.",
+    "Al ganar carreras recibes: zapatos al azar y estandartes (en G1), ambos para subir el potencial de tu uma, y relojes, que te dejan reintentar una carrera objetivo."
+  ],
+  "saludo": [
+    "¡Hola, entrenador! Soy un asistente de Umamusume: Pretty Derby (escenarios URA Finale y Unity Cup). ¿Qué quieres saber?",
+    "¡Hola! Puedo ayudarte con personajes, stats, cartas de soporte, habilidades y más del juego. ¿Por dónde empezamos?",
+    "¡Buenas! Pregúntame sobre Umamusume: Pretty Derby y te oriento."
+  ],
+  "stats_funcion": [
+    "Hay cinco stats: Speed (velocidad máxima, sobre todo en el tramo final), Stamina (cuánto tiempo mantiene la velocidad), Power (aceleración), Guts (ayuda a sostener el ritmo al final aunque se acabe la resistencia) y Wit (ayuda a activar habilidades y a tomar mejores decisiones).",
+    "Speed es la velocidad máxima; Stamina es la reserva de energía de la carrera; Power ayuda a acelerar y a subir pendientes; Guts mantiene el ritmo en el final cuando la resistencia se agota; Wit mejora la activación de habilidades y reduce errores.",
+    "Resumen de stats: Speed = qué tan rápido corre, Stamina = cuánto aguanta, Power = qué tan rápido acelera, Guts = empuje al final de la carrera y Wit = inteligencia para activar habilidades. Speed suele ser el más importante, seguido de Stamina y Power."
+  ],
+  "subir_nivel": [
+    "Las cartas de soporte suben de nivel con puntos de apoyo, y su límite se rompe con copias repetidas de la misma carta. Los personajes mejoran con niveles de potencial (usando zapatos y estandartes), con el nivel de despertar y con talentos mediante duplicados.",
+    "Para cartas: usa puntos de apoyo y fusiona duplicados para ampliar su límite de nivel. Para personajes: gasta zapatos y estandartes en el potencial, y consigue duplicados o piezas para el talento.",
+    "Cartas: puntos de apoyo y copias repetidas. Personajes: zapatos, estandartes, guirnaldas (despertar) y duplicados. Su mejora fuera de carrera se suma a los stats que ganas entrenando."
+  ],
+  "uma_facil_entrenar": [
+    "Según las guías para principiantes, las umas más recomendadas para empezar son {lista_umas}. Tienen buenas aptitudes en distancias comunes. Te sugiero entrenarlas en URA Finale.",
+    "Para empezar te sugiero {lista_umas}. Revisa siempre que su aptitud en la distancia y el estilo de sus carreras objetivo sea A.",
+    "Si eres nuevo, entrena a {lista_umas} en el escenario URA Finale para aprender el ciclo básico."
+  ]
+}

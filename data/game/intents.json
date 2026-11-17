@@ -1,0 +1,141 @@
+{
+  "umbral_confianza": 0.3,
+  "intenciones": [
+    {
+      "intencion": "uma_facil_entrenar",
+      "descripcion": "Pide recomendación de personajes sencillos de entrenar para empezar",
+      "ejemplo": "¿Cuál es la uma más fácil de entrenar?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Lista los personajes con recommended_beginner=1 de characters.csv y sugiere URA Finale",
+      "categorias_knowledge": ""
+    },
+    {
+      "intencion": "stats_funcion",
+      "descripcion": "Pregunta qué hace cada estadística (Speed, Stamina, Power, Guts, Wit)",
+      "ejemplo": "¿Para qué sirve cada stat?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Responde con la fila de knowledge.csv si menciona un stat; si no, resumen general",
+      "categorias_knowledge": "stat"
+    },
+    {
+      "intencion": "cartas_soporte",
+      "descripcion": "Pregunta qué son las cartas de soporte, sus tipos y rarezas",
+      "ejemplo": "¿Qué son las cartas de soporte?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Respuesta general; si menciona tipo o rareza usa knowledge.csv",
+      "categorias_knowledge": "carta|rareza"
+    },
+    {
+      "intencion": "cartas_recomendadas",
+      "descripcion": "Pide cartas de soporte recomendadas (por escenario, tipo o rareza)",
+      "ejemplo": "¿Qué cartas uso en Unity Cup?",
+      "usa_contexto": "sí (escenario)",
+      "accion_del_gestor_de_dialogo": "Filtra cards.csv por scenario/stat/rarity y arma {lista_cartas}",
+      "categorias_knowledge": "escenario|carta|rareza"
+    },
+    {
+      "intencion": "distancias_aptitudes",
+      "descripcion": "Pregunta qué significan distancias, pistas, estilos y letras de aptitud",
+      "ejemplo": "¿Qué significan las distancias?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Usa knowledge.csv; si pregunta por una letra, explica el grado",
+      "categorias_knowledge": "distancia|pista|estilo|aptitud"
+    },
+    {
+      "intencion": "distancia_pista_recomendada",
+      "descripcion": "Pide en qué distancia, pista o estilo conviene correr con su personaje",
+      "ejemplo": "¿En qué pista debería correr mi uma?",
+      "usa_contexto": "sí (personaje)",
+      "accion_del_gestor_de_dialogo": "Con personaje: lee sus aptitudes A en characters.csv; sin personaje: pregunta cuál",
+      "categorias_knowledge": "distancia|pista|estilo"
+    },
+    {
+      "intencion": "recompensas_items",
+      "descripcion": "Pregunta para qué sirven zapatos, estandartes (sashes) y relojes (alarm clocks)",
+      "ejemplo": "¿Para qué sirven los zapatos y los relojes?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Usa knowledge.csv si menciona un objeto concreto",
+      "categorias_knowledge": "item"
+    },
+    {
+      "intencion": "mejor_escenario",
+      "descripcion": "Pregunta por escenarios de carrera (URA Finale, Unity Cup) y cuál elegir",
+      "ejemplo": "¿Cuál es el mejor escenario para empezar?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Fija escenario en el contexto",
+      "categorias_knowledge": "escenario"
+    },
+    {
+      "intencion": "herencias",
+      "descripcion": "Pregunta qué es y para qué sirve la herencia (estrellas/sparks)",
+      "ejemplo": "¿Para qué sirven las herencias?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Si menciona un color usa knowledge.csv",
+      "categorias_knowledge": "herencia"
+    },
+    {
+      "intencion": "habilidades_comprar",
+      "descripcion": "Pregunta qué habilidades comprar con puntos de habilidad",
+      "ejemplo": "¿Qué habilidades compro?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Si menciona un tipo usa knowledge.csv",
+      "categorias_knowledge": "habilidad"
+    },
+    {
+      "intencion": "subir_nivel",
+      "descripcion": "Pregunta cómo subir de nivel cartas y personajes",
+      "ejemplo": "¿Cómo subo de nivel mis cartas?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Respuesta general",
+      "categorias_knowledge": "item"
+    },
+    {
+      "intencion": "info_personaje",
+      "descripcion": "Pide la ficha de un personaje: aptitudes, crecimiento y objetivos de stats",
+      "ejemplo": "¿Qué aptitudes tiene Gold Ship?",
+      "usa_contexto": "sí (personaje)",
+      "accion_del_gestor_de_dialogo": "Busca el nombre en characters.csv y guarda personaje en el contexto",
+      "categorias_knowledge": "estilo|pista|distancia"
+    },
+    {
+      "intencion": "info_carta",
+      "descripcion": "Pide datos de una carta concreta y sus bonos por límite de nivel",
+      "ejemplo": "¿Qué bonos da la carta de Fine Motion?",
+      "usa_contexto": "sí (carta, límite)",
+      "accion_del_gestor_de_dialogo": "Busca el nombre en cards.csv y cards_effects.csv; usa MLB si no dicen límite",
+      "categorias_knowledge": "carta|rareza"
+    },
+    {
+      "intencion": "pedir_mas_detalle",
+      "descripcion": "Seguimiento: pide ampliar, ejemplo o repetir lo anterior",
+      "ejemplo": "Explícame más",
+      "usa_contexto": "sí (tema previo)",
+      "accion_del_gestor_de_dialogo": "Usa contexto.tema para ampliar; sin contexto pide aclaración",
+      "categorias_knowledge": ""
+    },
+    {
+      "intencion": "saludo",
+      "descripcion": "Saludo inicial",
+      "ejemplo": "Hola",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Presenta capacidades del bot",
+      "categorias_knowledge": ""
+    },
+    {
+      "intencion": "despedida",
+      "descripcion": "Cierre de conversación o agradecimiento final",
+      "ejemplo": "Gracias, adiós",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Cierra y reinicia contexto",
+      "categorias_knowledge": ""
+    },
+    {
+      "intencion": "fuera_dominio",
+      "descripcion": "Mensajes ajenos al dominio Umamusume (URA Finale / Unity Cup)",
+      "ejemplo": "¿Cuál es la capital de Francia?",
+      "usa_contexto": "no",
+      "accion_del_gestor_de_dialogo": "Informa límites y redirige al dominio",
+      "categorias_knowledge": ""
+    }
+  ]
+}

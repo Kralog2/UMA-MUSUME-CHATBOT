@@ -1,0 +1,367 @@
+texto,intencion
+¿Cuál es la umamusume más fácil de entrenar?,uma_facil_entrenar
+¿Qué uma me conviene para empezar a entrenar?,uma_facil_entrenar
+Dime una chica caballo sencilla de criar,uma_facil_entrenar
+¿Con qué personaje me recomiendan empezar?,uma_facil_entrenar
+Quiero una uma que no me dé muchos problemas en la carrera,uma_facil_entrenar
+¿Cuál es la mejor uma para principiantes?,uma_facil_entrenar
+Recomiéndame una uma fácil de sacar adelante,uma_facil_entrenar
+¿A quién debería entrenar primero siendo nuevo?,uma_facil_entrenar
+¿Qué umas son buenas para novatos?,uma_facil_entrenar
+¿Hay alguna uma fácil de llevar hasta el final del modo carrera?,uma_facil_entrenar
+"Soy nuevo, ¿qué personaje elijo para mi primera carrera?",uma_facil_entrenar
+¿Qué uma tiene los objetivos de carrera más fáciles?,uma_facil_entrenar
+"quiero entrenar a alguien facil, ¿quién?",uma_facil_entrenar
+¿Con qué uma es más difícil perder las carreras objetivo?,uma_facil_entrenar
+¿Cuál personaje es el más amigable para principiantes?,uma_facil_entrenar
+Dame opciones de umas con poca dificultad,uma_facil_entrenar
+¿Quién es la mejor candidata para mi primer entrenamiento?,uma_facil_entrenar
+¿Oguri Cap es buena para empezar?,uma_facil_entrenar
+Necesito un personaje fácil para pasar el modo carrera,uma_facil_entrenar
+¿Existe alguna uma recomendada para quienes recién empiezan?,uma_facil_entrenar
+¿Con quién tendré menos dolores de cabeza al entrenar?,uma_facil_entrenar
+uma facil de entrenar pls,uma_facil_entrenar
+¿Para qué sirve cada stat?,stats_funcion
+¿Qué hace la velocidad en una uma?,stats_funcion
+Explícame los cinco atributos de las umas,stats_funcion
+¿Para qué sirve el stamina?,stats_funcion
+¿Qué significa Power en el juego?,stats_funcion
+¿Qué hace la estadística de Guts?,stats_funcion
+¿Y el Wit para qué es?,stats_funcion
+¿Qué diferencia hay entre Speed y Power?,stats_funcion
+¿Cuáles son las estadísticas de una uma?,stats_funcion
+¿Qué representa cada barra de estadística?,stats_funcion
+¿Qué hace cada estadística en la carrera?,stats_funcion
+¿Para qué sirve la resistencia?,stats_funcion
+¿Qué influye la inteligencia de mi personaje?,stats_funcion
+¿Cómo afectan los stats al desempeño en una carrera?,stats_funcion
+"Quiero entender qué significan Speed, Stamina, Power, Guts y Wit",stats_funcion
+¿Qué stat es el más importante?,stats_funcion
+¿Por qué necesito Stamina?,stats_funcion
+¿Sirve de algo subir Guts?,stats_funcion
+¿Para qué sirve la potencia en las carreras?,stats_funcion
+¿El Wit afecta a las habilidades?,stats_funcion
+dime que hacen las estadisticas,stats_funcion
+"¿Para qué sirven los números de velocidad, resistencia y demás?",stats_funcion
+¿Qué son las cartas de soporte?,cartas_soporte
+¿Para qué sirven las support cards?,cartas_soporte
+Explícame las cartas de apoyo,cartas_soporte
+¿Cuántas cartas de soporte puedo llevar a un entrenamiento?,cartas_soporte
+¿Qué tipos de cartas de soporte hay?,cartas_soporte
+¿Qué es una carta SSR de soporte?,cartas_soporte
+¿Qué hace una carta de tipo amigo?,cartas_soporte
+¿Cómo funcionan las cartas de soporte en el entrenamiento?,cartas_soporte
+¿Qué significa que una carta sea de tipo Speed?,cartas_soporte
+¿Las cartas de soporte me dan bonificaciones?,cartas_soporte
+¿Por qué aparecen personajes en mis entrenamientos?,cartas_soporte
+¿Para qué sirven las tarjetas de apoyo?,cartas_soporte
+"¿Qué diferencia hay entre una carta R, SR y SSR?",cartas_soporte
+¿Para qué usan los jugadores las cartas de apoyo?,cartas_soporte
+Cómo ayudan las cartas a mi personaje al entrenar,cartas_soporte
+¿Qué es el mazo de apoyo?,cartas_soporte
+¿Qué es el vínculo con las cartas?,cartas_soporte
+Necesito saber qué hacen las cartas de soporte,cartas_soporte
+¿Las cartas de soporte son obligatorias?,cartas_soporte
+¿Qué aportan las cartas al modo carrera?,cartas_soporte
+¿Qué son esas cartas que se eligen antes de empezar la carrera?,cartas_soporte
+¿Cuáles son las cartas de soporte más recomendadas?,cartas_recomendadas
+¿Qué cartas debería llevar en mi mazo?,cartas_recomendadas
+Dime qué cartas son buenas para URA Finale,cartas_recomendadas
+¿Qué cartas conviene usar en Unity Cup?,cartas_recomendadas
+¿Cuál es la mejor carta de velocidad?,cartas_recomendadas
+¿Qué cartas de soporte son las mejores ahora?,cartas_recomendadas
+Recomiéndame cartas SSR para mi equipo,cartas_recomendadas
+¿Qué cartas de stamina valen la pena?,cartas_recomendadas
+¿Cuáles son las mejores cartas para un principiante?,cartas_recomendadas
+¿Qué carta de amigo me recomiendas?,cartas_recomendadas
+Arma un mazo de cartas recomendado,cartas_recomendadas
+¿Qué cartas uso para el primer escenario?,cartas_recomendadas
+¿Cuáles son las cartas top del segundo escenario?,cartas_recomendadas
+¿Hay cartas SR que sirvan?,cartas_recomendadas
+¿Qué carta de Wit es buena?,cartas_recomendadas
+¿Con qué cartas me conviene entrenar?,cartas_recomendadas
+¿Cuál es la mejor combinación de cartas?,cartas_recomendadas
+Dime una lista de cartas buenas,cartas_recomendadas
+¿Qué cartas de poder recomiendan?,cartas_recomendadas
+¿En qué cartas debería gastar mis tiradas?,cartas_recomendadas
+tier list de cartas de soporte,cartas_recomendadas
+¿Qué significan las distancias de los personajes?,distancias_aptitudes
+"¿Qué quiere decir Sprint, Mile, Media y Larga?",distancias_aptitudes
+¿Qué son las aptitudes de una uma?,distancias_aptitudes
+"¿Qué significan las letras A, B, C que aparecen junto a la distancia?",distancias_aptitudes
+¿Cuántos metros es una distancia corta?,distancias_aptitudes
+¿Qué es una carrera de milla?,distancias_aptitudes
+¿Qué significa que mi uma tenga aptitud S en distancia?,distancias_aptitudes
+¿Qué quiere decir que una uma sea de larga distancia?,distancias_aptitudes
+¿Qué tan importante es la aptitud de distancia?,distancias_aptitudes
+¿Qué son los estilos de carrera?,distancias_aptitudes
+¿Qué es un Escapista o un Líder en las carreras?,distancias_aptitudes
+Explícame qué es Turf y Dirt,distancias_aptitudes
+¿Qué diferencia hay entre pasto y tierra?,distancias_aptitudes
+¿Qué significan las aptitudes de pista?,distancias_aptitudes
+¿Qué significa F o G en una aptitud?,distancias_aptitudes
+¿Por qué mi uma tiene aptitud mala en distancia media?,distancias_aptitudes
+¿Cómo se leen las aptitudes del personaje?,distancias_aptitudes
+¿Cuántos metros mide una carrera media?,distancias_aptitudes
+¿Para qué sirve saber la distancia de mi uma?,distancias_aptitudes
+¿Qué es eso de Late Surger y End Closer?,distancias_aptitudes
+que es la aptitud de una uma,distancias_aptitudes
+¿Qué tipo de distancia y en qué pista debería correr mi personaje?,distancia_pista_recomendada
+¿En qué distancia debo inscribir a mi uma?,distancia_pista_recomendada
+¿Mi uma debe correr en pasto o en tierra?,distancia_pista_recomendada
+¿Cómo sé en qué pista le va mejor a mi personaje?,distancia_pista_recomendada
+¿Qué carreras me conviene correr con esta uma?,distancia_pista_recomendada
+¿Qué distancia es mejor para mi personaje?,distancia_pista_recomendada
+¿En qué distancia gana más fácil mi uma?,distancia_pista_recomendada
+"Mi uma es mala en tierra, ¿dónde la pongo a correr?",distancia_pista_recomendada
+¿Cuál es la mejor pista para una uma con aptitud A en milla?,distancia_pista_recomendada
+¿Debería entrenar a mi uma para sprint o para larga?,distancia_pista_recomendada
+¿Qué estilo de carrera le conviene a mi personaje?,distancia_pista_recomendada
+¿Dónde debería competir mi personaje?,distancia_pista_recomendada
+¿Qué stats subir según la distancia?,distancia_pista_recomendada
+¿Qué tipo de carreras elijo para mi uma?,distancia_pista_recomendada
+¿A qué distancia le saco más provecho a mi personaje?,distancia_pista_recomendada
+¿Cómo elijo pista y distancia para mi uma?,distancia_pista_recomendada
+"Mi uma tiene A en media y B en larga, ¿cuál escojo?",distancia_pista_recomendada
+¿Es mejor que corra en pasto o en tierra?,distancia_pista_recomendada
+Quiero saber dónde correr con mi personaje,distancia_pista_recomendada
+¿Qué distancia me recomiendas para una uma con poco stamina?,distancia_pista_recomendada
+¿En qué tipo de carrera luce más mi uma?,distancia_pista_recomendada
+"¿Para qué sirven los zapatos, estandartes y relojes que me dan al ganar?",recompensas_items
+¿Para qué son los zapatos de carrera?,recompensas_items
+¿Qué hago con los estandartes?,recompensas_items
+¿Para qué sirve el reloj despertador?,recompensas_items
+¿Qué son las bandas de ganador?,recompensas_items
+¿Para qué sirven los premios de las carreras?,recompensas_items
+¿Qué objetos me dan por ganar una carrera?,recompensas_items
+¿Cómo uso el reloj para repetir una carrera?,recompensas_items
+¿Qué pasa si pierdo una carrera objetivo?,recompensas_items
+¿Los zapatos se pueden gastar?,recompensas_items
+¿Dónde consigo estandartes?,recompensas_items
+¿Para qué sirve el alarm clock?,recompensas_items
+¿Qué recompensas dan las carreras G1?,recompensas_items
+¿Qué son los sashes?,recompensas_items
+¿Cómo consigo más zapatos?,recompensas_items
+¿Para qué sirven los objetos que caen al terminar una carrera?,recompensas_items
+¿Debo guardar los relojes o usarlos?,recompensas_items
+¿Qué hacen los racing shoes?,recompensas_items
+¿Para qué se ocupan los objetos de mejora de potencial?,recompensas_items
+¿Qué recompensa obtengo al ganar una G1?,recompensas_items
+¿Para qué quiero los relojes?,recompensas_items
+¿Cuál es el mejor escenario para empezar a jugar?,mejor_escenario
+¿Por cuál escenario empiezo?,mejor_escenario
+¿Qué diferencia hay entre URA Finale y Unity Cup?,mejor_escenario
+¿Es mejor URA Finale o Unity Cup para un novato?,mejor_escenario
+¿Qué escenarios hay en el modo carrera?,mejor_escenario
+¿En qué escenario debo gastar mis primeras partidas?,mejor_escenario
+¿Qué es Unity Cup?,mejor_escenario
+¿Qué es URA Finale?,mejor_escenario
+¿Cuál escenario es más fácil?,mejor_escenario
+¿Qué escenario recomiendan para aprender el juego?,mejor_escenario
+¿Cuál es el escenario más sencillo de completar?,mejor_escenario
+¿Debo empezar con Unity Cup?,mejor_escenario
+¿Qué trae de nuevo Unity Cup?,mejor_escenario
+¿Cuántos escenarios hay disponibles?,mejor_escenario
+¿Cuál escenario conviene para subir stats altos?,mejor_escenario
+¿Por qué se recomienda URA Finale al inicio?,mejor_escenario
+¿Qué es Aoharu Hai?,mejor_escenario
+¿Cuándo debo pasar al segundo escenario?,mejor_escenario
+Dime qué escenario elegir primero,mejor_escenario
+¿El primer escenario es muy difícil?,mejor_escenario
+¿Qué cambia entre los dos escenarios?,mejor_escenario
+¿Para qué sirven las herencias?,herencias
+¿Qué es la herencia de umas?,herencias
+¿Cómo funciona la herencia?,herencias
+¿Qué son las chispas?,herencias
+¿Para qué sirven los padres en la carrera?,herencias
+¿Qué es el legado?,herencias
+¿Cómo heredo habilidades de otra uma?,herencias
+¿Qué pasa si uso una uma ya entrenada como padre?,herencias
+"¿Qué son las chispas azules, rosas y verdes?",herencias
+¿Qué es heredar aptitudes?,herencias
+¿Por qué debo elegir padres antes de entrenar?,herencias
+¿Qué parentesco entre umas me conviene?,herencias
+¿Qué ventaja da usar una uma anterior como herencia?,herencias
+¿Cómo mejoro a mi uma con las herencias?,herencias
+¿Para qué sirve el sistema de legacy?,herencias
+¿Qué son los sparks?,herencias
+¿Se pueden heredar stats?,herencias
+¿Qué aporta una uma prestada de un amigo?,herencias
+¿Qué es la herencia y cómo se usa?,herencias
+¿Cómo funcionan los padres de una uma?,herencias
+¿Qué sentido tiene heredar de otra uma?,herencias
+¿Qué tipos de habilidades debo comprar con mis puntos?,habilidades_comprar
+¿En qué gasto los puntos de habilidad?,habilidades_comprar
+¿Cuáles habilidades me recomiendan comprar?,habilidades_comprar
+¿Cómo funcionan los puntos de habilidad?,habilidades_comprar
+¿Qué habilidades son prioridad?,habilidades_comprar
+¿Qué habilidades sirven para carreras largas?,habilidades_comprar
+¿Vale la pena comprar habilidades doradas?,habilidades_comprar
+¿Qué son las habilidades de aceleración?,habilidades_comprar
+¿Qué habilidades de recuperación me convienen?,habilidades_comprar
+¿Cómo compro habilidades?,habilidades_comprar
+¿Cuándo debo gastar mis puntos de skill?,habilidades_comprar
+¿Qué son las habilidades únicas?,habilidades_comprar
+¿Para qué sirve comprar habilidades?,habilidades_comprar
+¿Cuáles son las mejores habilidades para mi uma?,habilidades_comprar
+¿Qué habilidades compro antes de la final?,habilidades_comprar
+¿Cómo reduzco el costo de las habilidades?,habilidades_comprar
+¿Qué son los hints de habilidades?,habilidades_comprar
+¿Qué habilidades pasivas existen?,habilidades_comprar
+¿Debo guardar puntos o comprar de inmediato?,habilidades_comprar
+¿Qué habilidades me convienen según mi estilo de carrera?,habilidades_comprar
+¿Con qué habilidades gana más mi uma?,habilidades_comprar
+¿Cómo subo de nivel mis cartas y personajes?,subir_nivel
+¿Cómo mejoro mis cartas de soporte?,subir_nivel
+¿Cómo subo el nivel de una carta de soporte?,subir_nivel
+¿Cómo hago más fuerte a mi personaje?,subir_nivel
+¿Para qué sirven los puntos de apoyo?,subir_nivel
+¿Cómo aumento el nivel de potencial?,subir_nivel
+¿Qué es el límite de nivel de una carta?,subir_nivel
+¿Cómo rompo el límite de mis cartas?,subir_nivel
+¿Qué hago con las cartas repetidas?,subir_nivel
+¿Cómo mejoro el talento de una uma?,subir_nivel
+¿Qué es el nivel de despertar?,subir_nivel
+¿Cómo subo de estrellas a mi personaje?,subir_nivel
+¿Con qué subo mis cartas SSR?,subir_nivel
+¿Cómo mejoro a mi uma fuera del modo carrera?,subir_nivel
+¿Cómo desbloqueo el potencial de mi uma?,subir_nivel
+¿Cómo evolucionan mis cartas?,subir_nivel
+¿Qué materiales necesito para subir de nivel?,subir_nivel
+¿Cuál es la forma de mejorar a mis personajes?,subir_nivel
+¿Cómo subo los niveles de mis personajes y cartas de forma eficiente?,subir_nivel
+¿Por qué no puedo subir más mi carta?,subir_nivel
+¿Las cartas duplicadas sirven para algo?,subir_nivel
+Explícame más,pedir_mas_detalle
+Dame un ejemplo,pedir_mas_detalle
+¿Puedes profundizar?,pedir_mas_detalle
+¿Y eso cómo funciona?,pedir_mas_detalle
+"No entendí, explícalo de otra forma",pedir_mas_detalle
+¿Me das más detalles?,pedir_mas_detalle
+¿Y qué más?,pedir_mas_detalle
+¿Cómo así?,pedir_mas_detalle
+Continúa por favor,pedir_mas_detalle
+¿Puedes darme un ejemplo?,pedir_mas_detalle
+¿Y cuál me recomiendas?,pedir_mas_detalle
+¿Y en el segundo escenario?,pedir_mas_detalle
+¿Y eso es igual en Unity Cup?,pedir_mas_detalle
+Cuéntame más sobre eso,pedir_mas_detalle
+No me quedó claro,pedir_mas_detalle
+¿Hay algo más que deba saber de eso?,pedir_mas_detalle
+Amplía la respuesta,pedir_mas_detalle
+Más información sobre ese tema,pedir_mas_detalle
+"Y de ese tema, ¿qué más?",pedir_mas_detalle
+Dame detalles,pedir_mas_detalle
+"No lo entendí, ¿podrías repetirlo?",pedir_mas_detalle
+Hola,saludo
+Buenas,saludo
+Hey,saludo
+¿Qué tal?,saludo
+Buenos días,saludo
+Buenas tardes,saludo
+Buenas noches,saludo
+Hola chatbot,saludo
+Holaaa,saludo
+¿Cómo estás?,saludo
+"Hola, ¿me puedes ayudar?",saludo
+Saludos,saludo
+¿Qué onda?,saludo
+Hola entrenador,saludo
+Ey,saludo
+Hello,saludo
+"Hola, quiero preguntar algo",saludo
+Buen día,saludo
+"Hola, ¿estás ahí?",saludo
+Hola asistente,saludo
+Hi,saludo
+Adiós,despedida
+Hasta luego,despedida
+Nos vemos,despedida
+Gracias,despedida
+Eso es todo,despedida
+Chao,despedida
+Bye,despedida
+Hasta pronto,despedida
+Muchas gracias,despedida
+Ya no tengo más preguntas,despedida
+Me voy,despedida
+Gracias por la ayuda,despedida
+Hasta la próxima,despedida
+Eso es todo por hoy,despedida
+Cuídate,despedida
+Nos vemos luego,despedida
+"Listo, gracias",despedida
+Me despido,despedida
+"Gracias, adiós",despedida
+Que tengas buen día,despedida
+"Fue de mucha ayuda, gracias",despedida
+¿Cuál es la capital de Francia?,fuera_dominio
+¿Quién ganó el mundial?,fuera_dominio
+Dame una receta de pasta,fuera_dominio
+¿Cómo está el clima hoy?,fuera_dominio
+¿Cómo reparo mi computadora?,fuera_dominio
+Cuéntame un chiste,fuera_dominio
+¿Cuál es la mejor pizza?,fuera_dominio
+¿Qué es la fotosíntesis?,fuera_dominio
+Recomiéndame una película,fuera_dominio
+¿Cuál es el mejor teléfono?,fuera_dominio
+¿Cuánto cuesta un boleto de avión?,fuera_dominio
+Háblame de Pokémon,fuera_dominio
+¿Cómo gano en Genshin Impact?,fuera_dominio
+¿Cuál es el mejor equipo de futbol?,fuera_dominio
+Ayúdame con mi tarea de matemáticas,fuera_dominio
+¿Quién es el presidente de México?,fuera_dominio
+¿Cómo hago una página web?,fuera_dominio
+¿Qué hora es?,fuera_dominio
+¿Cuáles son los personajes de Fate Grand Order?,fuera_dominio
+¿Cómo se apuesta en carreras de caballos de verdad?,fuera_dominio
+¿Qué cartas existen en Yu-Gi-Oh?,fuera_dominio
+¿Qué aptitudes tiene Special Week?,info_personaje
+Dime las aptitudes de Gold Ship,info_personaje
+¿En qué crece más Oguri Cap?,info_personaje
+¿Cuáles son los objetivos de Mejiro McQueen?,info_personaje
+¿Qué crecimiento de stats tiene Tokai Teio?,info_personaje
+Háblame de Rice Shower,info_personaje
+¿Cuáles son las letras de aptitud de Silence Suzuka?,info_personaje
+¿Cuántos puntos de Speed necesita Vodka para los objetivos?,info_personaje
+¿Qué stats debo subir con Daiwa Scarlet?,info_personaje
+¿Cómo es Kitasan Black?,info_personaje
+Muéstrame la ficha de Air Groove,info_personaje
+¿Cuál es el bono de crecimiento de Nice Nature?,info_personaje
+¿Qué objetivos de stats pide Haru Urara?,info_personaje
+¿Qué meta de Wit tiene Seiun Sky?,info_personaje
+¿Qué porcentaje de crecimiento tiene Mihono Bourbon?,info_personaje
+información de Grass Wonder,info_personaje
+¿Qué datos tiene Maruzensky?,info_personaje
+¿Cuál es el crecimiento de Super Creek?,info_personaje
+¿Qué aptitudes de pista tiene Taiki Shuttle?,info_personaje
+Dame los datos de King Halo,info_personaje
+¿Qué stats necesita Agnes Tachyon para sus metas?,info_personaje
+¿Qué sé de Narita Brian?,info_personaje
+¿Qué hace la carta de Kitasan Black?,info_carta
+¿Cómo es la carta SSR de Fine Motion?,info_carta
+¿Qué bonos da Super Creek con límite máximo?,info_carta
+¿Qué habilidad trae la carta de Nice Nature?,info_carta
+¿Vale la pena la carta de Silence Suzuka?,info_carta
+¿Qué da Riko Kashimoto en Unity Cup?,info_carta
+¿Qué tipo es la carta de Vodka?,info_carta
+¿Cuál es el bono de amistad de Biko Pegasus?,info_carta
+¿Qué cambia en la carta de Satono Diamond al llegar a MLB?,info_carta
+¿Qué es la 3LB de Kitasan Black?,info_carta
+¿Sirve la carta de Tazuna Hayakawa?,info_carta
+¿Qué habilidad tiene la carta de Rice Shower?,info_carta
+¿Qué eficiencia de entrenamiento da Fine Motion?,info_carta
+¿Cuánto Race Bonus da la carta de Manhattan Cafe?,info_carta
+Dime los datos de la carta de Haru Urara,info_carta
+¿Es buena la carta de Mejiro McQueen sin romper límite?,info_carta
+¿Qué da Aoi Kiryuin?,info_carta
+¿Para qué escenario es la carta de Seiun Sky?,info_carta
+¿Qué prioridad de especialidad tiene Sakura Bakushin O?,info_carta
+¿Qué diferencia hay entre la carta R y SSR de Riko Kashimoto?,info_carta
+¿Qué trae la carta de Ines Fujin con el límite máximo?,info_carta
+¿En qué distancia debería correr Gold Ship?,distancia_pista_recomendada
+¿Dónde conviene que compita Oguri Cap?,distancia_pista_recomendada
+¿Special Week va mejor en pasto o en tierra?,distancia_pista_recomendada
+¿Qué pista le queda a Haru Urara?,distancia_pista_recomendada
+¿Gold Ship es fácil de entrenar?,uma_facil_entrenar
+¿Vodka es buena para principiantes?,uma_facil_entrenar

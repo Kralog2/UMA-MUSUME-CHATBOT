@@ -1,0 +1,54 @@
+card_id,limit_break,level,friendship_bonus_pct,training_eff_pct,specialty_prio,race_bonus_pct,initial_friendship,stat_bonus,note
+kitasan_black_ssr,0LB,30,20,5,0,5,20,power:1,Poco usable sin Specialty Priority.
+kitasan_black_ssr,3LB,45,25,10,40,5,30,power:1,Punto de quiebre: ya es top tier.
+kitasan_black_ssr,MLB,50,25,15,80,5,35,power:1,Máximo rendimiento del juego.
+biko_pegasus_ssr,0LB,30,20,15,20,5,15,speed:1,Ya aporta buen bono general desde 0LB.
+biko_pegasus_ssr,MLB,50,25,20,50,10,30,speed:1,Explosiva en Unity Cup (20% Training Eff).
+silence_suzuka_ssr,0LB,30,20,5,20,5,35,speed:1,Excelente amistad inicial desde nivel 30.
+silence_suzuka_ssr,MLB,50,30,10,50,5,45,speed:1,Activa arcoíris en los primeros turnos.
+sakura_bakushin_o_ssr,0LB,30,20,5,20,5,20,speed:1,Sólida para Sprint/Mile desde nivel base.
+sakura_bakushin_o_ssr,MLB,50,30,10,50,5,35,speed:2,Doble bono plano (+2) en Velocidad.
+sweep_tosho_sr,2LB,35,25,10,30,5,15,speed:1,Muy sólida incluso a medio subir.
+sweep_tosho_sr,MLB,45,30,10,50,5,25,speed:1,Supera a muchas SSR en 0LB/1LB.
+king_halo_sr,MLB,45,25,5,60,5,20,power:1,Muy alta prioridad en Velocidad.
+eishin_flash_sr,MLB,45,25,10,35,5,25,speed:1,Gran ahorro de turnos por sus eventos.
+narita_brian_ssr,MLB,50,25,10,35,5,20,speed:1,Gratuita; gran opción F2P para Media/Larga.
+super_creek_ssr,0LB,30,20,10,20,5,15,stamina:1,Usable desde 0LB por Swinging Maestro.
+super_creek_ssr,3LB,45,30,15,35,5,25,stamina:1,Sube mucho su amistad y recuperación.
+super_creek_ssr,MLB,50,30,15,50,5,30,stamina:1,Estándar de oro para distancias largas.
+seiun_sky_ssr,0LB,30,20,5,20,5,25,stamina:1,Buena amistad inicial para Runners.
+seiun_sky_ssr,MLB,50,30,10,50,5,40,stamina:1,Excelente soporte de Estamina para Runners.
+satono_diamond_ssr,0LB,30,20,5,20,5,20,stamina:1,Cumple en carreras largas desde nivel 30.
+satono_diamond_ssr,MLB,50,30,10,50,10,35,stamina:1,Buen Race Bonus (10%) y recuperación.
+manhattan_cafe_sr,MLB,45,25,5,65,10,20,stamina:1,Excelente Race Bonus (10%) y prioridad.
+mayano_top_gun_sr,MLB,45,25,10,35,5,20,stamina:1,Muy flexible para cualquier distancia.
+mejiro_mcqueen_ssr,MLB,50,20,10,35,5,20,stamina:1,Gratuita; cumple bien en carreras largas.
+rice_shower_ssr,0LB,30,20,10,20,5,20,power:1,Útil desde nivel 30 por dar Swinging Maestro.
+rice_shower_ssr,MLB,50,30,15,50,5,35,power:1|stamina:1,Cubre Poder y Estamina al mismo tiempo.
+vodka_ssr,0LB,30,20,5,20,5,15,power:1,Buena recuperación en rectas desde 0LB.
+vodka_ssr,MLB,50,30,10,50,5,30,power:2,Bono plano doble (+2) en Poder.
+el_condor_pasa_ssr,0LB,30,20,5,20,5,20,power:1,Buena opción para Leader y Dirt.
+el_condor_pasa_ssr,MLB,50,30,10,50,10,35,power:1,Gran bono de carrera y habilidades de rebase.
+smart_falcon_ssr,0LB,30,20,5,20,5,20,power:1,Clave para corredoras de arena (Dirt).
+smart_falcon_ssr,MLB,50,30,10,50,5,35,power:1|speed:1,Sube Poder y Velocidad al entrenar Dirt.
+hishi_amazon_sr,MLB,45,25,10,50,5,25,power:1,Mejor opción SR para Betweener/Chaser.
+mihono_bourbon_sr,MLB,45,25,5,50,5,25,power:1,Mejor opción SR de Poder para Runners.
+biwa_hayahide_sr,MLB,45,20,10,35,10,20,power:1,Equilibrada y con buen Race Bonus (10%).
+fine_motion_ssr,0LB,30,20,15,20,10,20,wit:1,Muy fuerte desde 0LB (15% Training Eff).
+fine_motion_ssr,3LB,45,30,15,35,10,30,wit:1,Salto masivo de rendimiento en Inteligencia.
+fine_motion_ssr,MLB,50,30,15,50,10,35,wit:1,La mejor carta de Wit del meta.
+nice_nature_ssr,3LB,45,25,15,35,15,25,wit:1,Imprescindible en Unity Cup (15% Race Bonus).
+nice_nature_ssr,MLB,50,30,15,50,15,35,wit:1,Máximo aporte de puntos en carreras y Wit.
+marvelous_sunday_sr,MLB,45,25,10,35,10,25,wit:1,Mejor SR de Inteligencia y moral.
+matikane_fukukitaru_sr,MLB,45,20,10,35,10,20,wit:1,Buen soporte general y recuperación de energía.
+daiwa_scarlet_sr,MLB,45,25,5,50,5,25,wit:1,Gran opción F2P para Runner / Leader.
+fuji_kiseki_sr,MLB,45,25,10,35,5,25,wit:1,Especializada en carreras de Milla.
+haru_urara_ssr,MLB,50,20,15,0,5,30,guts:1,Comodín F2P; infla números en cualquier stat.
+ines_fujin_ssr,0LB,30,20,10,20,5,20,guts:1,Útil para Runners en carreras cortas/medias.
+ines_fujin_ssr,MLB,50,30,15,50,5,35,guts:1|speed:1,Aporta mucha Velocidad entrenando Guts.
+riko_kashimoto_ssr,0LB,30,0,10,0,5,0,stamina:1|guts:1,Totalmente funcional desde nivel 30 en Unity Cup.
+riko_kashimoto_ssr,MLB,50,0,15,0,10,0,stamina:1|guts:1,Máxima reducción de energía y bono de escenario.
+riko_kashimoto_r,MLB,40,0,5,0,5,0,stamina:1|guts:1,Alternativa F2P muy sólida si no tienes la SSR.
+tazuna_hayakawa_ssr,0LB,30,0,10,0,5,0,speed:1,Cumple su rol de control de moral desde 0LB.
+tazuna_hayakawa_ssr,MLB,50,0,15,0,10,0,speed:1,Máximo ahorro de energía en URA Finals.
+aoi_kiryuin_sr,MLB,45,0,5,0,5,0,wit:1,Alternativa F2P a Tazuna; da muchos Skill Points.

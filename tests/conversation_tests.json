@@ -1,0 +1,363 @@
+[
+ {
+  "nombre": "Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",
+  "pasos": [
+   {
+    "usuario": "¿Qué aptitudes tiene Gold Ship?",
+    "intencion": "info_personaje",
+    "contiene": [
+     "gold ship",
+     "stamina"
+    ]
+   },
+   {
+    "usuario": "¿En qué distancia le conviene correr?",
+    "intencion": "distancia_pista_recomendada",
+    "contiene": [
+     "gold ship",
+     "larga"
+    ]
+   },
+   {
+    "usuario": "¿Y Silence Suzuka?",
+    "intencion": "distancia_pista_recomendada",
+    "contiene": [
+     "silence suzuka",
+     "front runner"
+    ],
+    "fuente": "contexto"
+   },
+   {
+    "usuario": "explícame más",
+    "intencion": "pedir_mas_detalle",
+    "contiene": [
+     "silence suzuka",
+     "speed"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Aclaración cuando falta el personaje y luego uso del dato",
+  "pasos": [
+   {
+    "usuario": "¿En qué pista debería correr mi uma?",
+    "intencion": "distancia_pista_recomendada",
+    "contiene": [
+     "personaje",
+     "uma",
+     "dime"
+    ],
+    "alguna": true,
+    "slots": {
+     "personaje": null
+    }
+   },
+   {
+    "usuario": "Vodka",
+    "intencion": "distancia_pista_recomendada",
+    "contiene": [
+     "vodka"
+    ],
+    "fuente": "aclaracion",
+    "slots": {
+     "personaje": "vodka"
+    }
+   },
+   {
+    "usuario": "¿Qué estilo le conviene?",
+    "intencion": "distancia_pista_recomendada",
+    "contiene": [
+     "vodka",
+     "estilo"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Carta con límite de nivel (usa MLB por defecto) y seguimiento",
+  "pasos": [
+   {
+    "usuario": "¿Qué bonos da la carta de Fine Motion?",
+    "intencion": "info_carta",
+    "contiene": [
+     "fine motion",
+     "mlb"
+    ]
+   },
+   {
+    "usuario": "¿Y con 0LB?",
+    "intencion": "info_carta",
+    "contiene": [
+     "0lb",
+     "fine motion"
+    ]
+   },
+   {
+    "usuario": "explícame más",
+    "intencion": "pedir_mas_detalle",
+    "contiene": [
+     "comparacion",
+     "3lb"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Cartas por escenario, cambio de escenario y paginación",
+  "pasos": [
+   {
+    "usuario": "¿Qué cartas me recomiendas para Unity Cup?",
+    "intencion": "cartas_recomendadas",
+    "contiene": [
+     "unity cup"
+    ],
+    "no_contiene": [
+     "tazuna hayakawa"
+    ]
+   },
+   {
+    "usuario": "¿Y para el otro escenario es lo mismo?",
+    "intencion": "pedir_mas_detalle",
+    "contiene": [
+     "ura finale"
+    ],
+    "slots": {
+     "escenario": "ura_finale"
+    }
+   },
+   {
+    "usuario": "dame más opciones",
+    "intencion": "pedir_mas_detalle",
+    "contiene": [
+     "otras opciones"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Escenario recomendado queda en contexto",
+  "pasos": [
+   {
+    "usuario": "¿Cuál es el mejor escenario para empezar?",
+    "intencion": "mejor_escenario",
+    "contiene": [
+     "ura finale"
+    ],
+    "slots": {
+     "escenario": "ura_finale"
+    }
+   },
+   {
+    "usuario": "¿Qué cartas uso ahí?",
+    "intencion": "cartas_recomendadas",
+    "contiene": [
+     "ura finale"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Stats: respuesta específica y ampliación por niveles",
+  "pasos": [
+   {
+    "usuario": "¿Para qué sirve Stamina?",
+    "intencion": "stats_funcion",
+    "contiene": [
+     "stamina"
+    ]
+   },
+   {
+    "usuario": "Explícame más",
+    "intencion": "pedir_mas_detalle",
+    "contiene": [
+     "distancias largas"
+    ]
+   },
+   {
+    "usuario": "¿Y qué más?",
+    "intencion": "pedir_mas_detalle",
+    "contiene": [
+     "todo lo que tengo",
+     "no tengo más",
+     "ya te di"
+    ],
+    "alguna": true
+   }
+  ]
+ },
+ {
+  "nombre": "Uma fácil de entrenar y pregunta sobre una uma concreta",
+  "pasos": [
+   {
+    "usuario": "¿Cuál es la umamusume más fácil de entrenar?",
+    "intencion": "uma_facil_entrenar",
+    "contiene": [
+     "oguri cap",
+     "vodka",
+     "sakura bakushin o"
+    ]
+   },
+   {
+    "usuario": "¿Special Week es fácil de entrenar?",
+    "intencion": "uma_facil_entrenar",
+    "contiene": [
+     "special week",
+     "oguri cap"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Significado de una letra de aptitud",
+  "pasos": [
+   {
+    "usuario": "¿Qué significa tener una A en pasto?",
+    "intencion": "distancias_aptitudes",
+    "contiene": [
+     "a"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Herencia por color",
+  "pasos": [
+   {
+    "usuario": "¿Qué hacen las chispas azules?",
+    "intencion": "herencias",
+    "contiene": [
+     "stats extra"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Personaje que solo tiene carta",
+  "pasos": [
+   {
+    "usuario": "¿Qué aptitudes tiene Biko Pegasus?",
+    "intencion": "info_personaje",
+    "contiene": [
+     "carta"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Pregunta ambigua sin contexto",
+  "pasos": [
+   {
+    "usuario": "Explícame más",
+    "intencion": "pedir_mas_detalle",
+    "contiene": [
+     "tema"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Fuera de dominio y recuperación",
+  "pasos": [
+   {
+    "usuario": "¿Cuál es la capital de Francia?",
+    "intencion": "fuera_dominio",
+    "contiene": [
+     "umamusume"
+    ]
+   },
+   {
+    "usuario": "¿Para qué sirve cada stat?",
+    "intencion": "stats_funcion",
+    "contiene": [
+     "speed"
+    ]
+   }
+  ]
+ },
+ {
+  "nombre": "Mensaje sin sentido y ayuda tras dos fallos",
+  "pasos": [
+   {
+    "usuario": "asdfgh qwerty zxcv",
+    "intencion": "desconocido",
+    "contiene": [
+     "reformular",
+     "entendido",
+     "identificar",
+     "clara"
+    ],
+    "alguna": true
+   },
+   {
+    "usuario": "zzz xkcd plmoknijb",
+    "intencion": "desconocido",
+    "contiene": [
+     "puedo ayudarte con",
+     "esto es lo que se",
+     "pregúntame por una uma"
+    ],
+    "alguna": true
+   }
+  ]
+ },
+ {
+  "nombre": "Reinicio elimina el contexto",
+  "pasos": [
+   {
+    "usuario": "¿Qué aptitudes tiene Rice Shower?",
+    "intencion": "info_personaje",
+    "contiene": [
+     "rice shower"
+    ],
+    "slots": {
+     "personaje": "rice_shower"
+    }
+   },
+   {
+    "usuario": "empecemos de nuevo",
+    "intencion": "reinicio",
+    "slots": {
+     "personaje": null
+    },
+    "fuente": "regla"
+   },
+   {
+    "usuario": "¿En qué pista debería correr mi uma?",
+    "intencion": "distancia_pista_recomendada",
+    "contiene": [
+     "personaje",
+     "uma",
+     "dime"
+    ],
+    "alguna": true,
+    "slots": {
+     "personaje": null
+    }
+   }
+  ]
+ },
+ {
+  "nombre": "Saludo y despedida (la despedida limpia el contexto)",
+  "pasos": [
+   {
+    "usuario": "Hola, buenas tardes",
+    "intencion": "saludo"
+   },
+   {
+    "usuario": "¿Qué aptitudes tiene Vodka?",
+    "intencion": "info_personaje",
+    "slots": {
+     "personaje": "vodka"
+    }
+   },
+   {
+    "usuario": "Gracias, adiós",
+    "intencion": "despedida",
+    "slots": {
+     "personaje": null
+    }
+   }
+  ]
+ }
+]
