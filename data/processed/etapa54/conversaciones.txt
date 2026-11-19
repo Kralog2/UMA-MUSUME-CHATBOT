@@ -1,0 +1,132 @@
+
+== Personaje y seguimientos (4 turnos, cambio de personaje por contexto)
+  [OK ] Tú: ¿Qué aptitudes tiene Gold Ship?
+ Bot: Ficha de Gold Ship. Aptitudes A: pista Turf (pasto), distancia Media, Larga, estilo End Closer. Crece en Stamina +20% y Power +10%. Para sus objetivos necesitas Speed 1500+, Stamina 1000, Power 1000, Guts 500, Wit 1000.  (info_personaje, 0.736, clasificador)
+  [OK ] Tú: ¿En qué distancia le conviene correr?
+ Bot: Gold Ship rinde mejor en pista Turf (pasto), distancias Media, Larga y con estilo End Closer.  (distancia_pista_recomendada, 1.0, contexto)
+  [OK ] Tú: ¿Y Silence Suzuka?
+ Bot: Para Silence Suzuka, sus mejores aptitudes (A) son: pista Turf (pasto), distancia Mile, Media y estilo Front Runner. Te conviene correr ahí.  (distancia_pista_recomendada, 1.0, contexto)
+  [OK ] Tú: explícame más
+ Bot: Con gusto te explico más sobre la pista y distancia de Silence Suzuka: Sus objetivos de stats son Speed 1500+, Stamina 700, Power 1200, Guts 500, Wit 1000, y crece en Speed +20% y Guts +10%.  (pedir_mas_detalle, 1.0, contexto)
+
+== Aclaración cuando falta el personaje y luego uso del dato
+  [OK ] Tú: ¿En qué pista debería correr mi uma?
+ Bot: Dime qué uma estás usando y te ayudo.  (distancia_pista_recomendada, 0.837, clasificador)
+  [OK ] Tú: Vodka
+ Bot: Vodka rinde mejor en pista Turf (pasto), distancias Mile, Media y con estilo Late Surger.  (distancia_pista_recomendada, 1.0, aclaracion)
+  [OK ] Tú: ¿Qué estilo le conviene?
+ Bot: Según su ficha, Vodka tiene aptitud A en pista Turf (pasto), distancia Mile, Media y estilo Late Surger.  (distancia_pista_recomendada, 1.0, contexto)
+
+== Carta con límite de nivel (usa MLB por defecto) y seguimiento
+  [OK ] Tú: ¿Qué bonos da la carta de Fine Motion?
+ Bot: La carta Fine Motion (Wave of Gratitude) es SSR de tipo Wit para ambos escenarios. Su habilidad es Speed Star. En MLB (nivel 50) da 30% de amistad, 15% de eficiencia, 10% de bono de carrera y +1 Wit. La mejor carta de Wit del meta.  (info_carta, 0.856, clasificador)
+  [OK ] Tú: ¿Y con 0LB?
+ Bot: Fine Motion (Wave of Gratitude): SSR de Wit, recomendada para ambos escenarios. Su habilidad es Speed Star. Con 0LB: prioridad 20, amistad inicial 20, bono de stat +1 Wit. Muy fuerte desde 0LB (15% Training Eff).  (info_carta, 1.0, regla)
+  [OK ] Tú: explícame más
+ Bot: Con gusto te explico más sobre la carta Fine Motion (Wave of Gratitude): Comparación por límite: 0LB (nivel 30): amistad 20%, entrenamiento 15%, prioridad 20; 3LB (nivel 45): amistad 30%, entrenamiento 15%, prioridad 35; MLB (nivel 50): amistad 30%, entrenamiento 15%, prioridad 50.  (pedir_mas_detalle, 1.0, contexto)
+
+== Cartas por escenario, cambio de escenario y paginación
+  [OK ] Tú: ¿Qué cartas me recomiendas para Unity Cup?
+ Bot: Cartas recomendadas del catálogo — Unity Cup.
+1. Nice Nature (SSR Wit): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 15%. Escenario: URA Finale y Unity Cup. Habilidad registrada: On Your Left!.
+2. Biko Pegasus (SSR Speed): opción general del catálogo. En MLB: entrenamiento 20%, amistad 25%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Plan X.
+3. Fine Motion (SSR Wit): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Speed Star.
+4. El Condor Pasa (SSR Power): opción general del catálogo. En MLB: entrenamiento 10%, amistad 30%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Killer Tunes.
+5. Rice Shower (SSR Power): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 5%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Swinging Maestro.
+Orden orientativo por compatibilidad y bonos registrados; no es un mazo optimizado. Los bonos corresponden al límite indicado, no necesariamente al nivel que posees.
+Mostrando 1–5 de 27.
+Puedes pedir más opciones.  (cartas_recomendadas, 0.746, clasificador)
+  [OK ] Tú: ¿Y para el otro escenario es lo mismo?
+ Bot: Cartas recomendadas del catálogo — URA Finale.
+1. Nice Nature (SSR Wit): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 15%. Escenario: URA Finale y Unity Cup. Habilidad registrada: On Your Left!.
+2. Biko Pegasus (SSR Speed): opción general del catálogo. En MLB: entrenamiento 20%, amistad 25%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Plan X.
+3. Fine Motion (SSR Wit): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Speed Star.
+4. El Condor Pasa (SSR Power): opción general del catálogo. En MLB: entrenamiento 10%, amistad 30%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Killer Tunes.
+5. Ines Fujin (SSR Guts): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 5%. Escenario: URA Finale. Habilidad registrada: Fast & Furious.
+Orden orientativo por compatibilidad y bonos registrados; no es un mazo optimizado. Los bonos corresponden al límite indicado, no necesariamente al nivel que posees.
+Mostrando 1–5 de 31.
+Puedes pedir más opciones.  (pedir_mas_detalle, 1.0, regla)
+  [OK ] Tú: dame más opciones
+ Bot: Sobre las cartas recomendadas, un detalle más: Otras opciones del catálogo — URA Finale.
+6. Rice Shower (SSR Power): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 5%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Swinging Maestro.
+7. Satono Diamond (SSR Stamina): opción general del catálogo. En MLB: entrenamiento 10%, amistad 30%, carrera 10%. Escenario: URA Finale. Habilidad registrada: Iron Will.
+8. Super Creek (SSR Stamina): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 5%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Swinging Maestro.
+9. Kitasan Black (SSR Speed): opción general del catálogo. En MLB: entrenamiento 15%, amistad 25%, carrera 5%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Professor of Curvature.
+10. Marvelous Sunday (SR Wit): opción general del catálogo. En MLB: entrenamiento 10%, amistad 25%, carrera 10%. Escenario: URA Finale y Unity Cup.
+Orden orientativo por compatibilidad y bonos registrados; no es un mazo optimizado. Los bonos corresponden al límite indicado, no necesariamente al nivel que posees.
+Mostrando 6–10 de 31.
+Puedes pedir más opciones.  (pedir_mas_detalle, 1.0, contexto)
+
+== Escenario recomendado queda en contexto
+  [OK ] Tú: ¿Cuál es el mejor escenario para empezar?
+ Bot: Para empezar se recomienda URA Finale: es el escenario original, con carreras objetivo fijas y el ciclo básico de entrenamiento. Unity Cup, el segundo escenario, agrega equipos, batallas de equipo y entrenamiento en equipo.  (mejor_escenario, 0.623, clasificador)
+  [OK ] Tú: ¿Qué cartas uso ahí?
+ Bot: Cartas recomendadas del catálogo — URA Finale.
+1. Nice Nature (SSR Wit): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 15%. Escenario: URA Finale y Unity Cup. Habilidad registrada: On Your Left!.
+2. Biko Pegasus (SSR Speed): opción general del catálogo. En MLB: entrenamiento 20%, amistad 25%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Plan X.
+3. Fine Motion (SSR Wit): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Speed Star.
+4. El Condor Pasa (SSR Power): opción general del catálogo. En MLB: entrenamiento 10%, amistad 30%, carrera 10%. Escenario: URA Finale y Unity Cup. Habilidad registrada: Killer Tunes.
+5. Ines Fujin (SSR Guts): opción general del catálogo. En MLB: entrenamiento 15%, amistad 30%, carrera 5%. Escenario: URA Finale. Habilidad registrada: Fast & Furious.
+Orden orientativo por compatibilidad y bonos registrados; no es un mazo optimizado. Los bonos corresponden al límite indicado, no necesariamente al nivel que posees.
+Mostrando 1–5 de 31.
+Puedes pedir más opciones.  (cartas_recomendadas, 0.764, clasificador)
+
+== Stats: respuesta específica y ampliación por niveles
+  [OK ] Tú: ¿Para qué sirve Stamina?
+ Bot: Sobre eso: Stamina: Cuánto tiempo mantiene la velocidad durante la carrera. Clave en distancias largas.  (stats_funcion, 0.758, clasificador)
+  [OK ] Tú: Explícame más
+ Bot: Claro, ampliando sobre la estadística Stamina: Clave en distancias largas.  (pedir_mas_detalle, 1.0, contexto)
+  [OK ] Tú: ¿Y qué más?
+ Bot: Ya te di todo el detalle disponible de ese tema; pregúntame por otro, como stats, cartas o escenarios.  (pedir_mas_detalle, 1.0, contexto)
+
+== Uma fácil de entrenar y pregunta sobre una uma concreta
+  [OK ] Tú: ¿Cuál es la umamusume más fácil de entrenar?
+ Bot: Según las guías para principiantes, las umas más recomendadas para empezar son Oguri Cap, Vodka, Sakura Bakushin O. Tienen buenas aptitudes en distancias comunes. Te sugiero entrenarlas en URA Finale.  (uma_facil_entrenar, 0.775, clasificador)
+  [OK ] Tú: ¿Special Week es fácil de entrenar?
+ Bot: Special Week no está entre las más recomendadas para empezar (tiene 5 aptitudes A). Las más sencillas son Oguri Cap, Vodka, Sakura Bakushin O.  (uma_facil_entrenar, 0.723, clasificador)
+
+== Significado de una letra de aptitud
+  [OK ] Tú: ¿Qué significa tener una A en pasto?
+ Bot: Sobre eso: Turf: Pista de pasto. Superficie donde casi todas las umas tienen aptitud A.  (distancias_aptitudes, 0.634, clasificador)
+
+== Herencia por color
+  [OK ] Tú: ¿Qué hacen las chispas azules?
+ Bot: Te cuento: Estrella azul: Chispa heredada que da stats extra. Viene de las umas usadas como padres.  (herencias, 0.701, clasificador)
+
+== Personaje que solo tiene carta
+  [OK ] Tú: ¿Qué aptitudes tiene Biko Pegasus?
+ Bot: No tengo datos de personaje de Biko Pegasus; sí tengo su carta de soporte.  (info_personaje, 0.569, clasificador)
+
+== Pregunta ambigua sin contexto
+  [OK ] Tú: Explícame más
+ Bot: ¿Puedes decirme el tema? Por ejemplo personajes, cartas de soporte, herencias o habilidades.  (pedir_mas_detalle, 0.761, clasificador)
+
+== Fuera de dominio y recuperación
+  [OK ] Tú: ¿Cuál es la capital de Francia?
+ Bot: No tengo información sobre eso. Intenta preguntarme algo sobre el juego, por ejemplo qué hace cada stat. Mi ámbito es Umamusume.  (fuera_dominio, 0.723, clasificador)
+  [OK ] Tú: ¿Para qué sirve cada stat?
+ Bot: Hay cinco stats: Speed (velocidad máxima, sobre todo en el tramo final), Stamina (cuánto tiempo mantiene la velocidad), Power (aceleración), Guts (ayuda a sostener el ritmo al final aunque se acabe la resistencia) y Wit (ayuda a activar habilidades y a tomar mejores decisiones).  (stats_funcion, 0.792, clasificador)
+
+== Mensaje sin sentido y ayuda tras dos fallos
+  [OK ] Tú: asdfgh qwerty zxcv
+ Bot: No encontré una respuesta clara. ¿Podrías reformular tu pregunta sobre Umamusume?  (desconocido, 0.199, umbral)
+  [OK ] Tú: zzz xkcd plmoknijb
+ Bot: Puedo ayudarte con: personajes (aptitudes, crecimiento, objetivos), stats, cartas de soporte (y sus bonos), escenarios, herencias, habilidades y objetos de recompensa. Prueba con "¿Qué aptitudes tiene Gold Ship?".  (desconocido, 0.199, umbral)
+
+== Reinicio elimina el contexto
+  [OK ] Tú: ¿Qué aptitudes tiene Rice Shower?
+ Bot: Sobre Rice Shower: corre mejor en Turf (pasto), Media, Larga y estilo Pace Chaser. Crecimiento: Stamina +10% y Guts +20%. Metas de stats: Speed 1400, Stamina 1000, Power 1000, Guts 500, Wit 800.  (info_personaje, 0.774, clasificador)
+  [OK ] Tú: empecemos de nuevo
+ Bot: Listo, empezamos de cero. ¿Qué quieres saber?  (reinicio, 1.0, regla)
+  [OK ] Tú: ¿En qué pista debería correr mi uma?
+ Bot: Dime qué uma estás usando y te ayudo.  (distancia_pista_recomendada, 0.837, clasificador)
+
+== Saludo y despedida (la despedida limpia el contexto)
+  [OK ] Tú: Hola, buenas tardes
+ Bot: ¡Hola! Puedo ayudarte con personajes, stats, cartas de soporte, habilidades y más del juego. ¿Por dónde empezamos?  (saludo, 0.836, clasificador)
+  [OK ] Tú: ¿Qué aptitudes tiene Vodka?
+ Bot: Ficha de Vodka. Aptitudes A: pista Turf (pasto), distancia Mile, Media, estilo Late Surger. Crece en Speed +10% y Power +20%. Para sus objetivos necesitas Speed 1500+, Stamina 600, Power 1200, Guts 500, Wit 1000+.  (info_personaje, 0.733, clasificador)
+  [OK ] Tú: Gracias, adiós
+ Bot: ¡Gracias por conversar! Que tus umas ganen todas sus carreras.  (despedida, 0.82, clasificador)
+
+Resultado: 34/34 pasos correctos  ✔ TODAS LAS PRUEBAS PASARON

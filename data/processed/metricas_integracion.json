@@ -1,0 +1,11 @@
+{
+  "modelo": "SVM lineal calibrado (sigmoid, CV=5)",
+  "train_ejemplos": 425,
+  "test_ejemplos": 136,
+  "accuracy": 0.8970588235294118,
+  "precision_macro": 0.9063895255071726,
+  "recall_macro": 0.8970588235294118,
+  "f1_macro": 0.8961399317208825,
+  "cv_f1_macro_svm_sin_calibrar": 0.6975024322083148,
+  "nota": "El conjunto test se había usado en una evaluación anterior; no considerarlo test independiente nuevo."
+}

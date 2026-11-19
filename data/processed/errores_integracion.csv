@@ -1,0 +1,15 @@
+﻿texto,intencion,intencion_predicha,confianza
+¿Qué es una support card?,cartas_soporte,distancias_aptitudes,0.450173530903509
+¿Qué tipos de cartas existen en el juego?,cartas_soporte,fuera_dominio,0.2540066022183942
+Dime las cartas SSR más fuertes,cartas_recomendadas,cartas_soporte,0.34284638630850084
+¿Qué skills compro para una carrera larga?,habilidades_comprar,recompensas_items,0.23499145247391212
+¿Qué se necesita para fortalecer a mi uma?,subir_nivel,distancia_pista_recomendada,0.4035088208318391
+¿Y para el otro escenario es lo mismo?,pedir_mas_detalle,mejor_escenario,0.5883694563552686
+¿Qué hay?,saludo,mejor_escenario,0.29638370809539083
+¿Cómo se prepara un pastel?,fuera_dominio,herencias,0.2663238318801805
+dime una uma facilita pa pasar ura finale,uma_facil_entrenar,mejor_escenario,0.4573997312663199
+"explicame la diferencia entre cartas r, sr y ssr",cartas_soporte,cartas_recomendadas,0.3244604210706019
+en q distancia y estilo rinde mejor Daiwa Scarlet,distancia_pista_recomendada,info_personaje,0.20148300873656094
+"tengo una uma con aptitud a en mile y b en sprint, cual elijo",distancia_pista_recomendada,distancias_aptitudes,0.3671384384026834
+pa q sirven las copias repetidas de una carta de soporte,subir_nivel,cartas_soporte,0.5281025728775863
+cuantos planetas tiene el sistema solar,fuera_dominio,herencias,0.309500487560742

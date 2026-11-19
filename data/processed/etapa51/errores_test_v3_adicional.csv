@@ -1,0 +1,4 @@
+texto,intencion,prediccion,confianza
+que diferencia hay entre correr en pasto y correr en arena,distancias_aptitudes,distancia_pista_recomendada,0.3996732887617541
+como influye la letra de aptitud en la velocidad de mi uma,distancias_aptitudes,stats_funcion,0.5097597614064697
+tengo el corazon roto porque no me hace caso,fuera_dominio,pedir_mas_detalle,0.35459023377375554

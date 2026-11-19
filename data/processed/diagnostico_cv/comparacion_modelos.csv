@@ -1,0 +1,4 @@
+﻿modelo,accuracy_oof,f1_macro_oof,errores_oof
+svm_lineal,0.7082,0.703,124
+svm_calibrado,0.7059,0.7009,125
+regresion_logistica,0.6894,0.6835,132

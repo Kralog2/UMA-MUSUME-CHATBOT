@@ -1,0 +1,14 @@
+texto,intencion,prediccion,confianza
+Dime las cartas SSR más fuertes,cartas_recomendadas,cartas_soporte,0.4711373681669378
+¿Qué se necesita para fortalecer a mi uma?,subir_nivel,distancia_pista_recomendada,0.2817785779734197
+¿Y para el otro escenario es lo mismo?,pedir_mas_detalle,mejor_escenario,0.498007002164744
+¿Qué hay?,saludo,mejor_escenario,0.37207786954747185
+¿Quién descubrió América?,fuera_dominio,uma_facil_entrenar,0.44884907651690753
+dime una uma facilita pa pasar ura finale,uma_facil_entrenar,mejor_escenario,0.47369387501835647
+q cartas conviene equipar en el mazo,cartas_recomendadas,cartas_soporte,0.46440700065736795
+"tengo una uma con aptitud a en mile y b en sprint, cual elijo",distancia_pista_recomendada,distancias_aptitudes,0.451988833157173
+recomiendame un juego parecido a zelda,fuera_dominio,cartas_recomendadas,0.39370421767957337
+cuantos planetas tiene el sistema solar,fuera_dominio,herencias,0.3820346441564938
+que diferencia hay entre correr en pasto y correr en arena,distancias_aptitudes,distancia_pista_recomendada,0.3996732887617541
+como influye la letra de aptitud en la velocidad de mi uma,distancias_aptitudes,stats_funcion,0.5097597614064697
+tengo el corazon roto porque no me hace caso,fuera_dominio,pedir_mas_detalle,0.35459023377375554

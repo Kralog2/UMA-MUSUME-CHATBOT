@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from .confidence_manager import ConfidenceManager
+from .card_recommender import ordenar, describir, objetivos
 from .context_resolver import ETIQUETAS, elegir_opcion, preferencias, seguimiento
 from .context_manager import ContextManager, Turno
 from .knowledge_base import ESCENARIOS, KnowledgeBase, normalizar
@@ -254,7 +255,8 @@ class DialogueManager:
         return self._elegir("saludo")
     def _h_fuera_dominio(self, ent):
         """Informa que el tema está fuera del ámbito del chatbot."""
-        return self._elegir("fuera_dominio")
+        respuesta = self._elegir("fuera_dominio")
+        return respuesta if "umamusume" in normalizar(respuesta) else respuesta + " Mi ámbito es Umamusume."
 
     def _h_despedida(self, ent):
         """Responde la despedida y limpia el contexto."""
@@ -316,19 +318,43 @@ class DialogueManager:
             self.ctx.preferencias["sin_ssr"] = False
         if self.ctx.preferencias.get("sin_ssr") and f["rareza"] == "SSR":
             f["rareza"] = None
-        self.ctx.set_tema("cartas_recomendadas", **f)
+        self.ctx.set_tema("cartas_recomendadas", **f, personaje=self.ctx.slots["personaje"])
         if anteriores != self.ctx.preferencias:
             self.ctx.nivel_detalle = 0
-        ids = self.kb.recomendar_cartas(f["escenario"], f["stat"], f["rareza"])
-        if self.ctx.preferencias.get("sin_ssr"):
-            ids = [i for i in ids if self.kb.cartas[i]["rarity"] != "SSR"]
-        if not ids:
-            return self._elegir("_cartas_sin_resultados")
-        lista = ", ".join(self.kb.etiqueta_carta(i) for i in ids[:_TAM_PAGINA])
-        respuesta = self._elegir("cartas_recomendadas", escenario=ESCENARIOS.get(f["escenario"] or "both"), lista_cartas=lista)
-        if any(self.ctx.preferencias.get(k) for k in ("distancia", "pista", "estilo", "f2p")) or self.ctx.slots["personaje"]:
-            respuesta += " He conservado tus preferencias, pero esta lista aún no está personalizada por personaje, distancia, estilo, pista ni disponibilidad F2P."
-        return respuesta
+        self.ctx.nivel_detalle = 0
+        return self._pagina_cartas(self.ctx.tema, 0)
+
+    def _pagina_cartas(self, tema, pagina):
+        """Presenta una página estable de recomendaciones y explica sus restricciones."""
+        personaje = tema.get("personaje")
+        pref = self.ctx.preferencias
+        filas = ordenar(self.kb, tema.get("escenario"), tema.get("stat"), tema.get("rareza"), personaje, pref)
+        seleccion = filas[pagina * _TAM_PAGINA:(pagina + 1) * _TAM_PAGINA]
+        if not seleccion:
+            if pagina:
+                return None
+            return "No encontré cartas en DBCv3 que cumplan todos los filtros. Puedes cambiar la distancia, el estilo, la pista, la rareza o el escenario. No he relajado tus restricciones."
+        titulo = "Otras opciones" if pagina else "Cartas recomendadas"
+        titulo += " para " + self.kb.nombre_personaje(personaje) if personaje else " del catálogo"
+        titulo += " — " + (ESCENARIOS[tema["escenario"]] if tema.get("escenario") else "sin escenario específico")
+        metas = objetivos(self.kb, personaje, pref)
+        filtros = [f"{k}: {', '.join(sorted(v))} ({'solicitado' if exp else 'inferido por aptitudes'})" for k, (v, exp) in metas.items()]
+        if tema.get("stat"): filtros.append("stat: " + tema["stat"])
+        if tema.get("rareza"): filtros.append("rareza: " + tema["rareza"])
+        if pref.get("sin_ssr"): filtros.append("sin SSR")
+        partes = [titulo + "."]
+        if filtros: partes.append("Criterios: " + "; ".join(filtros) + ".")
+        if personaje:
+            ficha = self.kb.personajes[personaje]
+            bajas = [f"{k} {x.upper()} (aptitud {ficha[x]})" for k,(v,exp) in metas.items() if exp for x in v if ficha[x] not in ("S", "A")]
+            if bajas: partes.append("Atención: " + ", ".join(bajas) + "; la preferencia explícita se conserva.")
+        partes.extend(f"{pagina * _TAM_PAGINA + i}. {describir(self.kb, fila)}" for i, fila in enumerate(seleccion, 1))
+        partes.append("Orden orientativo por compatibilidad y bonos registrados; no es un mazo optimizado. Los bonos corresponden al límite indicado, no necesariamente al nivel que posees.")
+        if pref.get("f2p"):
+            partes.append("F2P: priorizo las opciones con evidencia F2P en las notas de DBCv3 a igual compatibilidad. No conozco tu inventario ni el coste o disponibilidad actual de todas las cartas.")
+        partes.append(f"Mostrando {pagina * _TAM_PAGINA + 1}–{pagina * _TAM_PAGINA + len(seleccion)} de {len(filas)}.")
+        if (pagina+1)*_TAM_PAGINA < len(filas): partes.append("Puedes pedir más opciones.")
+        return "\n".join(partes)
 
     def _h_distancias_aptitudes(self, ent):
         """Explica aptitudes de pista, distancia y estilo."""
@@ -470,13 +496,8 @@ class DialogueManager:
         """Recupera información adicional o pagina recomendaciones."""
         i, kb = t["intent"], self.kb
         todas = lambda cat: " ".join(f"{f['name'][0].upper() + f['name'][1:]}: {f['detail']}." for f in kb.filas(cat) if f["detail"])
-        if i == "cartas_recomendadas":  # paginación: cada "más" muestra las siguientes cartas
-            ids = kb.recomendar_cartas(t.get("escenario"), t.get("stat"), t.get("rareza"))
-            if self.ctx.preferencias.get("sin_ssr"):
-                ids = [c for c in ids if kb.cartas[c]["rarity"] != "SSR"]
-            pag = ids[_TAM_PAGINA * (nivel + 1): _TAM_PAGINA * (nivel + 2)]
-            return ("Otras opciones: " + ", ".join(kb.etiqueta_carta(c) for c in pag) +
-                    ". (Orden: rareza y luego suma de bonos de entrenamiento, amistad y carrera con MLB.)") if pag else None
+        if i == "cartas_recomendadas":
+            return self._pagina_cartas(t, nivel + 1)
         if nivel > 0:
             return None
         if i == "stats_funcion":
@@ -542,7 +563,8 @@ class DialogueManager:
             return getattr(self, "_h_" + t["intent"])(ent)
         texto = self._detalle(t, ctx.nivel_detalle)
         if texto is None:
-            return self._elegir("_sin_mas_detalle")
+            return ("No quedan más cartas que cumplan tus filtros. Puedes cambiar alguno para ampliar la búsqueda."
+                    if t["intent"] == "cartas_recomendadas" else self._elegir("_sin_mas_detalle"))
         ctx.nivel_detalle += 1
         return self._elegir("pedir_mas_detalle", tema=self._etiqueta_tema(t)).rstrip() + " " + texto
 

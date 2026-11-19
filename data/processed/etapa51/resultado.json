@@ -1,0 +1,59 @@
+{
+  "seleccion": {
+    "variante": "v3_reforzado",
+    "total": 583,
+    "accuracy": 0.7803921568627451,
+    "f1_macro": 0.7832282476023865,
+    "precision_macro": 0.7912904980010786,
+    "recall_macro": 0.7803921568627451,
+    "top3": 0.9215686274509803
+  },
+  "comparacion": [
+    {
+      "variante": "v3_base",
+      "total": 510,
+      "accuracy": 0.7647058823529411,
+      "f1_macro": 0.7651499148501347,
+      "precision_macro": 0.7682298700388052,
+      "recall_macro": 0.7647058823529411,
+      "top3": 0.903921568627451
+    },
+    {
+      "variante": "v3_reforzado",
+      "total": 583,
+      "accuracy": 0.7803921568627451,
+      "f1_macro": 0.7832282476023865,
+      "precision_macro": 0.7912904980010786,
+      "recall_macro": 0.7803921568627451,
+      "top3": 0.9215686274509803
+    }
+  ],
+  "evaluacion": {
+    "test_v3": {
+      "n": 170,
+      "accuracy": 0.9235294117647059,
+      "f1_macro": 0.921735779812237,
+      "precision_macro": 0.9303944421591481,
+      "recall_macro": 0.9235294117647058,
+      "top3": 0.9941176470588236
+    },
+    "test_v3_adicional": {
+      "n": 34,
+      "accuracy": 0.9117647058823529,
+      "f1_macro": 0.8862745098039215,
+      "precision_macro": 0.8823529411764706,
+      "recall_macro": 0.9117647058823529,
+      "top3": 1.0
+    },
+    "challenge_previamente_usado": {
+      "n": 68,
+      "accuracy": 0.8088235294117647,
+      "f1_macro": 0.8111280875986759,
+      "precision_macro": 0.8434173669467786,
+      "recall_macro": 0.8088235294117647,
+      "top3": 0.9705882352941176
+    }
+  },
+  "sklearn": "1.8.0",
+  "nota": "Selección solo por CV. Test y challenge no son evaluaciones vírgenes completas."
+}

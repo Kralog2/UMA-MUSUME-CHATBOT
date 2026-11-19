@@ -1,0 +1,21 @@
+,precision,recall,f1-score,support
+cartas_recomendadas,1.0,1.0,1.0,2.0
+cartas_soporte,1.0,1.0,1.0,2.0
+despedida,1.0,1.0,1.0,2.0
+distancia_pista_recomendada,0.6666666666666666,1.0,0.8,2.0
+distancias_aptitudes,0.0,0.0,0.0,2.0
+fuera_dominio,1.0,0.5,0.6666666666666666,2.0
+habilidades_comprar,1.0,1.0,1.0,2.0
+herencias,1.0,1.0,1.0,2.0
+info_carta,1.0,1.0,1.0,2.0
+info_personaje,1.0,1.0,1.0,2.0
+mejor_escenario,1.0,1.0,1.0,2.0
+pedir_mas_detalle,0.6666666666666666,1.0,0.8,2.0
+recompensas_items,1.0,1.0,1.0,2.0
+saludo,1.0,1.0,1.0,2.0
+stats_funcion,0.6666666666666666,1.0,0.8,2.0
+subir_nivel,1.0,1.0,1.0,2.0
+uma_facil_entrenar,1.0,1.0,1.0,2.0
+accuracy,0.9117647058823529,0.9117647058823529,0.9117647058823529,0.9117647058823529
+macro avg,0.8823529411764706,0.9117647058823529,0.8862745098039215,34.0
+weighted avg,0.8823529411764706,0.9117647058823529,0.8862745098039215,34.0

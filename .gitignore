@@ -1,13 +1,76 @@
+# ============================================================
+# UMA MUSUME ChatBot v3.0
+# Configuración de Git para el proyecto académico
+# ============================================================
 
+# 1. Entornos virtuales de Python
 .venv/
-__pycache__/
-*.pyc
+venv/
+env/
+ENV/
 
+# 2. Caché y archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 3. Caché de pruebas y análisis de código
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# 4. Jupyter Notebook (conservar los archivos .ipynb)
 .ipynb_checkpoints/
 
+# 5. Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+
+# 6. Configuración local de editores
 .vscode/
+.idea/
+*.code-workspace
 
-artifacts/*
-!artifacts/.gitkeep
+# 7. Empaquetado de Python
+/build/
+/dist/
+*.egg-info/
+.eggs/
 
-data/processed/
+# 8. Logs y archivos temporales
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+~$*.xlsx
+~$*.xls
+
+# 9. Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 10. Paquetes locales de distribución
+/UMA_MUSUME_CHATBOT*.zip
+
+# ============================================================
+# IMPORTANTE: conservar bajo control de versiones:
+# artifacts/      - Modelos entrenados (.joblib)
+# data/raw/       - Entrenamiento, prueba y refuerzo
+# data/game/      - Base de conocimiento CSV y JSON
+# data/source/    - Excel autorizado para compartir
+# data/versions/  - Versiones históricas
+# data/challenge/ - Evaluaciones adicionales
+# data/processed/ - Métricas y evidencias experimentales
+# docs/, src/, tests/, scripts/, notebooks/
+# README.md y requirements.txt
+# No guardar datos privados ni credenciales en estas carpetas.
+# ============================================================

@@ -1,0 +1,15 @@
+{
+  "nota": "Desafío nuevo separado: 68 preguntas sintéticas redactadas para esta etapa; no es un muestreo de usuarios reales.",
+  "sha256_desafio": "2e9dbcdc5032e3617f2d2d9f32de38735573e994e2f683ecc007a49eee0508f7",
+  "sha256_modelo": "b3e6de9257fef3f0118ebcc9b218b5f4f5ed54d8fd524c776d70614eb777efc3",
+  "ejemplos": 68,
+  "intenciones": 17,
+  "umbral_congelado": 0.3,
+  "accuracy_sin_rechazo": 0.8235294117647058,
+  "f1_macro_sin_rechazo": 0.8287284610814022,
+  "precision_macro_sin_rechazo": 0.8600840336134454,
+  "recall_macro_sin_rechazo": 0.8235294117647058,
+  "cobertura_con_umbral": 0.8970588235294118,
+  "exactitud_de_aceptadas": 0.8688524590163934,
+  "rechazados": 7
+}

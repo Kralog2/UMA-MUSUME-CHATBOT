@@ -1,0 +1,100 @@
+
+== Personaje y seguimientos (4 turnos, cambio de personaje por contexto)
+  [OK ] Tú: ¿Qué aptitudes tiene Gold Ship?
+ Bot: Ficha de Gold Ship. Aptitudes A: pista Turf (pasto), distancia Media, Larga, estilo End Closer. Crece en Stamina +20% y Power +10%. Para sus objetivos necesitas Speed 1500+, Stamina 1000, Power 1000, Guts 500, Wit 1000.  (info_personaje, 0.736, clasificador)
+  [OK ] Tú: ¿En qué distancia le conviene correr?
+ Bot: Gold Ship rinde mejor en pista Turf (pasto), distancias Media, Larga y con estilo End Closer.  (distancia_pista_recomendada, 0.827, clasificador)
+  [OK ] Tú: ¿Y Silence Suzuka?
+ Bot: Para Silence Suzuka, sus mejores aptitudes (A) son: pista Turf (pasto), distancia Mile, Media y estilo Front Runner. Te conviene correr ahí.  (distancia_pista_recomendada, 1.0, contexto)
+  [OK ] Tú: explícame más
+ Bot: Con gusto te explico más sobre la pista y distancia de Silence Suzuka: Sus objetivos de stats son Speed 1500+, Stamina 700, Power 1200, Guts 500, Wit 1000, y crece en Speed +20% y Guts +10%.  (pedir_mas_detalle, 0.761, clasificador)
+
+== Aclaración cuando falta el personaje y luego uso del dato
+  [OK ] Tú: ¿En qué pista debería correr mi uma?
+ Bot: Dime qué uma estás usando y te ayudo.  (distancia_pista_recomendada, 0.837, clasificador)
+  [OK ] Tú: Vodka
+ Bot: Vodka rinde mejor en pista Turf (pasto), distancias Mile, Media y con estilo Late Surger.  (distancia_pista_recomendada, 1.0, aclaracion)
+  [OK ] Tú: ¿Qué estilo le conviene?
+ Bot: Según su ficha, Vodka tiene aptitud A en pista Turf (pasto), distancia Mile, Media y estilo Late Surger.  (distancia_pista_recomendada, 0.706, clasificador)
+
+== Carta con límite de nivel (usa MLB por defecto) y seguimiento
+  [OK ] Tú: ¿Qué bonos da la carta de Fine Motion?
+ Bot: La carta Fine Motion (Wave of Gratitude) es SSR de tipo Wit para ambos escenarios. Su habilidad es Speed Star. En MLB (nivel 50) da 30% de amistad, 15% de eficiencia, 10% de bono de carrera y +1 Wit. La mejor carta de Wit del meta.  (info_carta, 0.856, clasificador)
+  [OK ] Tú: ¿Y con 0LB?
+ Bot: Fine Motion (Wave of Gratitude): SSR de Wit, recomendada para ambos escenarios. Su habilidad es Speed Star. Con 0LB: prioridad 20, amistad inicial 20, bono de stat +1 Wit. Muy fuerte desde 0LB (15% Training Eff).  (info_carta, 1.0, regla)
+  [OK ] Tú: explícame más
+ Bot: Con gusto te explico más sobre la carta Fine Motion (Wave of Gratitude): Comparación por límite: 0LB (nivel 30): amistad 20%, entrenamiento 15%, prioridad 20; 3LB (nivel 45): amistad 30%, entrenamiento 15%, prioridad 35; MLB (nivel 50): amistad 30%, entrenamiento 15%, prioridad 50.  (pedir_mas_detalle, 0.761, clasificador)
+
+== Cartas por escenario, cambio de escenario y paginación
+  [OK ] Tú: ¿Qué cartas me recomiendas para Unity Cup?
+ Bot: Mi recomendación para Unity Cup: Nice Nature (SSR Wit), Biko Pegasus (SSR Speed), Fine Motion (SSR Wit), El Condor Pasa (SSR Power), Rice Shower (SSR Power).  (cartas_recomendadas, 0.746, clasificador)
+  [OK ] Tú: ¿Y para el otro escenario es lo mismo?
+ Bot: Para URA Finale, estas cartas están bien valoradas en mi base de datos: Nice Nature (SSR Wit), Biko Pegasus (SSR Speed), Fine Motion (SSR Wit), El Condor Pasa (SSR Power), Ines Fujin (SSR Guts).  (pedir_mas_detalle, 1.0, regla)
+  [OK ] Tú: dame más opciones
+ Bot: Sobre las cartas recomendadas, un detalle más: Otras opciones: Rice Shower (SSR Power), Satono Diamond (SSR Stamina), Super Creek (SSR Stamina), Kitasan Black (SSR Speed), Sakura Bakushin O (SSR Speed). (Orden: rareza y luego suma de bonos de entrenamiento, amistad y carrera con MLB.)  (pedir_mas_detalle, 0.624, clasificador)
+
+== Escenario recomendado queda en contexto
+  [OK ] Tú: ¿Cuál es el mejor escenario para empezar?
+ Bot: Para empezar se recomienda URA Finale: es el escenario original, con carreras objetivo fijas y el ciclo básico de entrenamiento. Unity Cup, el segundo escenario, agrega equipos, batallas de equipo y entrenamiento en equipo.  (mejor_escenario, 0.623, clasificador)
+  [OK ] Tú: ¿Qué cartas uso ahí?
+ Bot: Cartas recomendadas para URA Finale: Nice Nature (SSR Wit), Biko Pegasus (SSR Speed), Fine Motion (SSR Wit), El Condor Pasa (SSR Power), Ines Fujin (SSR Guts). Si no tienes SSR, algunas SR también funcionan.  (cartas_recomendadas, 0.764, clasificador)
+
+== Stats: respuesta específica y ampliación por niveles
+  [OK ] Tú: ¿Para qué sirve Stamina?
+ Bot: Claro. Stamina: Cuánto tiempo mantiene la velocidad durante la carrera. Clave en distancias largas.  (stats_funcion, 0.758, clasificador)
+  [OK ] Tú: Explícame más
+ Bot: Claro, ampliando sobre la estadística Stamina: Clave en distancias largas.  (pedir_mas_detalle, 0.761, clasificador)
+  [OK ] Tú: ¿Y qué más?
+ Bot: No tengo más detalle por ahora. Prueba con otra pregunta sobre el juego.  (pedir_mas_detalle, 0.722, clasificador)
+
+== Uma fácil de entrenar y pregunta sobre una uma concreta
+  [OK ] Tú: ¿Cuál es la umamusume más fácil de entrenar?
+ Bot: Para empezar te sugiero Oguri Cap, Vodka, Sakura Bakushin O. Revisa siempre que su aptitud en la distancia y el estilo de sus carreras objetivo sea A.  (uma_facil_entrenar, 0.775, clasificador)
+  [OK ] Tú: ¿Special Week es fácil de entrenar?
+ Bot: Para tu primera carrera es mejor elegir Oguri Cap, Vodka, Sakura Bakushin O; Special Week (5 aptitudes A) no es la más sencilla.  (uma_facil_entrenar, 0.723, clasificador)
+
+== Significado de una letra de aptitud
+  [OK ] Tú: ¿Qué significa tener una A en pasto?
+ Bot: Sobre eso: Turf: Pista de pasto. Superficie donde casi todas las umas tienen aptitud A.  (distancias_aptitudes, 0.634, clasificador)
+
+== Herencia por color
+  [OK ] Tú: ¿Qué hacen las chispas azules?
+ Bot: Sobre eso: Estrella azul: Chispa heredada que da stats extra. Viene de las umas usadas como padres.  (herencias, 0.701, clasificador)
+
+== Personaje que solo tiene carta
+  [OK ] Tú: ¿Qué aptitudes tiene Biko Pegasus?
+ Bot: No tengo la ficha de Biko Pegasus como personaje, solo su carta de soporte. Pregúntame por la carta.  (info_personaje, 0.569, clasificador)
+
+== Pregunta ambigua sin contexto
+  [OK ] Tú: Explícame más
+ Bot: Todavía no tengo un tema para ampliar. ¿Qué te gustaría saber del juego?  (pedir_mas_detalle, 0.761, clasificador)
+
+== Fuera de dominio y recuperación
+  [OK ] Tú: ¿Cuál es la capital de Francia?
+ Bot: Solo puedo ayudarte con Umamusume: Pretty Derby (URA Finale y Unity Cup). ¿Quieres saber de personajes, stats, cartas o habilidades?  (fuera_dominio, 0.723, clasificador)
+  [OK ] Tú: ¿Para qué sirve cada stat?
+ Bot: Resumen de stats: Speed = qué tan rápido corre, Stamina = cuánto aguanta, Power = qué tan rápido acelera, Guts = empuje al final de la carrera y Wit = inteligencia para activar habilidades. Speed suele ser el más importante, seguido de Stamina y Power.  (stats_funcion, 0.792, clasificador)
+
+== Mensaje sin sentido y ayuda tras dos fallos
+  [OK ] Tú: asdfgh qwerty zxcv
+ Bot: No estoy seguro de haber entendido. ¿Te refieres a personajes, stats, cartas, habilidades o escenarios?  (desconocido, 0.199, umbral)
+  [OK ] Tú: zzz xkcd plmoknijb
+ Bot: Pregúntame por una uma, una carta o un tema del juego; por ejemplo "¿Qué cartas uso en Unity Cup?" o "¿Para qué sirve cada stat?".  (desconocido, 0.199, umbral)
+
+== Reinicio elimina el contexto
+  [OK ] Tú: ¿Qué aptitudes tiene Rice Shower?
+ Bot: Ficha de Rice Shower. Aptitudes A: pista Turf (pasto), distancia Media, Larga, estilo Pace Chaser. Crece en Stamina +10% y Guts +20%. Para sus objetivos necesitas Speed 1400, Stamina 1000, Power 1000, Guts 500, Wit 800.  (info_personaje, 0.774, clasificador)
+  [OK ] Tú: empecemos de nuevo
+ Bot: Conversación reiniciada; olvidé lo que hablamos antes. ¿En qué te ayudo?  (reinicio, 1.0, regla)
+  [OK ] Tú: ¿En qué pista debería correr mi uma?
+ Bot: Dime qué uma estás usando y te ayudo.  (distancia_pista_recomendada, 0.837, clasificador)
+
+== Saludo y despedida (la despedida limpia el contexto)
+  [OK ] Tú: Hola, buenas tardes
+ Bot: ¡Hola, entrenador! Soy un asistente de Umamusume: Pretty Derby (escenarios URA Finale y Unity Cup). ¿Qué quieres saber?  (saludo, 0.836, clasificador)
+  [OK ] Tú: ¿Qué aptitudes tiene Vodka?
+ Bot: Ficha de Vodka. Aptitudes A: pista Turf (pasto), distancia Mile, Media, estilo Late Surger. Crece en Speed +10% y Power +20%. Para sus objetivos necesitas Speed 1500+, Stamina 600, Power 1200, Guts 500, Wit 1000+.  (info_personaje, 0.733, clasificador)
+  [OK ] Tú: Gracias, adiós
+ Bot: ¡Nos vemos! Vuelve cuando quieras resolver más dudas del juego.  (despedida, 0.82, clasificador)
+
+Resultado: 34/34 pasos correctos  ✔ TODAS LAS PRUEBAS PASARON

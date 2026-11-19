@@ -1,0 +1,12 @@
+{
+  "ejemplos_train": 425,
+  "ejemplos_test": 136,
+  "clases_train": 17,
+  "clases_test": 17,
+  "duplicados_normalizados_train": 0,
+  "duplicados_normalizados_test": 0,
+  "solapamiento_normalizado_train_test": 0,
+  "pares_test_con_similitud_mayor_igual_080": 0,
+  "similitud_maxima": 0.7585,
+  "nota": "Similitud superficial; no prueba ausencia de paráfrasis o fuga semántica."
+}

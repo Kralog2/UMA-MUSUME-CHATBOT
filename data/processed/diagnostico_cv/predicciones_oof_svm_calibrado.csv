@@ -1,0 +1,426 @@
+﻿texto,intencion,intencion_predicha,confianza,correcta
+¿Cuál es la umamusume más fácil de entrenar?,uma_facil_entrenar,uma_facil_entrenar,0.6142259477590793,True
+¿Qué uma me conviene para empezar a entrenar?,uma_facil_entrenar,uma_facil_entrenar,0.6411198283703635,True
+Dime una chica caballo sencilla de criar,uma_facil_entrenar,cartas_recomendadas,0.2741326594102153,False
+¿Con qué personaje me recomiendan empezar?,uma_facil_entrenar,uma_facil_entrenar,0.2848260812166106,True
+Quiero una uma que no me dé muchos problemas en la carrera,uma_facil_entrenar,stats_funcion,0.15595438165208952,False
+¿Cuál es la mejor uma para principiantes?,uma_facil_entrenar,uma_facil_entrenar,0.5798018224797228,True
+Recomiéndame una uma fácil de sacar adelante,uma_facil_entrenar,uma_facil_entrenar,0.4497531456729555,True
+¿A quién debería entrenar primero siendo nuevo?,uma_facil_entrenar,uma_facil_entrenar,0.2774768283135136,True
+¿Qué umas son buenas para novatos?,uma_facil_entrenar,saludo,0.22583286917491327,False
+¿Hay alguna uma fácil de llevar hasta el final del modo carrera?,uma_facil_entrenar,uma_facil_entrenar,0.6005563141949493,True
+"Soy nuevo, ¿qué personaje elijo para mi primera carrera?",uma_facil_entrenar,distancia_pista_recomendada,0.459333657897483,False
+¿Qué uma tiene los objetivos de carrera más fáciles?,uma_facil_entrenar,info_personaje,0.3038830086810372,False
+"quiero entrenar a alguien facil, ¿quién?",uma_facil_entrenar,uma_facil_entrenar,0.6528731428512099,True
+¿Con qué uma es más difícil perder las carreras objetivo?,uma_facil_entrenar,uma_facil_entrenar,0.23921597148781584,True
+¿Cuál personaje es el más amigable para principiantes?,uma_facil_entrenar,uma_facil_entrenar,0.5214508139656394,True
+Dame opciones de umas con poca dificultad,uma_facil_entrenar,herencias,0.23405489421137848,False
+¿Quién es la mejor candidata para mi primer entrenamiento?,uma_facil_entrenar,fuera_dominio,0.23297512079814484,False
+¿Oguri Cap es buena para empezar?,uma_facil_entrenar,uma_facil_entrenar,0.40640165946526935,True
+Necesito un personaje fácil para pasar el modo carrera,uma_facil_entrenar,uma_facil_entrenar,0.4204017085482484,True
+¿Existe alguna uma recomendada para quienes recién empiezan?,uma_facil_entrenar,uma_facil_entrenar,0.5633057769687958,True
+¿Con quién tendré menos dolores de cabeza al entrenar?,uma_facil_entrenar,uma_facil_entrenar,0.5785545649036201,True
+uma facil de entrenar pls,uma_facil_entrenar,uma_facil_entrenar,0.6936395630486217,True
+¿Para qué sirve cada stat?,stats_funcion,stats_funcion,0.5695497703733575,True
+¿Qué hace la velocidad en una uma?,stats_funcion,stats_funcion,0.454531453487244,True
+Explícame los cinco atributos de las umas,stats_funcion,recompensas_items,0.271314307295474,False
+¿Para qué sirve el stamina?,stats_funcion,stats_funcion,0.5134513686908061,True
+¿Qué significa Power en el juego?,stats_funcion,stats_funcion,0.24036782160772321,True
+¿Qué hace la estadística de Guts?,stats_funcion,stats_funcion,0.6148487994945278,True
+¿Y el Wit para qué es?,stats_funcion,stats_funcion,0.3410088027579559,True
+¿Qué diferencia hay entre Speed y Power?,stats_funcion,distancias_aptitudes,0.2918174102827762,False
+¿Cuáles son las estadísticas de una uma?,stats_funcion,distancias_aptitudes,0.33084376278881833,False
+¿Qué representa cada barra de estadística?,stats_funcion,stats_funcion,0.4833362271613318,True
+¿Qué hace cada estadística en la carrera?,stats_funcion,stats_funcion,0.5164860999139198,True
+¿Para qué sirve la resistencia?,stats_funcion,stats_funcion,0.6393811895646091,True
+¿Qué influye la inteligencia de mi personaje?,stats_funcion,distancia_pista_recomendada,0.45789027169439267,False
+¿Cómo afectan los stats al desempeño en una carrera?,stats_funcion,recompensas_items,0.48988752980788636,False
+"Quiero entender qué significan Speed, Stamina, Power, Guts y Wit",stats_funcion,stats_funcion,0.5787685024613823,True
+¿Qué stat es el más importante?,stats_funcion,uma_facil_entrenar,0.20995904089898976,False
+¿Por qué necesito Stamina?,stats_funcion,stats_funcion,0.15706023053889273,True
+¿Sirve de algo subir Guts?,stats_funcion,stats_funcion,0.33173936407435656,True
+¿Para qué sirve la potencia en las carreras?,stats_funcion,stats_funcion,0.5966602047759649,True
+¿El Wit afecta a las habilidades?,stats_funcion,habilidades_comprar,0.5634309006511019,False
+dime que hacen las estadisticas,stats_funcion,stats_funcion,0.31527758801120015,True
+"¿Para qué sirven los números de velocidad, resistencia y demás?",stats_funcion,recompensas_items,0.45392847597564123,False
+¿Qué son las cartas de soporte?,cartas_soporte,cartas_soporte,0.6046338594636005,True
+¿Para qué sirven las support cards?,cartas_soporte,recompensas_items,0.16136921602830082,False
+Explícame las cartas de apoyo,cartas_soporte,cartas_soporte,0.5765523596803356,True
+¿Cuántas cartas de soporte puedo llevar a un entrenamiento?,cartas_soporte,cartas_recomendadas,0.33314268097865257,False
+¿Qué tipos de cartas de soporte hay?,cartas_soporte,cartas_recomendadas,0.4264695118166051,False
+¿Qué es una carta SSR de soporte?,cartas_soporte,cartas_soporte,0.5036842613577127,True
+¿Qué hace una carta de tipo amigo?,cartas_soporte,cartas_soporte,0.29044716855301494,True
+¿Cómo funcionan las cartas de soporte en el entrenamiento?,cartas_soporte,cartas_soporte,0.6435867205223434,True
+¿Qué significa que una carta sea de tipo Speed?,cartas_soporte,cartas_soporte,0.48658721377208436,True
+¿Las cartas de soporte me dan bonificaciones?,cartas_soporte,cartas_soporte,0.64912059284653,True
+¿Por qué aparecen personajes en mis entrenamientos?,cartas_soporte,subir_nivel,0.29439105559687534,False
+¿Para qué sirven las tarjetas de apoyo?,cartas_soporte,cartas_soporte,0.3181681517959894,True
+"¿Qué diferencia hay entre una carta R, SR y SSR?",cartas_soporte,distancias_aptitudes,0.2549475126378281,False
+¿Para qué usan los jugadores las cartas de apoyo?,cartas_soporte,cartas_soporte,0.5579838796461497,True
+Cómo ayudan las cartas a mi personaje al entrenar,cartas_soporte,subir_nivel,0.2868447237578793,False
+¿Qué es el mazo de apoyo?,cartas_soporte,cartas_soporte,0.37527799062476636,True
+¿Qué es el vínculo con las cartas?,cartas_soporte,cartas_soporte,0.37082101259689565,True
+Necesito saber qué hacen las cartas de soporte,cartas_soporte,cartas_soporte,0.6731240735022475,True
+¿Las cartas de soporte son obligatorias?,cartas_soporte,cartas_soporte,0.5841443899133384,True
+¿Qué aportan las cartas al modo carrera?,cartas_soporte,cartas_soporte,0.513974676239807,True
+¿Qué son esas cartas que se eligen antes de empezar la carrera?,cartas_soporte,herencias,0.19775557450701273,False
+¿Cuáles son las cartas de soporte más recomendadas?,cartas_recomendadas,cartas_soporte,0.532981651323495,False
+¿Qué cartas debería llevar en mi mazo?,cartas_recomendadas,cartas_recomendadas,0.5906803787468176,True
+Dime qué cartas son buenas para URA Finale,cartas_recomendadas,cartas_recomendadas,0.39864221705330966,True
+¿Qué cartas conviene usar en Unity Cup?,cartas_recomendadas,cartas_recomendadas,0.5792600716769865,True
+¿Cuál es la mejor carta de velocidad?,cartas_recomendadas,info_carta,0.3325894104639324,False
+¿Qué cartas de soporte son las mejores ahora?,cartas_recomendadas,cartas_soporte,0.4363448853308023,False
+Recomiéndame cartas SSR para mi equipo,cartas_recomendadas,subir_nivel,0.27474392722033103,False
+¿Qué cartas de stamina valen la pena?,cartas_recomendadas,cartas_recomendadas,0.35635342616403376,True
+¿Cuáles son las mejores cartas para un principiante?,cartas_recomendadas,cartas_recomendadas,0.5199247195320266,True
+¿Qué carta de amigo me recomiendas?,cartas_recomendadas,info_carta,0.24343197291426255,False
+Arma un mazo de cartas recomendado,cartas_recomendadas,cartas_recomendadas,0.35187702294092144,True
+¿Qué cartas uso para el primer escenario?,cartas_recomendadas,mejor_escenario,0.384239246813213,False
+¿Cuáles son las cartas top del segundo escenario?,cartas_recomendadas,cartas_recomendadas,0.27570646657631054,True
+¿Hay cartas SR que sirvan?,cartas_recomendadas,cartas_recomendadas,0.5634569235830167,True
+¿Qué carta de Wit es buena?,cartas_recomendadas,info_carta,0.3403434368078971,False
+¿Con qué cartas me conviene entrenar?,cartas_recomendadas,cartas_recomendadas,0.3421904322911926,True
+¿Cuál es la mejor combinación de cartas?,cartas_recomendadas,cartas_recomendadas,0.5231553883825981,True
+Dime una lista de cartas buenas,cartas_recomendadas,cartas_recomendadas,0.34519916502007736,True
+¿Qué cartas de poder recomiendan?,cartas_recomendadas,cartas_recomendadas,0.5457474524274116,True
+¿En qué cartas debería gastar mis tiradas?,cartas_recomendadas,cartas_recomendadas,0.5211258434385261,True
+tier list de cartas de soporte,cartas_recomendadas,cartas_soporte,0.6738971072755132,False
+¿Qué significan las distancias de los personajes?,distancias_aptitudes,distancias_aptitudes,0.2342422200801466,True
+"¿Qué quiere decir Sprint, Mile, Media y Larga?",distancias_aptitudes,distancias_aptitudes,0.33712186097013436,True
+¿Qué son las aptitudes de una uma?,distancias_aptitudes,herencias,0.2870553046022952,False
+"¿Qué significan las letras A, B, C que aparecen junto a la distancia?",distancias_aptitudes,distancias_aptitudes,0.6722578781206865,True
+¿Cuántos metros es una distancia corta?,distancias_aptitudes,distancias_aptitudes,0.6204560233934103,True
+¿Qué es una carrera de milla?,distancias_aptitudes,distancias_aptitudes,0.3256350657163318,True
+¿Qué significa que mi uma tenga aptitud S en distancia?,distancias_aptitudes,distancias_aptitudes,0.4935261833723237,True
+¿Qué quiere decir que una uma sea de larga distancia?,distancias_aptitudes,distancias_aptitudes,0.4438549745384299,True
+¿Qué tan importante es la aptitud de distancia?,distancias_aptitudes,distancias_aptitudes,0.5562495460515738,True
+¿Qué son los estilos de carrera?,distancias_aptitudes,recompensas_items,0.6440805117838281,False
+¿Qué es un Escapista o un Líder en las carreras?,distancias_aptitudes,herencias,0.137606395636064,False
+Explícame qué es Turf y Dirt,distancias_aptitudes,distancias_aptitudes,0.22209398161939056,True
+¿Qué diferencia hay entre pasto y tierra?,distancias_aptitudes,stats_funcion,0.20047479549741684,False
+¿Qué significan las aptitudes de pista?,distancias_aptitudes,distancias_aptitudes,0.4093852711642702,True
+¿Qué significa F o G en una aptitud?,distancias_aptitudes,distancias_aptitudes,0.44138444433684415,True
+¿Por qué mi uma tiene aptitud mala en distancia media?,distancias_aptitudes,distancias_aptitudes,0.4990612673965349,True
+¿Cómo se leen las aptitudes del personaje?,distancias_aptitudes,info_personaje,0.28785662170576387,False
+¿Cuántos metros mide una carrera media?,distancias_aptitudes,distancias_aptitudes,0.629815917203857,True
+¿Para qué sirve saber la distancia de mi uma?,distancias_aptitudes,distancia_pista_recomendada,0.3591999793127201,False
+¿Qué es eso de Late Surger y End Closer?,distancias_aptitudes,distancias_aptitudes,0.22083172657919356,True
+que es la aptitud de una uma,distancias_aptitudes,distancias_aptitudes,0.5661496838709642,True
+¿Qué tipo de distancia y en qué pista debería correr mi personaje?,distancia_pista_recomendada,distancia_pista_recomendada,0.7530070345469396,True
+¿En qué distancia debo inscribir a mi uma?,distancia_pista_recomendada,distancia_pista_recomendada,0.6899638144471912,True
+¿Mi uma debe correr en pasto o en tierra?,distancia_pista_recomendada,distancia_pista_recomendada,0.7212190393247626,True
+¿Cómo sé en qué pista le va mejor a mi personaje?,distancia_pista_recomendada,distancia_pista_recomendada,0.6457118259595346,True
+¿Qué carreras me conviene correr con esta uma?,distancia_pista_recomendada,distancia_pista_recomendada,0.31488656569068824,True
+¿Qué distancia es mejor para mi personaje?,distancia_pista_recomendada,distancia_pista_recomendada,0.6108817949990826,True
+¿En qué distancia gana más fácil mi uma?,distancia_pista_recomendada,distancia_pista_recomendada,0.6896136295204606,True
+"Mi uma es mala en tierra, ¿dónde la pongo a correr?",distancia_pista_recomendada,distancia_pista_recomendada,0.5754760282806326,True
+¿Cuál es la mejor pista para una uma con aptitud A en milla?,distancia_pista_recomendada,distancias_aptitudes,0.3825307686781321,False
+¿Debería entrenar a mi uma para sprint o para larga?,distancia_pista_recomendada,uma_facil_entrenar,0.5434619279324908,False
+¿Qué estilo de carrera le conviene a mi personaje?,distancia_pista_recomendada,distancia_pista_recomendada,0.4822445092343559,True
+¿Dónde debería competir mi personaje?,distancia_pista_recomendada,distancia_pista_recomendada,0.6641615134411994,True
+¿Qué stats subir según la distancia?,distancia_pista_recomendada,info_personaje,0.271616229074185,False
+¿Qué tipo de carreras elijo para mi uma?,distancia_pista_recomendada,distancia_pista_recomendada,0.4378122274108101,True
+¿A qué distancia le saco más provecho a mi personaje?,distancia_pista_recomendada,distancia_pista_recomendada,0.7345475640937682,True
+¿Cómo elijo pista y distancia para mi uma?,distancia_pista_recomendada,distancia_pista_recomendada,0.5988874396766474,True
+"Mi uma tiene A en media y B en larga, ¿cuál escojo?",distancia_pista_recomendada,distancia_pista_recomendada,0.35601379131420235,True
+¿Es mejor que corra en pasto o en tierra?,distancia_pista_recomendada,distancia_pista_recomendada,0.3970254543598118,True
+Quiero saber dónde correr con mi personaje,distancia_pista_recomendada,distancia_pista_recomendada,0.5399032263134323,True
+¿Qué distancia me recomiendas para una uma con poco stamina?,distancia_pista_recomendada,distancia_pista_recomendada,0.3429730767766399,True
+¿En qué tipo de carrera luce más mi uma?,distancia_pista_recomendada,distancia_pista_recomendada,0.5705552092109372,True
+"¿Para qué sirven los zapatos, estandartes y relojes que me dan al ganar?",recompensas_items,recompensas_items,0.7715342695199152,True
+¿Para qué son los zapatos de carrera?,recompensas_items,recompensas_items,0.5380925202955217,True
+¿Qué hago con los estandartes?,recompensas_items,subir_nivel,0.5170558259094964,False
+¿Para qué sirve el reloj despertador?,recompensas_items,recompensas_items,0.4357401993271202,True
+¿Qué son las bandas de ganador?,recompensas_items,herencias,0.18965733054332,False
+¿Para qué sirven los premios de las carreras?,recompensas_items,recompensas_items,0.45686799935197997,True
+¿Qué objetos me dan por ganar una carrera?,recompensas_items,recompensas_items,0.6878429025468967,True
+¿Cómo uso el reloj para repetir una carrera?,recompensas_items,recompensas_items,0.46562608423800206,True
+¿Qué pasa si pierdo una carrera objetivo?,recompensas_items,distancias_aptitudes,0.2727277373964679,False
+¿Los zapatos se pueden gastar?,recompensas_items,recompensas_items,0.5887839768493055,True
+¿Dónde consigo estandartes?,recompensas_items,recompensas_items,0.5419648311486459,True
+¿Para qué sirve el alarm clock?,recompensas_items,stats_funcion,0.44012075733479356,False
+¿Qué recompensas dan las carreras G1?,recompensas_items,recompensas_items,0.3767567113431354,True
+¿Qué son los sashes?,recompensas_items,recompensas_items,0.4315521453950943,True
+¿Cómo consigo más zapatos?,recompensas_items,recompensas_items,0.5531651287120476,True
+¿Para qué sirven los objetos que caen al terminar una carrera?,recompensas_items,recompensas_items,0.6204805037250151,True
+¿Debo guardar los relojes o usarlos?,recompensas_items,recompensas_items,0.5028385637343075,True
+¿Qué hacen los racing shoes?,recompensas_items,recompensas_items,0.49742762606536123,True
+¿Para qué se ocupan los objetos de mejora de potencial?,recompensas_items,recompensas_items,0.29917256756142013,True
+¿Qué recompensa obtengo al ganar una G1?,recompensas_items,recompensas_items,0.47887228975226653,True
+¿Para qué quiero los relojes?,recompensas_items,recompensas_items,0.647640957924622,True
+¿Cuál es el mejor escenario para empezar a jugar?,mejor_escenario,fuera_dominio,0.35870332430161883,False
+¿Por cuál escenario empiezo?,mejor_escenario,mejor_escenario,0.6709907688265658,True
+¿Qué diferencia hay entre URA Finale y Unity Cup?,mejor_escenario,mejor_escenario,0.7095993438686158,True
+¿Es mejor URA Finale o Unity Cup para un novato?,mejor_escenario,mejor_escenario,0.7007939295946359,True
+¿Qué escenarios hay en el modo carrera?,mejor_escenario,uma_facil_entrenar,0.20925737210179765,False
+¿En qué escenario debo gastar mis primeras partidas?,mejor_escenario,mejor_escenario,0.2885382720178916,True
+¿Qué es Unity Cup?,mejor_escenario,mejor_escenario,0.4654646680978191,True
+¿Qué es URA Finale?,mejor_escenario,mejor_escenario,0.6487762588973071,True
+¿Cuál escenario es más fácil?,mejor_escenario,mejor_escenario,0.6205253544232419,True
+¿Qué escenario recomiendan para aprender el juego?,mejor_escenario,mejor_escenario,0.5843017799089355,True
+¿Cuál es el escenario más sencillo de completar?,mejor_escenario,mejor_escenario,0.4816569153343924,True
+¿Debo empezar con Unity Cup?,mejor_escenario,mejor_escenario,0.6649066359468637,True
+¿Qué trae de nuevo Unity Cup?,mejor_escenario,mejor_escenario,0.4183482353456654,True
+¿Cuántos escenarios hay disponibles?,mejor_escenario,mejor_escenario,0.458638186556239,True
+¿Cuál escenario conviene para subir stats altos?,mejor_escenario,mejor_escenario,0.5841410758491014,True
+¿Por qué se recomienda URA Finale al inicio?,mejor_escenario,mejor_escenario,0.4864771114620859,True
+¿Qué es Aoharu Hai?,mejor_escenario,mejor_escenario,0.3669466634264906,True
+¿Cuándo debo pasar al segundo escenario?,mejor_escenario,mejor_escenario,0.2907451396558001,True
+Dime qué escenario elegir primero,mejor_escenario,mejor_escenario,0.3417269420430422,True
+¿El primer escenario es muy difícil?,mejor_escenario,mejor_escenario,0.4932713766236551,True
+¿Qué cambia entre los dos escenarios?,mejor_escenario,recompensas_items,0.20662279357038668,False
+¿Para qué sirven las herencias?,herencias,herencias,0.43115777894030644,True
+¿Qué es la herencia de umas?,herencias,herencias,0.5944081173615509,True
+¿Cómo funciona la herencia?,herencias,herencias,0.6287070427090962,True
+¿Qué son las chispas?,herencias,herencias,0.563031430213354,True
+¿Para qué sirven los padres en la carrera?,herencias,recompensas_items,0.3777502720599362,False
+¿Qué es el legado?,herencias,cartas_soporte,0.20150890532257956,False
+¿Cómo heredo habilidades de otra uma?,herencias,habilidades_comprar,0.5133717504122894,False
+¿Qué pasa si uso una uma ya entrenada como padre?,herencias,recompensas_items,0.34449351424406394,False
+"¿Qué son las chispas azules, rosas y verdes?",herencias,herencias,0.7285030185898252,True
+¿Qué es heredar aptitudes?,herencias,distancias_aptitudes,0.3288236358939541,False
+¿Por qué debo elegir padres antes de entrenar?,herencias,herencias,0.24016321432870233,True
+¿Qué parentesco entre umas me conviene?,herencias,uma_facil_entrenar,0.2417351520253513,False
+¿Qué ventaja da usar una uma anterior como herencia?,herencias,herencias,0.5967127636477866,True
+¿Cómo mejoro a mi uma con las herencias?,herencias,subir_nivel,0.24842912294195515,False
+¿Para qué sirve el sistema de legacy?,herencias,stats_funcion,0.4373297271015146,False
+¿Qué son los sparks?,herencias,recompensas_items,0.4647613518865832,False
+¿Se pueden heredar stats?,herencias,herencias,0.2655394017845779,True
+¿Qué aporta una uma prestada de un amigo?,herencias,herencias,0.4141676943982173,True
+¿Qué es la herencia y cómo se usa?,herencias,herencias,0.49051051420436637,True
+¿Cómo funcionan los padres de una uma?,herencias,herencias,0.4358718041432182,True
+¿Qué sentido tiene heredar de otra uma?,herencias,herencias,0.596063189773569,True
+¿Qué tipos de habilidades debo comprar con mis puntos?,habilidades_comprar,habilidades_comprar,0.7298805499777307,True
+¿En qué gasto los puntos de habilidad?,habilidades_comprar,habilidades_comprar,0.4151707992449163,True
+¿Cuáles habilidades me recomiendan comprar?,habilidades_comprar,habilidades_comprar,0.6537712342401059,True
+¿Cómo funcionan los puntos de habilidad?,habilidades_comprar,habilidades_comprar,0.3439709326433589,True
+¿Qué habilidades son prioridad?,habilidades_comprar,habilidades_comprar,0.7653988398029439,True
+¿Qué habilidades sirven para carreras largas?,habilidades_comprar,habilidades_comprar,0.6478370348568449,True
+¿Vale la pena comprar habilidades doradas?,habilidades_comprar,habilidades_comprar,0.6708178191377288,True
+¿Qué son las habilidades de aceleración?,habilidades_comprar,habilidades_comprar,0.6031373131392616,True
+¿Qué habilidades de recuperación me convienen?,habilidades_comprar,habilidades_comprar,0.7629411655018353,True
+¿Cómo compro habilidades?,habilidades_comprar,habilidades_comprar,0.7053478194302886,True
+¿Cuándo debo gastar mis puntos de skill?,habilidades_comprar,mejor_escenario,0.27390202815088033,False
+¿Qué son las habilidades únicas?,habilidades_comprar,habilidades_comprar,0.6630969234542008,True
+¿Para qué sirve comprar habilidades?,habilidades_comprar,habilidades_comprar,0.5149546883408376,True
+¿Cuáles son las mejores habilidades para mi uma?,habilidades_comprar,cartas_recomendadas,0.510824118800525,False
+¿Qué habilidades compro antes de la final?,habilidades_comprar,habilidades_comprar,0.5871862260462833,True
+¿Cómo reduzco el costo de las habilidades?,habilidades_comprar,habilidades_comprar,0.6486315475414094,True
+¿Qué son los hints de habilidades?,habilidades_comprar,habilidades_comprar,0.5686656288403152,True
+¿Qué habilidades pasivas existen?,habilidades_comprar,habilidades_comprar,0.7350520760319661,True
+¿Debo guardar puntos o comprar de inmediato?,habilidades_comprar,habilidades_comprar,0.43568270674249493,True
+¿Qué habilidades me convienen según mi estilo de carrera?,habilidades_comprar,habilidades_comprar,0.6441778322083924,True
+¿Con qué habilidades gana más mi uma?,habilidades_comprar,habilidades_comprar,0.5468484340486708,True
+¿Cómo subo de nivel mis cartas y personajes?,subir_nivel,subir_nivel,0.7825047372634691,True
+¿Cómo mejoro mis cartas de soporte?,subir_nivel,cartas_soporte,0.44522471290905674,False
+¿Cómo subo el nivel de una carta de soporte?,subir_nivel,subir_nivel,0.610551380274029,True
+¿Cómo hago más fuerte a mi personaje?,subir_nivel,subir_nivel,0.3695426314383509,True
+¿Para qué sirven los puntos de apoyo?,subir_nivel,subir_nivel,0.24486225427803485,True
+¿Cómo aumento el nivel de potencial?,subir_nivel,subir_nivel,0.6740055751378152,True
+¿Qué es el límite de nivel de una carta?,subir_nivel,subir_nivel,0.32224570415994563,True
+¿Cómo rompo el límite de mis cartas?,subir_nivel,subir_nivel,0.6928880204435005,True
+¿Qué hago con las cartas repetidas?,subir_nivel,cartas_soporte,0.4675440040831333,False
+¿Cómo mejoro el talento de una uma?,subir_nivel,subir_nivel,0.39001370413325387,True
+¿Qué es el nivel de despertar?,subir_nivel,subir_nivel,0.3202589367104833,True
+¿Cómo subo de estrellas a mi personaje?,subir_nivel,subir_nivel,0.5069064836502385,True
+¿Con qué subo mis cartas SSR?,subir_nivel,subir_nivel,0.3957449499616865,True
+¿Cómo mejoro a mi uma fuera del modo carrera?,subir_nivel,uma_facil_entrenar,0.25363080117339093,False
+¿Cómo desbloqueo el potencial de mi uma?,subir_nivel,subir_nivel,0.4176969832614747,True
+¿Cómo evolucionan mis cartas?,subir_nivel,subir_nivel,0.6696535123451124,True
+¿Qué materiales necesito para subir de nivel?,subir_nivel,subir_nivel,0.2333646217036612,True
+¿Cuál es la forma de mejorar a mis personajes?,subir_nivel,fuera_dominio,0.3726850479201305,False
+¿Cómo subo los niveles de mis personajes y cartas de forma eficiente?,subir_nivel,subir_nivel,0.7404608037002861,True
+¿Por qué no puedo subir más mi carta?,subir_nivel,pedir_mas_detalle,0.3160713810020143,False
+¿Las cartas duplicadas sirven para algo?,subir_nivel,cartas_soporte,0.5731850966472538,False
+Explícame más,pedir_mas_detalle,pedir_mas_detalle,0.3186419286246727,True
+Dame un ejemplo,pedir_mas_detalle,pedir_mas_detalle,0.5280682457462487,True
+¿Puedes profundizar?,pedir_mas_detalle,saludo,0.37072382150400357,False
+¿Y eso cómo funciona?,pedir_mas_detalle,herencias,0.3832645842390671,False
+"No entendí, explícalo de otra forma",pedir_mas_detalle,herencias,0.34583029917479663,False
+¿Me das más detalles?,pedir_mas_detalle,pedir_mas_detalle,0.6575150125986483,True
+¿Y qué más?,pedir_mas_detalle,pedir_mas_detalle,0.4461955900581985,True
+¿Cómo así?,pedir_mas_detalle,subir_nivel,0.2999285310901264,False
+Continúa por favor,pedir_mas_detalle,despedida,0.2188103890718812,False
+¿Puedes darme un ejemplo?,pedir_mas_detalle,pedir_mas_detalle,0.5425184121898236,True
+¿Y cuál me recomiendas?,pedir_mas_detalle,fuera_dominio,0.33084378552488064,False
+¿Y en el segundo escenario?,pedir_mas_detalle,mejor_escenario,0.6645117404955814,False
+¿Y eso es igual en Unity Cup?,pedir_mas_detalle,mejor_escenario,0.5914689463102191,False
+Cuéntame más sobre eso,pedir_mas_detalle,pedir_mas_detalle,0.6150190601148114,True
+No me quedó claro,pedir_mas_detalle,despedida,0.462767124127377,False
+¿Hay algo más que deba saber de eso?,pedir_mas_detalle,pedir_mas_detalle,0.5546786910818184,True
+Amplía la respuesta,pedir_mas_detalle,info_carta,0.331597182824334,False
+Más información sobre ese tema,pedir_mas_detalle,pedir_mas_detalle,0.6420887763547107,True
+"Y de ese tema, ¿qué más?",pedir_mas_detalle,pedir_mas_detalle,0.6879702709320514,True
+Dame detalles,pedir_mas_detalle,pedir_mas_detalle,0.3131505057697656,True
+"No lo entendí, ¿podrías repetirlo?",pedir_mas_detalle,pedir_mas_detalle,0.5636818864665748,True
+Hola,saludo,saludo,0.7763384205774378,True
+Buenas,saludo,saludo,0.6423374493621001,True
+Hey,saludo,saludo,0.4799636942353623,True
+¿Qué tal?,saludo,stats_funcion,0.1562759881470131,False
+Buenos días,saludo,saludo,0.1351426503504165,True
+Buenas tardes,saludo,saludo,0.7500877819978785,True
+Buenas noches,saludo,saludo,0.6309398757086174,True
+Hola chatbot,saludo,saludo,0.7839200762457793,True
+Holaaa,saludo,saludo,0.1351426503504165,True
+¿Cómo estás?,saludo,saludo,0.32000026260816383,True
+"Hola, ¿me puedes ayudar?",saludo,saludo,0.5107942105682391,True
+Saludos,saludo,saludo,0.1700253818257347,True
+¿Qué onda?,saludo,saludo,0.43336839429535506,True
+Hola entrenador,saludo,saludo,0.7655476324370093,True
+Ey,saludo,saludo,0.16384504352810073,True
+Hello,saludo,saludo,0.16176135890071328,True
+"Hola, quiero preguntar algo",saludo,saludo,0.6661920156789395,True
+Buen día,saludo,despedida,0.5165305658417886,False
+"Hola, ¿estás ahí?",saludo,saludo,0.733694882308716,True
+Hola asistente,saludo,saludo,0.7861859169491082,True
+Hi,saludo,saludo,0.16176135890071328,True
+Adiós,despedida,despedida,0.36478988857786043,True
+Hasta luego,despedida,despedida,0.6408944213961197,True
+Nos vemos,despedida,despedida,0.501738509833997,True
+Gracias,despedida,despedida,0.740567750147673,True
+Eso es todo,despedida,pedir_mas_detalle,0.32443276860536624,False
+Chao,despedida,saludo,0.1700253818257347,False
+Bye,despedida,despedida,0.25488814758875206,True
+Hasta pronto,despedida,despedida,0.6395791903002322,True
+Muchas gracias,despedida,despedida,0.7232282701907242,True
+Ya no tengo más preguntas,despedida,pedir_mas_detalle,0.6253164268098548,False
+Me voy,despedida,pedir_mas_detalle,0.19505585177584497,False
+Gracias por la ayuda,despedida,despedida,0.7153324124837823,True
+Hasta la próxima,despedida,despedida,0.46200591324331725,True
+Eso es todo por hoy,despedida,fuera_dominio,0.27383660418580785,False
+Cuídate,despedida,saludo,0.1499397524376027,False
+Nos vemos luego,despedida,despedida,0.7245798701720174,True
+"Listo, gracias",despedida,despedida,0.761433380130935,True
+Me despido,despedida,pedir_mas_detalle,0.31971344343706626,False
+"Gracias, adiós",despedida,despedida,0.7921385602757232,True
+Que tengas buen día,despedida,saludo,0.5256271893521335,False
+"Fue de mucha ayuda, gracias",despedida,despedida,0.7101689798790299,True
+¿Cuál es la capital de Francia?,fuera_dominio,fuera_dominio,0.47243895563175675,True
+¿Quién ganó el mundial?,fuera_dominio,fuera_dominio,0.3321644636183932,True
+Dame una receta de pasta,fuera_dominio,pedir_mas_detalle,0.3340364155247215,False
+¿Cómo está el clima hoy?,fuera_dominio,fuera_dominio,0.33157413726663226,True
+¿Cómo reparo mi computadora?,fuera_dominio,subir_nivel,0.3886273599894876,False
+Cuéntame un chiste,fuera_dominio,pedir_mas_detalle,0.37850627206351634,False
+¿Cuál es la mejor pizza?,fuera_dominio,fuera_dominio,0.2569409036351817,True
+¿Qué es la fotosíntesis?,fuera_dominio,herencias,0.44091808330105325,False
+Recomiéndame una película,fuera_dominio,uma_facil_entrenar,0.23601939317311885,False
+¿Cuál es el mejor teléfono?,fuera_dominio,fuera_dominio,0.47721460218227313,True
+¿Cuánto cuesta un boleto de avión?,fuera_dominio,fuera_dominio,0.42677981722327346,True
+Háblame de Pokémon,fuera_dominio,info_personaje,0.5918823256601518,False
+¿Cómo gano en Genshin Impact?,fuera_dominio,fuera_dominio,0.35738290834736963,True
+¿Cuál es el mejor equipo de futbol?,fuera_dominio,fuera_dominio,0.5108398202523318,True
+Ayúdame con mi tarea de matemáticas,fuera_dominio,distancia_pista_recomendada,0.20547988206917145,False
+¿Quién es el presidente de México?,fuera_dominio,fuera_dominio,0.47047488702542345,True
+¿Cómo hago una página web?,fuera_dominio,subir_nivel,0.5389219412551677,False
+¿Qué hora es?,fuera_dominio,distancias_aptitudes,0.2582854211774968,False
+¿Cuáles son los personajes de Fate Grand Order?,fuera_dominio,cartas_recomendadas,0.14046455989163836,False
+¿Cómo se apuesta en carreras de caballos de verdad?,fuera_dominio,distancia_pista_recomendada,0.16333748939846673,False
+¿Qué cartas existen en Yu-Gi-Oh?,fuera_dominio,cartas_recomendadas,0.763712302362536,False
+¿Qué aptitudes tiene Special Week?,info_personaje,info_personaje,0.3761472983917009,True
+Dime las aptitudes de Gold Ship,info_personaje,distancias_aptitudes,0.34917569871169896,False
+¿En qué crece más Oguri Cap?,info_personaje,distancia_pista_recomendada,0.2948958678817268,False
+¿Cuáles son los objetivos de Mejiro McQueen?,info_personaje,info_personaje,0.324398818264566,True
+¿Qué crecimiento de stats tiene Tokai Teio?,info_personaje,info_personaje,0.6651502238705941,True
+Háblame de Rice Shower,info_personaje,fuera_dominio,0.34676205400436083,False
+¿Cuáles son las letras de aptitud de Silence Suzuka?,info_personaje,distancias_aptitudes,0.31190564001055643,False
+¿Cuántos puntos de Speed necesita Vodka para los objetivos?,info_personaje,habilidades_comprar,0.21378602357778123,False
+¿Qué stats debo subir con Daiwa Scarlet?,info_personaje,distancia_pista_recomendada,0.22685151552411068,False
+¿Cómo es Kitasan Black?,info_personaje,info_carta,0.5755371094037374,False
+Muéstrame la ficha de Air Groove,info_personaje,info_carta,0.47351998455315686,False
+¿Cuál es el bono de crecimiento de Nice Nature?,info_personaje,info_carta,0.300913537208729,False
+¿Qué objetivos de stats pide Haru Urara?,info_personaje,info_personaje,0.6158061905899576,True
+¿Qué meta de Wit tiene Seiun Sky?,info_personaje,info_personaje,0.22437762592132246,True
+¿Qué porcentaje de crecimiento tiene Mihono Bourbon?,info_personaje,info_personaje,0.711583005848306,True
+información de Grass Wonder,info_personaje,info_personaje,0.1712887638497158,True
+¿Qué datos tiene Maruzensky?,info_personaje,info_personaje,0.4810720505970543,True
+¿Cuál es el crecimiento de Super Creek?,info_personaje,fuera_dominio,0.29571879888880864,False
+¿Qué aptitudes de pista tiene Taiki Shuttle?,info_personaje,info_personaje,0.3791460286700951,True
+Dame los datos de King Halo,info_personaje,pedir_mas_detalle,0.22726376761067438,False
+¿Qué stats necesita Agnes Tachyon para sus metas?,info_personaje,info_personaje,0.4370647562141084,True
+¿Qué sé de Narita Brian?,info_personaje,recompensas_items,0.18002301028763615,False
+¿Qué hace la carta de Kitasan Black?,info_carta,info_carta,0.5957280200047513,True
+¿Cómo es la carta SSR de Fine Motion?,info_carta,info_carta,0.6818362653954407,True
+¿Qué bonos da Super Creek con límite máximo?,info_carta,info_carta,0.4153149404727657,True
+¿Qué habilidad trae la carta de Nice Nature?,info_carta,info_carta,0.720929208546793,True
+¿Vale la pena la carta de Silence Suzuka?,info_carta,info_carta,0.5980274899467951,True
+¿Qué da Riko Kashimoto en Unity Cup?,info_carta,mejor_escenario,0.5440747236560619,False
+¿Qué tipo es la carta de Vodka?,info_carta,info_carta,0.689980660390439,True
+¿Cuál es el bono de amistad de Biko Pegasus?,info_carta,info_personaje,0.3478603818233105,False
+¿Qué cambia en la carta de Satono Diamond al llegar a MLB?,info_carta,info_carta,0.7095387501882127,True
+¿Qué es la 3LB de Kitasan Black?,info_carta,info_personaje,0.3220468535251763,False
+¿Sirve la carta de Tazuna Hayakawa?,info_carta,info_carta,0.6697340070418177,True
+¿Qué habilidad tiene la carta de Rice Shower?,info_carta,info_carta,0.6178075688380598,True
+¿Qué eficiencia de entrenamiento da Fine Motion?,info_carta,info_carta,0.602061645082518,True
+¿Cuánto Race Bonus da la carta de Manhattan Cafe?,info_carta,info_carta,0.7547323605679357,True
+Dime los datos de la carta de Haru Urara,info_carta,info_carta,0.48762723549888287,True
+¿Es buena la carta de Mejiro McQueen sin romper límite?,info_carta,info_carta,0.5969592369253852,True
+¿Qué da Aoi Kiryuin?,info_carta,info_carta,0.5259883544969156,True
+¿Para qué escenario es la carta de Seiun Sky?,info_carta,info_carta,0.46064425323178176,True
+¿Qué prioridad de especialidad tiene Sakura Bakushin O?,info_carta,info_carta,0.41286135472671326,True
+¿Qué diferencia hay entre la carta R y SSR de Riko Kashimoto?,info_carta,info_carta,0.4076467601628398,True
+¿Qué trae la carta de Ines Fujin con el límite máximo?,info_carta,info_carta,0.7359029730066884,True
+¿En qué distancia debería correr Gold Ship?,distancia_pista_recomendada,distancia_pista_recomendada,0.6065964793968599,True
+¿Dónde conviene que compita Oguri Cap?,distancia_pista_recomendada,info_personaje,0.3186306452925991,False
+¿Special Week va mejor en pasto o en tierra?,distancia_pista_recomendada,distancia_pista_recomendada,0.31360352960447274,True
+¿Qué pista le queda a Haru Urara?,distancia_pista_recomendada,info_personaje,0.4213554091366943,False
+¿Gold Ship es fácil de entrenar?,uma_facil_entrenar,uma_facil_entrenar,0.5980847195126707,True
+¿Vodka es buena para principiantes?,uma_facil_entrenar,uma_facil_entrenar,0.6764878458069709,True
+q uma me recomiendas pa empezar sin batallar,uma_facil_entrenar,uma_facil_entrenar,0.42497678395041466,True
+"pa q sirve spd, sta y pow en las carreras",stats_funcion,stats_funcion,0.3856168460466234,True
+no entiendo bien la diferencia entre guts y wit,stats_funcion,stats_funcion,0.3831844641558561,True
+q pasa si le subo pura velocidad y nada de estamina,stats_funcion,herencias,0.14611621658586485,False
+como funciona el mazo de support cards,cartas_soporte,herencias,0.250118249088975,False
+q significa q una carta sea ssr o sr,cartas_soporte,cartas_soporte,0.33313785713406713,True
+pa q sirven las cartas de apoyo cuando entreno,cartas_soporte,cartas_soporte,0.6652657814337097,True
+cuantas cartas de soporte se llevan por run,cartas_soporte,cartas_soporte,0.49121654724991953,True
+q cartas rifan mas en unity cup,cartas_recomendadas,mejor_escenario,0.5128105239047869,False
+pasame un mazo bueno de cartas speed y stamina,cartas_recomendadas,cartas_recomendadas,0.29511585759381864,True
+cuales son las mejores support cards pa ura finale,cartas_recomendadas,mejor_escenario,0.3294621558536374,False
+q cartas sr valen la pena subir,cartas_recomendadas,cartas_recomendadas,0.2777101632879364,True
+q significa tener letra a o s en turf y mile,distancias_aptitudes,distancias_aptitudes,0.3774381598480894,True
+"diferencia entre front runner, pace, late y end",distancias_aptitudes,distancias_aptitudes,0.27640701880975116,True
+cuanto mide una carrera medium y long,distancias_aptitudes,distancias_aptitudes,0.3651108986855219,True
+q pasa si corro en dirt con aptitud g,distancias_aptitudes,distancias_aptitudes,0.1786976593107907,True
+pa q sirven los alarm clocks y los sashes,recompensas_items,recompensas_items,0.5808342414525409,True
+donde se gastan los racing shoes q dan al ganar,recompensas_items,recompensas_items,0.7230227771480249,True
+q me dan si gano una carrera g1,recompensas_items,recompensas_items,0.6220904664356547,True
+como consigo mas relojes pa repetir carreras,recompensas_items,recompensas_items,0.5905314629695443,True
+q diferencia hay entre ura y aoharu hai,mejor_escenario,mejor_escenario,0.634474638738045,True
+cual escenario me conviene mas si soy nuevo,mejor_escenario,mejor_escenario,0.3643578720190521,True
+"q onda con unity cup, es mas dificil q ura finale",mejor_escenario,mejor_escenario,0.6160866282514066,True
+en q escenario se sacan mejores stats,mejor_escenario,mejor_escenario,0.4200520721625116,True
+como funciona la erencia y los sparks azules,herencias,herencias,0.71797859121613,True
+pa q sirven las chispas rosas y verdes de los padres,herencias,herencias,0.7325162799121426,True
+como uso el legacy de un amigo antes de entrenar,herencias,herencias,0.45261569446839456,True
+q son las estrellas de herencia al terminar una run,herencias,herencias,0.31039748718705523,True
+q skills me conviene comprar con los puntos,habilidades_comprar,habilidades_comprar,0.4149075358727228,True
+valen la pena las abilidaddes doradas o mejor blancas,habilidades_comprar,cartas_recomendadas,0.4138067386150184,False
+q habilidades de recuperacion sirven pa larga distancia,habilidades_comprar,habilidades_comprar,0.6311978344283863,True
+como se usan los hints pa q salgan mas baratas las skills,habilidades_comprar,herencias,0.17603188470624595,False
+como hago limit break a una carta repetida,subir_nivel,subir_nivel,0.3395174920054301,True
+pa q sirven los puntos de apoyo en las cartas,subir_nivel,subir_nivel,0.35377063238250384,True
+como subo el potencial y despertar de mi personage,subir_nivel,subir_nivel,0.7056112465477677,True
+q hago con los duplicados de cartas ssr,subir_nivel,cartas_recomendadas,0.37590322237225243,False
+pasame las aptitudes y crecimiento de Haru Urara,info_personaje,info_personaje,0.46116903432417394,True
+q objetivos de stats pide Mihono Bourbon,info_personaje,info_personaje,0.7103316947497315,True
+como anda Curren Chan en sprint y mile,info_personaje,distancias_aptitudes,0.32790879967335496,False
+q bonos da Kitasan Black en mlb vs 3lb,info_carta,info_carta,0.5768380268412141,True
+pasame los stats de la carta de Fine Motion,info_carta,info_carta,0.7570458575517244,True
+q tan buena es Super Creek a 0lb,info_carta,info_carta,0.16153695768723134,True
+q prioridad de especialidad tiene Sweep Tosho sr,info_carta,info_carta,0.3521205185341112,True
+aver explicame un poco mas de eso,pedir_mas_detalle,pedir_mas_detalle,0.5400308751339732,True
+como funciona eso q me acabas de decir,pedir_mas_detalle,herencias,0.298577808774952,False
+dame mas info sobre ese tema pls,pedir_mas_detalle,pedir_mas_detalle,0.6115957590907459,True
+"no te entendi bien, me das un ejemplo",pedir_mas_detalle,pedir_mas_detalle,0.6946895159318703,True
+q onda bot,saludo,saludo,0.48595907450320963,True
+"hola q tal, me ayudas con umamusume",saludo,saludo,0.6950326642691612,True
+"buenas tardes, tienes info del juego",saludo,saludo,0.5213321605000157,True
+hey q onda,saludo,saludo,0.7720522416726174,True
+"va q va muchas gracias, nos vemos",despedida,despedida,0.732962796160915,True
+listo bro gracias por la info,despedida,despedida,0.7156622425685653,True
+"sale pues, ahi luego te pregunto mas",despedida,pedir_mas_detalle,0.3806212707631529,False
+"ya quedo claro todo, gracias bye",despedida,despedida,0.6664156837884528,True
+quien va a ganar la champions este año,fuera_dominio,despedida,0.18455359072539232,False
+pasame codigo en python para ordenar una lista,fuera_dominio,cartas_recomendadas,0.22408915367960103,False
+cuanto cuesta el dolar hoy en mexico,fuera_dominio,fuera_dominio,0.7095790421345409,True
+q me recomiendas ver en netflix hoy,fuera_dominio,pedir_mas_detalle,0.36556320980403473,False

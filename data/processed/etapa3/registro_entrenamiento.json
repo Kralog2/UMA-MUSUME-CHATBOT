@@ -1,0 +1,21 @@
+{
+  "original": 425,
+  "refuerzo": 73,
+  "entrenamiento_total": 498,
+  "seleccion": "Comparación OOF original solamente; desafío independiente no consultado",
+  "modelo": "artifacts/modelo_reforzado_etapa3.joblib",
+  "variantes": [
+    {
+      "variante": "base",
+      "accuracy_oof": 0.7082352941176471,
+      "f1_macro_oof": 0.703049599014541,
+      "errores_oof": 124
+    },
+    {
+      "variante": "con_refuerzo",
+      "accuracy_oof": 0.7364705882352941,
+      "f1_macro_oof": 0.7339254047065166,
+      "errores_oof": 112
+    }
+  ]
+}

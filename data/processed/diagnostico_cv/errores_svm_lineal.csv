@@ -1,0 +1,125 @@
+﻿texto,intencion,intencion_predicha
+Dime una chica caballo sencilla de criar,uma_facil_entrenar,cartas_recomendadas
+Quiero una uma que no me dé muchos problemas en la carrera,uma_facil_entrenar,distancia_pista_recomendada
+¿Qué umas son buenas para novatos?,uma_facil_entrenar,cartas_recomendadas
+"Soy nuevo, ¿qué personaje elijo para mi primera carrera?",uma_facil_entrenar,distancia_pista_recomendada
+¿Qué uma tiene los objetivos de carrera más fáciles?,uma_facil_entrenar,info_personaje
+Dame opciones de umas con poca dificultad,uma_facil_entrenar,herencias
+¿Quién es la mejor candidata para mi primer entrenamiento?,uma_facil_entrenar,distancia_pista_recomendada
+Explícame los cinco atributos de las umas,stats_funcion,recompensas_items
+¿Qué diferencia hay entre Speed y Power?,stats_funcion,distancias_aptitudes
+¿Cuáles son las estadísticas de una uma?,stats_funcion,distancias_aptitudes
+¿Qué influye la inteligencia de mi personaje?,stats_funcion,distancia_pista_recomendada
+¿Cómo afectan los stats al desempeño en una carrera?,stats_funcion,recompensas_items
+¿Qué stat es el más importante?,stats_funcion,uma_facil_entrenar
+¿Por qué necesito Stamina?,stats_funcion,cartas_soporte
+¿El Wit afecta a las habilidades?,stats_funcion,habilidades_comprar
+"¿Para qué sirven los números de velocidad, resistencia y demás?",stats_funcion,recompensas_items
+¿Cuántas cartas de soporte puedo llevar a un entrenamiento?,cartas_soporte,cartas_recomendadas
+¿Qué tipos de cartas de soporte hay?,cartas_soporte,cartas_recomendadas
+¿Por qué aparecen personajes en mis entrenamientos?,cartas_soporte,subir_nivel
+"¿Qué diferencia hay entre una carta R, SR y SSR?",cartas_soporte,distancias_aptitudes
+Cómo ayudan las cartas a mi personaje al entrenar,cartas_soporte,subir_nivel
+¿Qué son esas cartas que se eligen antes de empezar la carrera?,cartas_soporte,herencias
+¿Cuáles son las cartas de soporte más recomendadas?,cartas_recomendadas,cartas_soporte
+¿Cuál es la mejor carta de velocidad?,cartas_recomendadas,info_carta
+Recomiéndame cartas SSR para mi equipo,cartas_recomendadas,subir_nivel
+¿Qué carta de amigo me recomiendas?,cartas_recomendadas,info_carta
+Arma un mazo de cartas recomendado,cartas_recomendadas,cartas_soporte
+¿Qué cartas uso para el primer escenario?,cartas_recomendadas,mejor_escenario
+¿Qué carta de Wit es buena?,cartas_recomendadas,info_carta
+tier list de cartas de soporte,cartas_recomendadas,cartas_soporte
+¿Qué son las aptitudes de una uma?,distancias_aptitudes,herencias
+¿Qué son los estilos de carrera?,distancias_aptitudes,recompensas_items
+¿Qué es un Escapista o un Líder en las carreras?,distancias_aptitudes,stats_funcion
+¿Qué diferencia hay entre pasto y tierra?,distancias_aptitudes,stats_funcion
+¿Cómo se leen las aptitudes del personaje?,distancias_aptitudes,info_personaje
+¿Para qué sirve saber la distancia de mi uma?,distancias_aptitudes,distancia_pista_recomendada
+¿Cuál es la mejor pista para una uma con aptitud A en milla?,distancia_pista_recomendada,distancias_aptitudes
+¿Debería entrenar a mi uma para sprint o para larga?,distancia_pista_recomendada,uma_facil_entrenar
+¿Qué stats subir según la distancia?,distancia_pista_recomendada,distancias_aptitudes
+¿Qué hago con los estandartes?,recompensas_items,subir_nivel
+¿Qué son las bandas de ganador?,recompensas_items,distancias_aptitudes
+¿Qué pasa si pierdo una carrera objetivo?,recompensas_items,distancias_aptitudes
+¿Para qué sirve el alarm clock?,recompensas_items,stats_funcion
+¿Cuál es el mejor escenario para empezar a jugar?,mejor_escenario,fuera_dominio
+¿Qué escenarios hay en el modo carrera?,mejor_escenario,uma_facil_entrenar
+¿En qué escenario debo gastar mis primeras partidas?,mejor_escenario,habilidades_comprar
+¿Cuándo debo pasar al segundo escenario?,mejor_escenario,pedir_mas_detalle
+¿Para qué sirven los padres en la carrera?,herencias,recompensas_items
+¿Qué es el legado?,herencias,cartas_soporte
+¿Cómo heredo habilidades de otra uma?,herencias,habilidades_comprar
+¿Qué pasa si uso una uma ya entrenada como padre?,herencias,recompensas_items
+¿Qué parentesco entre umas me conviene?,herencias,distancia_pista_recomendada
+¿Cómo mejoro a mi uma con las herencias?,herencias,subir_nivel
+¿Para qué sirve el sistema de legacy?,herencias,stats_funcion
+¿Qué son los sparks?,herencias,recompensas_items
+¿Cuándo debo gastar mis puntos de skill?,habilidades_comprar,mejor_escenario
+¿Cuáles son las mejores habilidades para mi uma?,habilidades_comprar,cartas_recomendadas
+¿Cómo mejoro mis cartas de soporte?,subir_nivel,cartas_soporte
+¿Qué hago con las cartas repetidas?,subir_nivel,cartas_soporte
+¿Cuál es la forma de mejorar a mis personajes?,subir_nivel,fuera_dominio
+¿Por qué no puedo subir más mi carta?,subir_nivel,pedir_mas_detalle
+¿Las cartas duplicadas sirven para algo?,subir_nivel,cartas_soporte
+¿Puedes profundizar?,pedir_mas_detalle,saludo
+¿Y eso cómo funciona?,pedir_mas_detalle,herencias
+"No entendí, explícalo de otra forma",pedir_mas_detalle,herencias
+¿Cómo así?,pedir_mas_detalle,subir_nivel
+Continúa por favor,pedir_mas_detalle,despedida
+¿Y cuál me recomiendas?,pedir_mas_detalle,cartas_recomendadas
+¿Y en el segundo escenario?,pedir_mas_detalle,mejor_escenario
+¿Y eso es igual en Unity Cup?,pedir_mas_detalle,mejor_escenario
+No me quedó claro,pedir_mas_detalle,despedida
+Amplía la respuesta,pedir_mas_detalle,info_carta
+¿Qué tal?,saludo,distancias_aptitudes
+Buen día,saludo,despedida
+Eso es todo,despedida,pedir_mas_detalle
+Chao,despedida,saludo
+Ya no tengo más preguntas,despedida,pedir_mas_detalle
+Me voy,despedida,pedir_mas_detalle
+Eso es todo por hoy,despedida,fuera_dominio
+Cuídate,despedida,saludo
+Me despido,despedida,pedir_mas_detalle
+Que tengas buen día,despedida,saludo
+Dame una receta de pasta,fuera_dominio,pedir_mas_detalle
+¿Cómo reparo mi computadora?,fuera_dominio,subir_nivel
+Cuéntame un chiste,fuera_dominio,pedir_mas_detalle
+¿Qué es la fotosíntesis?,fuera_dominio,herencias
+Recomiéndame una película,fuera_dominio,uma_facil_entrenar
+Háblame de Pokémon,fuera_dominio,info_personaje
+Ayúdame con mi tarea de matemáticas,fuera_dominio,subir_nivel
+¿Cómo hago una página web?,fuera_dominio,subir_nivel
+¿Qué hora es?,fuera_dominio,distancias_aptitudes
+¿Cuáles son los personajes de Fate Grand Order?,fuera_dominio,cartas_recomendadas
+¿Cómo se apuesta en carreras de caballos de verdad?,fuera_dominio,distancia_pista_recomendada
+¿Qué cartas existen en Yu-Gi-Oh?,fuera_dominio,cartas_recomendadas
+Dime las aptitudes de Gold Ship,info_personaje,distancias_aptitudes
+¿En qué crece más Oguri Cap?,info_personaje,distancia_pista_recomendada
+Háblame de Rice Shower,info_personaje,fuera_dominio
+¿Cuáles son las letras de aptitud de Silence Suzuka?,info_personaje,distancias_aptitudes
+¿Cuántos puntos de Speed necesita Vodka para los objetivos?,info_personaje,habilidades_comprar
+¿Qué stats debo subir con Daiwa Scarlet?,info_personaje,distancia_pista_recomendada
+¿Cómo es Kitasan Black?,info_personaje,info_carta
+Muéstrame la ficha de Air Groove,info_personaje,info_carta
+¿Cuál es el bono de crecimiento de Nice Nature?,info_personaje,info_carta
+información de Grass Wonder,info_personaje,pedir_mas_detalle
+¿Cuál es el crecimiento de Super Creek?,info_personaje,fuera_dominio
+Dame los datos de King Halo,info_personaje,pedir_mas_detalle
+¿Qué sé de Narita Brian?,info_personaje,recompensas_items
+¿Qué da Riko Kashimoto en Unity Cup?,info_carta,mejor_escenario
+¿Cuál es el bono de amistad de Biko Pegasus?,info_carta,info_personaje
+¿Qué es la 3LB de Kitasan Black?,info_carta,info_personaje
+¿Dónde conviene que compita Oguri Cap?,distancia_pista_recomendada,info_personaje
+¿Qué pista le queda a Haru Urara?,distancia_pista_recomendada,info_personaje
+q pasa si le subo pura velocidad y nada de estamina,stats_funcion,subir_nivel
+como funciona el mazo de support cards,cartas_soporte,cartas_recomendadas
+q cartas rifan mas en unity cup,cartas_recomendadas,mejor_escenario
+cuales son las mejores support cards pa ura finale,cartas_recomendadas,mejor_escenario
+valen la pena las abilidaddes doradas o mejor blancas,habilidades_comprar,cartas_recomendadas
+q hago con los duplicados de cartas ssr,subir_nivel,cartas_recomendadas
+como anda Curren Chan en sprint y mile,info_personaje,distancias_aptitudes
+como funciona eso q me acabas de decir,pedir_mas_detalle,herencias
+"sale pues, ahi luego te pregunto mas",despedida,pedir_mas_detalle
+quien va a ganar la champions este año,fuera_dominio,uma_facil_entrenar
+pasame codigo en python para ordenar una lista,fuera_dominio,cartas_recomendadas
+q me recomiendas ver en netflix hoy,fuera_dominio,pedir_mas_detalle

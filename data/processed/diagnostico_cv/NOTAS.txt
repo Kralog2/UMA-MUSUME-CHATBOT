@@ -1,0 +1,6 @@
+Predicciones OOF: cada pregunta se predice con un modelo entrenado sin esa pregunta. Solo usa train.csv.
+La confianza es la probabilidad calibrada más alta, NO prueba que el rechazo fuera de dominio sea fiable.
+La precisión sobre aceptados es accuracy condicional, no precision_macro.
+Los ejemplos fuera de dominio incluidos forman parte de las 17 clases; una pregunta realmente nueva podría comportarse distinto.
+El conjunto test.csv NO se consultó ni utilizó para elegir umbral o arquitectura.
+No usar la clase de prueba externa como validación futura si ya fue utilizada para ajustar decisiones.
