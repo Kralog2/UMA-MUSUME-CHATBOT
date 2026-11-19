@@ -1,0 +1,34 @@
+card_id,card,rarity,stat,skill,scenario,distance,style,track
+kitasan_black_ssr,Kitasan Black (Fire at My Heels),SSR,Speed,Professor of Curvature,both,any,any,any
+biko_pegasus_ssr,Biko Pegasus (Double Carrot Punch!),SSR,Speed,Plan X,both,mile|sprint,any,any
+silence_suzuka_ssr,Silence Suzuka (Beyond This Shining Moment),SSR,Speed,Unrestrained,both,any,front,any
+sakura_bakushin_o_ssr,Sakura Bakushin O (Eat Fast! Yum Fast!),SSR,Speed,Turbo Sprint,both,sprint,front,any
+narita_brian_ssr,Narita Brian (Two Pieces),SSR,Speed,Shatterprof,both,medium|long,any,any
+sweep_tosho_sr,Sweep Tosho (Lamplit Training of a Witch-to-Be),SR,Speed,,both,any,any,any
+eishin_flash_sr,Eishin Flash (5:00 a.m.-Right on Schedule),SR,Speed,,both,any,late,any
+king_halo_sr,King Halo (First-Rate Plan),SR,Speed,,both,sprint|mile,any,any
+super_creek_ssr,Super Creek (Piece of Mind),SSR,Stamina,Swinging Maestro,both,medium|long,any,any
+seiun_sky_ssr,Seiun Sky (Foolproof Plan),SSR,Stamina,Killer Tunes,ura_finale,any,front,any
+satono_diamond_ssr,Satono Diamond (The Will to Overtake),SSR,Stamina,Iron Will,ura_finale,long,late,any
+mejiro_mcqueen_ssr,Mejiro McQueen (Your Team Ace),SSR,Stamina,Cooldown,both,long,any,any
+manhattan_cafe_sr,Manhattan Cafe (My Solo Drawn to Raindrop Drums),SR,Stamina,,both,long,any,any
+mayano_top_gun_sr,Mayano Top Gun (Cute + Cute = ?),SR,Stamina,,both,medium|long,any,any
+rice_shower_ssr,Rice Shower (Happiness Just around the Bend),SSR,Power,Swinging Maestro,both,medium|long,any,any
+vodka_ssr,Vodka (Wild Rider),SSR,Power,Breath of Fresh Air,both,mile|medium,any,any
+el_condor_pasa_ssr,El Condor Pasa (Champion's Passion),SSR,Power,Killer Tunes,both,any,pace,dirt
+smart_falcon_ssr,Smart Falcon (My Umadol Way! ☆),SSR,Power,Chart Topper!,both,any,front,dirt
+hishi_amazon_sr,Hishi Amazon (Reach to the Top!),SR,Power,,both,any,late|end,any
+mihono_bourbon_sr,Mihono Bourbon (Pal-Assisted Training),SR,Power,,both,any,front,any
+biwa_hayahide_sr,Biwa Hayahide (Trial Initiation),SR,Power,,ura_finale,any,pace,any
+fine_motion_ssr,Fine Motion (Wave of Gratitude),SSR,Wit,Speed Star,both,any,any,any
+nice_nature_ssr,Nice Nature (Daring to Dream),SSR,Wit,On Your Left!,both,any,late,any
+marvelous_sunday_sr,Marvelous Sunday (A Marvelous ☆ Plan),SR,Wit,,both,any,any,any
+matikane_fukukitaru_sr,Matikane Fukukitaru (Fate's Forecast),SR,Wit,,both,any,any,any
+daiwa_scarlet_sr,Daiwa Scarlet (Nothing Hard Work Can't Solve!),SR,Wit,,both,any,front|pace,any
+fuji_kiseki_sr,"Fuji Kiseki (Well, Look Who's Home)",SR,Wit,,both,mile,pace,any
+haru_urara_ssr,Haru Urara (Urara's Day Off!),SSR,Guts,Indomable Spirit,both,any,any,any
+ines_fujin_ssr,Ines Fujin (Watch My Star Fly!),SSR,Guts,Fast & Furious,ura_finale,any,front,any
+riko_kashimoto_ssr,Riko Kashimoto (Planned Perfection),SSR,Pal,Rushing Gale!,unity_cup,any,any,any
+tazuna_hayakawa_ssr,Tazuna Hayakawa (Tracen Reception),SSR,Pal,Concentration,ura_finale,any,any,any
+aoi_kiryuin_sr,Aoi Kiryuin (Trainer's Teamwork),SR,Pal,,ura_finale,any,any,any
+riko_kashimoto_r,Riko Kashimoto (Tracen Academy),R,Pal,,unity_cup,any,any,any

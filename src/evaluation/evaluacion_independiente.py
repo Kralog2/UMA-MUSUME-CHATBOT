@@ -1,7 +1,6 @@
-"""Evalúa una sola vez el modelo reforzado sobre un desafío independiente.
+"""Evaluación de una sola pasada sobre un desafío separado, nunca usado al entrenar.
 
 No hay ajuste automático ni búsqueda de hiperparámetros usando este desafío.
-Verifica el hash del conjunto y guarda métricas, predicciones y reportes.
 """
 from pathlib import Path
 import hashlib
@@ -16,7 +15,6 @@ ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'data/processed/etapa3/evaluacion_independiente'
 
 def ejecutar():
-    """Verifica el manifiesto y evalúa el modelo sin reutilizar el desafío."""
     ruta=ROOT/'data/challenge/evaluacion_nueva_v1.csv'
     manifest=json.loads((ROOT/'data/challenge/manifiesto.json').read_text(encoding='utf-8'))
     huella=hashlib.sha256(ruta.read_bytes()).hexdigest()

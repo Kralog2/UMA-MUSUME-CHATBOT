@@ -1,8 +1,4 @@
-"""Carga y consulta el conocimiento del juego y extrae entidades de mensajes.
-
-Lee personajes, cartas, efectos y conocimiento desde los CSV exportados de
-DBC.xlsx; también normaliza texto y construye patrones para reconocer nombres.
-"""
+"""Consultas a la base de datos (CSV exportados de DBC.xlsx) y extracción de entidades."""
 
 from __future__ import annotations
 
@@ -27,14 +23,12 @@ _BLOQUEO = {"super", "smart", "grass", "black", "nature", "special", "silence", 
 
 
 def normalizar(texto: str) -> str:
-    """Convierte texto a minúsculas sin acentos ni puntuación y normaliza espacios."""
     t = unicodedata.normalize("NFKD", str(texto).lower())
     t = "".join(c for c in t if not unicodedata.combining(c))
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9\s]", " ", t)).strip()
 
 
 def _slug(t: str) -> str:
-    """Crea una clave normalizada para buscar nombres de personajes."""
     return normalizar(t).replace(" ", "_")
 
 
@@ -55,7 +49,6 @@ def _alias_nombres(nombres: Dict[str, str]) -> Dict[str, set]:
 
 class KnowledgeBase:
     def __init__(self, directorio: Union[str, Path]):
-        """Carga los CSV del directorio y prepara índices y patrones de búsqueda."""
         d = Path(directorio)
         leer = lambda n: pd.read_csv(d / n, dtype=str, keep_default_na=False).to_dict("records")
         self.personajes: Dict[str, dict] = {_slug(r["name"]): r for r in leer("characters.csv")}
@@ -73,14 +66,12 @@ class KnowledgeBase:
     # Patrones
 
     def _add(self, clave, valor, alias):
-        """Compila y registra un alias para la categoría y el valor indicados."""
         a = normalizar(alias)
         if a:
             palabras = [re.escape(w) + ("(?:e?s)?" if len(w) >= 4 else "") for w in a.split()]
             self._patrones.append((clave, valor, re.compile(r"\b" + " ".join(palabras) + r"\b"), a))
 
     def _construir_patrones(self):
-        """Genera patrones para el conocimiento, personajes y cartas cargados."""
         for cat, filas in self.conocimiento.items():
             for nombre, f in filas.items():
                 alias = [s for s in f["synonym"].split("|")]
@@ -103,7 +94,6 @@ class KnowledgeBase:
     # Entidades
 
     def extraer_entidades(self, texto: str) -> Dict[str, str]:
-        """Detecta las entidades mencionadas y resuelve las cartas por rareza."""
         norm = normalizar(texto)
         mejor: Dict[str, tuple] = {}
         for clave, valor, rx, alias in self._patrones:
@@ -118,14 +108,12 @@ class KnowledgeBase:
         return ent
 
     def quitar_entidades(self, texto: str) -> str:
-        """Retira del texto los alias reconocidos y devuelve el contenido restante."""
         norm = normalizar(texto)
         for _, _, rx, _ in sorted(self._patrones, key=lambda p: -len(p[3])):  # alias largos primero
             norm = rx.sub(" ", norm)
         return re.sub(r"\s+", " ", norm).strip()
 
     def _resolver_carta(self, corto: str, rareza: Optional[str]) -> str:
-        """Elige la carta del grupo solicitado, priorizando la rareza indicada."""
         ids = sorted(self._grupos_carta[corto], key=lambda i: ORDEN_RAREZA.get(self.cartas[i]["rarity"], 9))
         for i in ids:
             if rareza and self.cartas[i]["rarity"] == rareza:
@@ -135,61 +123,51 @@ class KnowledgeBase:
     # Conocimiento
 
     def fila(self, categoria: str, nombre: str) -> Optional[dict]:
-        """Devuelve el registro de conocimiento de una categoría y nombre."""
         return self.conocimiento.get(categoria, {}).get(nombre)
 
     def filas(self, categoria: str) -> List[dict]:
-        """Devuelve todos los registros disponibles para una categoría."""
         return list(self.conocimiento.get(categoria, {}).values())
 
     # Personajes
 
     def nombre_personaje(self, clave: str) -> str:
-        """Obtiene el nombre visible del personaje identificado por su clave."""
         return self.personajes[clave]["name"]
 
     def aptitudes(self, clave: str, categoria: str, letras: str = "SA") -> List[str]:
-        """Lista las opciones de la categoría cuya aptitud coincide con las letras."""
         p = self.personajes[clave]
         return [etq for col, etq in CATEGORIAS_APT[categoria] if p[col] in letras]
 
     def mejor_aptitud(self, clave: str, categoria: str) -> Tuple[str, List[str]]:
-        """Devuelve la mejor calificación del personaje y las opciones que la tienen."""
         p = self.personajes[clave]
         letra = min((p[col] for col, _ in CATEGORIAS_APT[categoria]), key=ORDEN_APT.index)
         return letra, [etq for col, etq in CATEGORIAS_APT[categoria] if p[col] == letra]
 
     def crecimiento(self, clave: str) -> str:
-        """Resume los porcentajes de crecimiento de estadísticas del personaje."""
         p = self.personajes[clave]
         partes = [f"{n} +{p[c]}%" for n, c in [("Speed", "spd_growth"), ("Stamina", "sta_growth"), ("Power", "pow_growth"),
                                                ("Guts", "gut_growth"), ("Wit", "wit_growth")] if p[c] not in ("", "0")]
         return " y ".join(partes) if partes else "ningún stat en particular"
 
     def objetivos(self, clave: str) -> str:
-        """Resume los objetivos de estadísticas del personaje para el entrenamiento."""
         p = self.personajes[clave]
         mas = lambda v: "+" if v not in ("", "0") else ""
         return (f"Speed {p['spd_goal']}{mas(p['spd_goal_plus'])}, Stamina {p['sta_goal']}, Power {p['pow_goal']}, "
                 f"Guts {p['gut_goal']}, Wit {p['wit_goal']}{mas(p['wit_goal_plus'])}")
 
     def principiantes(self) -> List[str]:
-        """Lista los nombres de personajes recomendados para principiantes."""
         return [p["name"] for p in self.personajes.values() if p["recommended_beginner"] == "1"]
 
     # Cartas
     
     def nombre_carta(self, card_id: str) -> str:
-        """Devuelve el nombre completo de una carta por su identificador."""
         return self.cartas[card_id]["card"]
 
     def etiqueta_carta(self, card_id: str) -> str:
-        """Devuelve una etiqueta breve con nombre, rareza y estadística de la carta."""
         c = self.cartas[card_id]
         return f"{c['card'].split(' (')[0]} ({c['rarity']} {c['stat']})"
 
     def efecto(self, card_id: str, lb: Optional[str]) -> Tuple[str, dict]:
-        """Obtiene el efecto del límite pedido, usando MLB o el mayor disponible como alternativa."""
+        """Efectos de la carta con el límite pedido; si no existe usa MLB (o el mayor disponible)."""
         ef = self.efectos.get(card_id, {})
         if lb in ef:
             return lb, ef[lb]
@@ -199,7 +177,6 @@ class KnowledgeBase:
         return k, ef[k]
 
     def recomendar_cartas(self, escenario: Optional[str], stat: Optional[str], rareza: Optional[str]) -> List[str]:
-        """Filtra y ordena cartas compatibles con el escenario, estadística y rareza."""
         res = []
         for cid, c in self.cartas.items():
             if escenario and c["scenario"] not in (escenario, "both"):

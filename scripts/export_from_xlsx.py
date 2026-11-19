@@ -18,14 +18,12 @@ UMBRAL_CONFIANZA = 0.30
 
 
 def norm(t):
-    """Normaliza texto para detectar duplicados y fugas entre conjuntos."""
     t = unicodedata.normalize("NFKD", str(t).lower())
     t = "".join(c for c in t if not unicodedata.combining(c))
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", t)).strip()
 
 
 def limpiar(df):
-    """Elimina columnas y filas vacías y limpia espacios en los datos de una hoja."""
     df = df.loc[:, [c for c in df.columns if not str(c).startswith("Unnamed")]].copy()
     df.columns = [str(c).strip() for c in df.columns]
     df = df.apply(lambda col: col.map(lambda v: v.strip() if isinstance(v, str) else v))
@@ -33,20 +31,14 @@ def limpiar(df):
 
 
 def main(xlsx):
-    """Exporta las hojas del libro, genera JSON y valida los datos requeridos."""
     hojas = {k: limpiar(v) for k, v in pd.read_excel(xlsx, sheet_name=None, dtype=str, keep_default_na=False).items()}
-    out = RAIZ / "data"
-    for hoja, archivo in [("Characters", "characters.csv"), ("Knowledge", "knowledge.csv"), ("Cards", "cards.csv"),
-                          ("CardsEffect", "cards_effects.csv"), ("DataTrain", "train.csv"), ("DataTest", "test.csv")]:
-        hojas[hoja].to_csv(out / archivo, index=False, encoding="utf-8")
-
+    out = RAIZ / "data" / "game"
+    efecto = "CardsEffects" if "CardsEffects" in hojas else "CardsEffect"
     resp = {}
     r = hojas["Responses"].copy(); r["variante"] = r["variante"].astype(int)
     for clave, g in r.sort_values(["intencion", "variante"]).groupby("intencion", sort=False):
         resp[clave] = g["respuesta"].tolist()
-    (out / "responses.json").write_text(json.dumps(resp, ensure_ascii=False, indent=2), encoding="utf-8")
     intents = {"umbral_confianza": UMBRAL_CONFIANZA, "intenciones": hojas["Intents"].to_dict("records")}
-    (out / "intents.json").write_text(json.dumps(intents, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # Validaciones
 
@@ -60,17 +52,26 @@ def main(xlsx):
         if len(resp.get(i, [])) < 3: errores.append(f"{i}: menos de 3 variantes de respuesta")
     if len(tr) < 200: errores.append("train < 200")
     if len(te) < 50: errores.append("test < 50")
+    if any(not norm(t) for t in list(tr.texto)+list(te.texto)): errores.append("textos vacíos")
     ntr, nte = tr["texto"].map(norm), te["texto"].map(norm)
     if ntr.duplicated().any(): errores.append("duplicados en train")
     if nte.duplicated().any(): errores.append("duplicados en test")
     if set(ntr) & set(nte): errores.append("fuga: textos en train y test")
     if set(tr["intencion"]) - ids or set(te["intencion"]) - ids: errores.append("etiquetas que no están en Intents")
-    ce, ca = hojas["CardsEffect"], hojas["Cards"]
+    ce, ca = hojas[efecto], hojas["Cards"]
     if set(ce["card_id"]) - set(ca["card_id"]): errores.append("CardsEffect con card_id inexistente")
     print(f"intenciones={len(ids)} train={len(tr)} test={len(te)} cartas={len(ca)} personajes={len(hojas['Characters'])}")
     print("VALIDACIÓN OK" if not errores else "ERRORES:\n - " + "\n - ".join(errores))
-    return 1 if errores else 0
+    if errores:
+        return 1
+    for hoja, archivo in [("Characters", "characters.csv"), ("Knowledge", "knowledge.csv"), ("Cards", "cards.csv"), (efecto, "cards_effects.csv"), ("DataTrain", "train.csv"), ("DataTest", "test.csv")]:
+        destino = RAIZ / "data" / "raw" if hoja in ("DataTrain", "DataTest") else out
+        destino.mkdir(parents=True, exist_ok=True)
+        hojas[hoja].to_csv(destino / archivo, index=False, encoding="utf-8")
+    (out / "responses.json").write_text(json.dumps(resp, ensure_ascii=False, indent=2), encoding="utf-8")
+    (out / "intents.json").write_text(json.dumps(intents, ensure_ascii=False, indent=2), encoding="utf-8")
+    return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else RAIZ / "data" / "source" / "DBC.xlsx"))
+    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else RAIZ / "data" / "source" / "DBCv3.xlsx"))

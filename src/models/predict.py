@@ -1,5 +1,3 @@
-"""Ejecuta una consola interactiva para predecir intenciones con el modelo."""
-
 from src.models.predictor_adapter import construir_predictor
 
 if __name__ == "__main__":

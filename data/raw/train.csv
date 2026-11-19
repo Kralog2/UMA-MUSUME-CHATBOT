@@ -1,4 +1,4 @@
-﻿texto,intencion
+texto,intencion
 ¿Cuál es la umamusume más fácil de entrenar?,uma_facil_entrenar
 ¿Qué uma me conviene para empezar a entrenar?,uma_facil_entrenar
 Dime una chica caballo sencilla de criar,uma_facil_entrenar
@@ -424,3 +424,88 @@ quien va a ganar la champions este año,fuera_dominio
 pasame codigo en python para ordenar una lista,fuera_dominio
 cuanto cuesta el dolar hoy en mexico,fuera_dominio
 q me recomiendas ver en netflix hoy,fuera_dominio
+que uma me recomiendas para aprender ura finale,uma_facil_entrenar
+cual corredora es mas amigable si voy empezando en el juego,uma_facil_entrenar
+dime personajes recomendados para principiantes en carreras cortas,uma_facil_entrenar
+con que uma es mas sencillo ganar la final por primera vez,uma_facil_entrenar
+personajes faciles de criar sin tener buenas cartas,uma_facil_entrenar
+como influye el wit en la activacion de habilidades,stats_funcion
+que pasa en carrera si me falta stamina en distancia media,stats_funcion
+para que sirve subir guts si ya tengo buena velocidad,stats_funcion
+cual es el rol de power al acelerar en curvas y pendientes,stats_funcion
+explicame la importancia de cada stat en ura finale y unity cup,stats_funcion
+como funcionan los entrenamientos arcoiris con las cartas de apoyo,cartas_soporte
+que diferencia hay entre llevar cartas r sr y ssr en el deck,cartas_soporte
+para que sirve subir la amistad con las cartas de soporte,cartas_soporte
+que aportan las cartas tipo amigo como riko o tazuna,cartas_soporte
+explicame como se arma un mazo de seis cartas de soporte,cartas_soporte
+armame un mazo free 2 play para unity cup,cartas_recomendadas
+cuales sr son las que funcionan bien en unity cup,cartas_recomendadas
+que cartas sr le sirven a silence suzuka para correr de front,cartas_recomendadas
+recomiendame un deck f2p sin cartas ssr para oguri cap,cartas_recomendadas
+mejores cartas de soporte para entrenar un front runner en unity cup,cartas_recomendadas
+que significa que una uma tenga aptitud a en turf y mile,distancias_aptitudes
+cual es la diferencia entre correr de front runner y pace chaser,distancias_aptitudes
+cuantos metros abarca cada categoria de distancia en el juego,distancias_aptitudes
+como afecta tener letra c o d en el estilo de carrera,distancias_aptitudes
+explicame los cuatro estilos de carrera y las superficies,distancias_aptitudes
+en que distancia y estilo conviene entrenar a silence suzuka,distancia_pista_recomendada
+donde rinde mejor oguri cap segun sus aptitudes,distancia_pista_recomendada
+mi uma tiene a en milla y b en media donde la inscribo,distancia_pista_recomendada
+que pista y distancia le quedan mejor a smart falcon,distancia_pista_recomendada
+como elijo el estilo ideal para mi personaje antes de correr,distancia_pista_recomendada
+para que se utilizan los sashes que gano en carreras g1,recompensas_items
+en que momento conviene gastar un alarm clock,recompensas_items
+donde consigo mas racing shoes para subir potencial,recompensas_items
+que objetos dan al completar carreras objetivo en el modo carrera,recompensas_items
+diferencia entre zapatos estandartes y relojes despertadores,recompensas_items
+que mecanicas nuevas agrega unity cup frente a ura finale,mejor_escenario
+conviene jugar ura finale antes de pasar a aoharu cup,mejor_escenario
+cual de los dos primeros escenarios da mas stats al entrenar,mejor_escenario
+explicame como funcionan los equipos en unity cup,mejor_escenario
+que escenario recomiendas para farmear chispas siendo novato,mejor_escenario
+como elegir buenos padres para heredar stats y aptitudes,herencias
+que diferencia hay entre chispas azules rosas y verdes,herencias
+para que sirven las chispas blancas al terminar una partida,herencias
+como funciona el prestamo de legado de otro jugador,herencias
+cuando se activan las herencias durante los tres años de carrera,herencias
+que skills son prioridad para una corredora de larga distancia,habilidades_comprar
+conviene comprar habilidades doradas o varias normales,habilidades_comprar
+como funcionan los descuentos por hints al comprar skills,habilidades_comprar
+que habilidades de aceleracion sirven para estilo front,habilidades_comprar
+cuando es mejor gastar los puntos de habilidad acumulados,habilidades_comprar
+como hago limit break a una carta sr o ssr repetida,subir_nivel
+que materiales pide subir el nivel de potencial de una uma,subir_nivel
+para que sirven los puntos de apoyo en las cartas de soporte,subir_nivel
+como subo el nivel de despertar y talento de mi personaje,subir_nivel
+que hago con las copias duplicadas de cartas de apoyo,subir_nivel
+dame los bonos de crecimiento y metas de oguri cap,info_personaje
+cuales son las aptitudes y objetivos de silence suzuka,info_personaje
+muestrame la ficha completa de daiwa scarlet,info_personaje
+que porcentaje de crecimiento tiene sakura bakushin o,info_personaje
+que stats objetivos pide mejiro mcqueen en carrera,info_personaje
+que bonos da riko kashimoto ssr en unity cup,info_carta
+que tan buena es sweep tosho sr al maximo nivel,info_carta
+dime la habilidad y bonos de kitasan black a 3lb y mlb,info_carta
+que aporta fine motion ssr en entrenamiento de wit,info_carta
+sirve la carta r de riko kashimoto si no tengo la ssr,info_carta
+ampliame un poco mas esa explicacion del juego,pedir_mas_detalle
+dame mas detalles sobre ese personaje o carta,pedir_mas_detalle
+explicame mejor como se aplica eso en carrera,pedir_mas_detalle
+puedes darme un ejemplo practico de lo que dijiste,pedir_mas_detalle
+y en el caso de unity cup como funciona eso,pedir_mas_detalle
+hola buenas tardes quiero consultar sobre umamusume,saludo
+que onda asistente me ayudas con mi entrenamiento,saludo
+buenos dias bot listo para armar un mazo,saludo
+hola que tal tienes informacion de cartas y umas,saludo
+ey buenas me puedes orientar en el juego,saludo
+muchas gracias por toda la ayuda nos vemos luego,despedida
+ya quedo claro todo gracias por orientarme adios,despedida
+sale pues gracias bro ahi nos vemos,despedida
+listo con eso ya puedo entrenar gracias bye,despedida
+es todo por ahora muchas gracias hasta pronto,despedida
+porque ella no me ama,fuera_dominio
+me siento triste y desmotivado hoy,fuera_dominio
+cuanto es ciento veinticinco por ocho,fuera_dominio
+recomiendame una serie o anime para ver este fin de semana,fuera_dominio
+como arreglo un error de permisos en windows powershell,fuera_dominio

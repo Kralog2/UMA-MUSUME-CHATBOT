@@ -29,8 +29,8 @@
       "intencion": "cartas_recomendadas",
       "descripcion": "Pide cartas de soporte recomendadas (por escenario, tipo o rareza)",
       "ejemplo": "¿Qué cartas uso en Unity Cup?",
-      "usa_contexto": "sí (escenario)",
-      "accion_del_gestor_de_dialogo": "Filtra cards.csv por scenario/stat/rarity y arma {lista_cartas}",
+      "usa_contexto": "sí (escenario, personaje, rareza, estilo)",
+      "accion_del_gestor_de_dialogo": "Filtra cards.csv por scenario/personaje/rarity/style/stat y arma {lista_cartas}",
       "categorias_knowledge": "escenario|carta|rareza"
     },
     {

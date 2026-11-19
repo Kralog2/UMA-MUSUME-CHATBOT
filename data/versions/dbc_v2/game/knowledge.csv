@@ -1,0 +1,41 @@
+category,name,synonym,description,detail
+stat,speed,speed|velocidad,Velocidad máxima de la uma,Pesa sobre todo en el tramo final; suele ser el stat más importante
+stat,stamina,stamina|resistencia,Cuánto tiempo mantiene la velocidad durante la carrera,Clave en distancias largas
+stat,power,power|fuerza|potencia,Aceleración de la uma,También ayuda a subir pendientes
+stat,guts,guts|valor|coraje|agallas,Ayuda a sostener el ritmo en el final aunque se acabe la resistencia,Más útil en carreras largas o disputadas
+stat,wit,wit|inteligencia|astucia,Ayuda a activar habilidades y a tomar mejores decisiones en carrera,Reduce errores de posicionamiento
+distancia,sprint,sprint|distancia corta|carrera corta|corta,Carrera corta,1000 a 1400 m
+distancia,mile,mile|milla,Carrera de milla,1600 a 1800 m
+distancia,media,medium|media|distancia media|carrera media,Carrera de distancia media,2000 a 2400 m
+distancia,larga,long|larga|distancia larga|carrera larga,Carrera de larga distancia,2500 m en adelante
+pista,turf,turf|pasto|césped|cesped,Pista de pasto,Superficie donde casi todas las umas tienen aptitud A
+pista,dirt,dirt|tierra,Pista de tierra,Pocas umas la corren bien; revisar la aptitud
+estilo,front runner,front runner|runner|front|escapista,Corre al frente desde la salida,Escapista
+estilo,pace chaser,pace chaser|leader|pace|líder|lider,"Corre cerca del frente, detrás de los punteros",Líder
+estilo,late surger,late surger|betweener|late|cierre,Corre en el centro del pelotón y acelera en la segunda mitad,Cierre
+estilo,end closer,end closer|chaser|end|remate,Corre en la parte trasera y remonta al final,Remate
+aptitud,aptitud,aptitud|aptitudes|grado|grados|letra de aptitud,"Letra que indica qué tan bien corre una uma en una pista, distancia o estilo","De G (peor) a S (mejor); lo recomendable es A o superior. Las letras sueltas (A, B, C...) se detectan con regla, no por sinónimo"
+item,sash,sash|sashes|estandarte|estandartes|banda|bandas|listón|liston,Objeto que se obtiene al ganar carreras G1 específicas,Se usa para subir el nivel de potencial de las umas
+item,alarm clock,alarm clock|reloj|relojes|despertador|despertadores,Permite reintentar una carrera objetivo fallida en el modo carrera,Conviene no gastarlo sin necesidad
+item,racing shoes,racing shoes|zapato|zapatos|zapatillas|zapatos de carrera,Objeto que se obtiene al correr carreras,Se usa para subir el nivel de potencial de las umas
+escenario,URA Finale,ura finale|ura final|ura|primer escenario,"Escenario original del modo carrera, con carreras objetivo fijas",Recomendado para aprender el juego
+escenario,Unity Cup,unity cup|unity|aoharu|segundo escenario,"Segundo escenario, que agrega equipos y batallas de equipo",Mayor complejidad que URA Finale
+herencia,estrella azul,estrella azul|chispa azul|spark azul|blue spark,Chispa heredada que da stats extra,Viene de las umas usadas como padres
+herencia,estrella rosa,estrella rosa|chispa rosa|spark rosa|pink spark,Chispa heredada que mejora aptitudes,Viene de las umas usadas como padres
+herencia,estrella verde,estrella verde|chispa verde|spark verde|green spark,Chispa heredada que da la habilidad única,Viene de las umas usadas como padres
+herencia,estrella blanca,estrella blanca|chispa blanca|spark blanca|white spark,Chispa heredada de habilidades o carreras,Viene de las umas usadas como padres
+habilidad,velocidad,habilidad de velocidad|skill de velocidad,Habilidad que aumenta la velocidad en un tramo de la carrera,Prioridad si la uma corre en su distancia fuerte
+habilidad,aceleración,habilidad de aceleracion|skill de aceleracion,Habilidad que mejora la aceleración,Útil si la uma tiene buen Power
+habilidad,recuperación,habilidad de recuperacion|skill de recuperacion,Habilidad que recupera resistencia durante la carrera,Importante en distancias largas
+habilidad,pasiva,habilidad pasiva|skill pasiva|pasiva,Habilidad que sube stats o aptitudes,No necesita activarse en carrera
+habilidad,única,habilidad única|habilidad unica|skill unica|unique skill,Habilidad exclusiva de cada personaje,Se puede heredar con estrellas verdes
+habilidad,dorada,habilidad dorada|skill dorada|gold skill,Versión superior de una habilidad,Cuesta más puntos; los hints reducen el costo
+carta,speed (carta),carta speed|carta de velocidad,Carta de soporte que favorece el entrenamiento de Speed,Es el tipo más usado en los mazos
+carta,stamina (carta),carta stamina|carta de resistencia,Carta de soporte que favorece el entrenamiento de Stamina,
+carta,power (carta),carta power|carta de fuerza|carta de potencia,Carta de soporte que favorece el entrenamiento de Power,
+carta,guts (carta),carta guts,Carta de soporte que favorece el entrenamiento de Guts,
+carta,wit (carta),carta wit|carta inteligencia,Carta de soporte que favorece el entrenamiento de Wit,
+carta,pal (carta),carta pal|carta amigo|amigo|carta apoyo|friend,Carta de soporte tipo Pal o Amigo,Aporta bonos distintos a los de stat
+rareza,R,carta r|rareza r|carta plateada,Rareza básica de una carta de soporte,
+rareza,SR,sr|carta sr|rareza sr|carta dorada,Rareza intermedia de una carta de soporte,
+rareza,SSR,ssr|carta ssr|rareza ssr|carta rainbow|rainbow|arcoíris|arcoiris,Rareza más alta de una carta de soporte,

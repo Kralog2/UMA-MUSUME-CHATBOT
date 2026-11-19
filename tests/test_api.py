@@ -1,4 +1,4 @@
-"""Prueba endpoints, sesiones, validaciones y CORS de la API con TestClient."""
+"""Pruebas HTTP reales con FastAPI TestClient y el SVM incluido en artifacts."""
 from pathlib import Path
 import sys
 
@@ -10,14 +10,12 @@ from src.api.app import app
 
 
 def test_health_and_docs():
-    """Verifica que el endpoint de salud y la documentación OpenAPI respondan."""
     with TestClient(app) as client:
         assert client.get("/api/health").json()["estado"] == "ok"
         assert client.get("/openapi.json").status_code == 200
 
 
 def test_sessions_isolated_and_reset():
-    """Comprueba que las sesiones se aíslen y que el reinicio borre su contexto."""
     with TestClient(app) as client:
         a = client.post("/api/chat", json={"mensaje": "Dame información de Gold Ship"})
         assert a.status_code == 200, a.text
@@ -34,7 +32,6 @@ def test_sessions_isolated_and_reset():
 
 
 def test_validation_and_unknown_session():
-    """Verifica validaciones HTTP y respuestas para identificadores inexistentes."""
     with TestClient(app) as client:
         for body in [{"mensaje": " "}, {"mensaje": "x" * 2001}, {"mensaje": "hola", "session_id": "no-es-uuid"}]:
             assert client.post("/api/chat", json=body).status_code == 422
@@ -43,7 +40,6 @@ def test_validation_and_unknown_session():
 
 
 def test_cors_allowed_and_disallowed():
-    """Comprueba que CORS permita el origen configurado y rechace otros."""
     with TestClient(app) as client:
         allowed = client.options("/api/chat", headers={"Origin": "http://localhost:3000", "Access-Control-Request-Method": "POST"})
         assert allowed.headers.get("access-control-allow-origin") == "http://localhost:3000"
@@ -52,7 +48,6 @@ def test_cors_allowed_and_disallowed():
 
 
 def run():
-    """Ejecuta todos los grupos de pruebas HTTP y anuncia su finalización."""
     test_health_and_docs()
     test_sessions_isolated_and_reset()
     test_validation_and_unknown_session()

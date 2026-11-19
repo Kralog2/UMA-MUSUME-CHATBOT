@@ -1,7 +1,4 @@
-"""Carga el clasificador calibrado y adapta sus predicciones al gestor de diálogo.
-
-Expone un callable que devuelve la intención predicha junto con su confianza.
-"""
+"""Adaptador entre SVM calibrado y gestor de diálogo del compañero."""
 from pathlib import Path
 import joblib
 import numpy as np
@@ -10,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def construir_predictor(ruta_modelo=None):
-    """Carga el modelo local y devuelve una función que predice intención y confianza."""
+    """Carga el modelo calibrado y crea interfaces de predicción simple y Top-K."""
     ruta=Path(ruta_modelo) if ruta_modelo else ROOT / "artifacts/mejor_modelo.joblib"
     if not ruta.is_file():
         raise FileNotFoundError(
@@ -20,13 +17,19 @@ def construir_predictor(ruta_modelo=None):
     if not hasattr(modelo, "predict_proba"):
         raise TypeError("Este modelo no tiene probabilidades calibradas; entrénalo con src.models.train.")
 
-    def predictor(texto):
-        """Predice la intención más probable para un texto no vacío."""
+    def top_k(texto, k=3):
+        """Ordena las probabilidades calibradas y devuelve las k clases principales."""
         if not isinstance(texto,str) or not texto.strip():
             raise ValueError("El texto debe ser una cadena no vacía")
         probabilidades=modelo.predict_proba([texto])[0]
-        indice=int(np.argmax(probabilidades))
-        return str(modelo.classes_[indice]),float(probabilidades[indice])
+        indices=np.argsort(-probabilidades, kind="stable")[:k]
+        return [(str(modelo.classes_[i]), float(probabilidades[i])) for i in indices]
 
+    def predictor(texto):
+        """Devuelve la clase más probable en el formato histórico del gestor."""
+        return top_k(texto, 1)[0]
+
+    predictor.top_k=top_k
+    predictor.politica_v3=ruta.name == "modelo_v3.joblib"
     predictor.modelo=modelo
     return predictor

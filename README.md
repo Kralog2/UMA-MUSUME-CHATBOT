@@ -91,3 +91,11 @@ python tests/run_conversation_tests.py --modelo reforzado
 ```
 
 La API usa **el SVM reforzado** por defecto. Incluye sesiones aisladas por UUID y reinicio de contexto. El contrato y ejemplo para Next.js están en [`docs/ETAPA_4_API_FRONTEND.md`](docs/ETAPA_4_API_FRONTEND.md).
+
+## Etapa 5.1 — DBCv3
+
+Ver [documentación de actualización](docs/ETAPA_5_1_DBCV3.md). Los datos activos son V3; se conserva la copia V2. Para usar el nuevo modelo: `python -m src.chat_console --modelo v3`. Para API en PowerShell: `$env:UMABOT_MODELO = "v3"` antes de iniciar Uvicorn. El entrenamiento correspondiente es `python -m src.models.train_v3`. Los comandos históricos de entrenamiento y auditoría usan los datos archivados V2. No se cambió el umbral de confianza.
+
+## Etapa 5.2: gestor de confianza
+
+Con `--modelo v3` se activa la política de confianza y margen. Consulte `docs/ETAPA_5_2_CONFIANZA.md` para criterios, métricas, pruebas y contrato HTTP actualizado. Reproduzca la selección con `python -m src.evaluation.ajustar_confianza` y las pruebas con `python tests/test_confidence.py`.

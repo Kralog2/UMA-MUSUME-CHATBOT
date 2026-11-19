@@ -1,7 +1,4 @@
-"""Ejecuta y valida los casos conversacionales definidos en conversation_tests.json.
-
-Comprueba intenciones, contenido de respuestas, contexto y fuente de respuesta.
-"""
+"""Ejecuta las conversaciones de conversation_tests.json contra el gestor de diálogo."""
 
 import json
 import sys
@@ -17,11 +14,10 @@ from src.models.predictor_adapter import construir_predictor
 
 
 def main():
-    """Corre todos los pasos de conversación y devuelve el número de fallos."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--modelo", choices=["original", "reforzado"], default="original")
+    parser.add_argument("--modelo", choices=["original", "reforzado", "v3"], default="original")
     args = parser.parse_args()
-    ruta = RAIZ / "artifacts" / ("modelo_reforzado_etapa3.joblib" if args.modelo == "reforzado" else "mejor_modelo.joblib")
+    ruta = RAIZ / "artifacts" / {"original":"mejor_modelo.joblib","reforzado":"modelo_reforzado_etapa3.joblib","v3":"modelo_v3.joblib"}[args.modelo]
     dm = DialogueManager(construir_predictor(ruta), RAIZ / "data" / "game", seed=0)
     casos = json.load(open(RAIZ / "tests" / "conversation_tests.json", encoding="utf-8"))
     fallos = pasos = 0

@@ -1,9 +1,8 @@
-"""Compara y entrena una variante del clasificador con ejemplos de refuerzo.
+"""Entrena una variante aumentada: nunca lee challenge ni test.
 
 La evaluación para seleccionar si se conserva el refuerzo usa únicamente folds
 sobre el train original. Los 73 ejemplos de refuerzo se agregan a cada fold de
-entrenamiento, nunca a los folds de validación. El modelo reforzado se guarda
-como un artefacto independiente; no lee challenge ni test.
+entrenamiento, nunca a los folds de validación.
 """
 from pathlib import Path
 import json
@@ -20,8 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT/'data/processed/etapa3'
 
 def ejecutar():
-    """Compara variantes con validación cruzada y guarda el modelo reforzado."""
-    train = cargar_dataset(ROOT/'data/raw/train.csv').reset_index(drop=True)
+    train = cargar_dataset(ROOT/'data/versions/dbc_v2/train.csv').reset_index(drop=True)
     extra = cargar_dataset(ROOT/'data/raw/refuerzo_etapa3.csv').reset_index(drop=True)
     assert set(extra.intencion).issubset(set(train.intencion))
     folds = StratifiedKFold(n_splits=5,shuffle=True,random_state=42)

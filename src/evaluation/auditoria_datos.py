@@ -1,8 +1,4 @@
-"""Audita duplicados y similitud textual entre los conjuntos train y test.
-
-Guarda pares de test similares a train y un resumen JSON en data/processed,
-sin modificar los datasets de entrada.
-"""
+"""Audita duplicados exactos y similitud superficial sin alterar los datos."""
 from pathlib import Path
 import json
 import numpy as np
@@ -15,15 +11,13 @@ ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'data/processed/diagnostico_cv'
 
 def normalizados(s):
-    """Normaliza una serie de textos para comparar duplicados sin acentos."""
     return (s.str.lower().str.normalize('NFKD')
               .str.replace(r'[\u0300-\u036f]','',regex=True)
               .str.replace(r'\W+',' ',regex=True).str.strip())
 
 def ejecutar():
-    """Calcula solapamientos y similitudes y guarda el informe de auditoría."""
-    train=cargar_dataset(ROOT/'data/raw/train.csv').reset_index(drop=True)
-    test=cargar_dataset(ROOT/'data/raw/test.csv').reset_index(drop=True)
+    train=cargar_dataset(ROOT/'data/versions/dbc_v2/train.csv').reset_index(drop=True)
+    test=cargar_dataset(ROOT/'data/versions/dbc_v2/test.csv').reset_index(drop=True)
     tr=set(normalizados(train.texto)); te=set(normalizados(test.texto))
     v=TfidfVectorizer(analyzer='char',ngram_range=(3,5),strip_accents='unicode')
     mat=v.fit_transform(pd.concat([train.texto,test.texto],ignore_index=True))

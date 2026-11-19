@@ -1,8 +1,7 @@
-"""Compara clasificadores y umbrales mediante validación cruzada sobre train.
+"""Diagnóstico reproducible únicamente con entrenamiento (test reservado).
 
 Ejecutar: python -m src.evaluation.diagnostico_cv
-Genera matrices, reportes y métricas OOF; no usa ni modifica data/raw/test.csv
-ni el modelo desplegado.
+No usa ni modifica data/versions/dbc_v2/test.csv, ni el modelo desplegado.
 """
 from pathlib import Path
 import json
@@ -21,9 +20,8 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'data' / 'processed' / 'diagnostico_cv'
 
 def ejecutar():
-    """Evalúa candidatos con predicciones OOF y guarda métricas y diagnósticos."""
     OUT.mkdir(parents=True, exist_ok=True)
-    df = cargar_dataset(ROOT / 'data' / 'raw' / 'train.csv').reset_index(drop=True)
+    df = cargar_dataset(ROOT / 'data' / 'versions' / 'dbc_v2' / 'train.csv').reset_index(drop=True)
     X, y = df['texto'], df['intencion']
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
     candidatos = {

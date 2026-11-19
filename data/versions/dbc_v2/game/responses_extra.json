@@ -1,0 +1,64 @@
+{
+  "_nota": "Respuestas AÑADIDAS por el gestor para casos que DBC.xlsx no cubre. Si se agregan a la hoja Responses (clave igual), la hoja tiene prioridad.",
+  "_knowledge": [
+    "Claro. {texto}",
+    "Te cuento: {texto}",
+    "Sobre eso: {texto}"
+  ],
+  "_aptitud_letra": [
+    "Una aptitud {letra} significa {significado}.",
+    "En aptitudes, la letra {letra} indica {significado}.",
+    "Tener {letra} de aptitud quiere decir {significado}."
+  ],
+  "_aclarar_carta": [
+    "¿De qué carta hablas? Algunas que conozco: {lista}.",
+    "Dime el nombre de la carta de soporte, por ejemplo: {lista}.",
+    "No sé a qué carta te refieres. Puedo consultar, entre otras, {lista}."
+  ],
+  "_aclarar_tema": [
+    "¿Sobre qué tema quieres más detalle? Aún no hemos hablado de nada. Prueba con stats, cartas, personajes o escenarios.",
+    "Todavía no tengo un tema para ampliar. ¿Qué te gustaría saber del juego?",
+    "¿Puedes decirme el tema? Por ejemplo personajes, cartas de soporte, herencias o habilidades."
+  ],
+  "_sin_mas_detalle": [
+    "Eso es todo lo que tengo sobre ese tema. ¿Quieres que hablemos de otro?",
+    "Ya te di todo el detalle disponible de ese tema; pregúntame por otro, como stats, cartas o escenarios.",
+    "No tengo más detalle por ahora. Prueba con otra pregunta sobre el juego."
+  ],
+  "_uma_facil_si": [
+    "{personaje} es una de las umas recomendadas para empezar: tiene {a_count} aptitudes A y crece en {crecimiento}.",
+    "Sí, {personaje} es buena opción para principiantes ({a_count} aptitudes A; crece en {crecimiento}).",
+    "{personaje} está entre las más sencillas de entrenar: {a_count} aptitudes A y crecimiento en {crecimiento}."
+  ],
+  "_uma_facil_no": [
+    "{personaje} no está entre las más recomendadas para empezar (tiene {a_count} aptitudes A). Las más sencillas son {lista_umas}.",
+    "{personaje} es más exigente para un principiante ({a_count} aptitudes A). Para empezar te sugiero {lista_umas}.",
+    "Para tu primera carrera es mejor elegir {lista_umas}; {personaje} ({a_count} aptitudes A) no es la más sencilla."
+  ],
+  "_sin_ficha": [
+    "No tengo la ficha de {nombre} como personaje, solo su carta de soporte. Pregúntame por la carta.",
+    "De {nombre} solo conozco la carta de soporte, no su ficha de personaje. ¿Quieres los datos de la carta?",
+    "No tengo datos de personaje de {nombre}; sí tengo su carta de soporte."
+  ],
+  "_cartas_sin_resultados": [
+    "No encontré cartas con esos filtros en mi base de datos. Prueba con otro escenario, tipo o rareza.",
+    "Con esos criterios no tengo cartas registradas. ¿Probamos con otro tipo de carta o escenario?",
+    "Mi base de datos no tiene cartas para ese filtro; pregúntame por otro escenario o tipo."
+  ],
+  "_lb_no_disponible": [
+    "No tengo datos de {carta} con {pedido}; te muestro {lb}. ",
+    "Para {carta} no hay registro con {pedido}, así que uso {lb}. ",
+    "{pedido} no está en mi base para {carta}; estos son los datos de {lb}. "
+  ],
+  "_ayuda": [
+    "Puedo ayudarte con: personajes (aptitudes, crecimiento, objetivos), stats, cartas de soporte (y sus bonos), escenarios, herencias, habilidades y objetos de recompensa. Prueba con \"¿Qué aptitudes tiene Gold Ship?\".",
+    "Esto es lo que sé: fichas de personajes, qué hace cada stat, cartas de soporte recomendadas, herencias, habilidades, escenarios URA Finale y Unity Cup. Escribe \"reiniciar\" para empezar de cero.",
+    "Pregúntame por una uma, una carta o un tema del juego; por ejemplo \"¿Qué cartas uso en Unity Cup?\" o \"¿Para qué sirve cada stat?\"."
+  ],
+  "_reinicio": [
+    "Listo, empezamos de cero. ¿Qué quieres saber?",
+    "Conversación reiniciada; olvidé lo que hablamos antes. ¿En qué te ayudo?",
+    "Borrón y cuenta nueva. Pregúntame lo que quieras sobre Umamusume."
+  ],
+  "vacio": ["Escribe un mensaje para que pueda ayudarte."]
+}

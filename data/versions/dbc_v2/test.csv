@@ -1,0 +1,137 @@
+﻿texto,intencion
+¿Qué uma elijo si apenas estoy empezando el juego?,uma_facil_entrenar
+Busco una uma que sea sencilla de entrenar,uma_facil_entrenar
+¿Cuál personaje me ayuda a terminar mi primera carrera sin sufrir?,uma_facil_entrenar
+¿Quién es ideal para un jugador sin experiencia?,uma_facil_entrenar
+¿Qué función cumple cada atributo de mi uma?,stats_funcion
+¿Para qué sirve el Speed?,stats_funcion
+explícame qué es el Wit,stats_funcion
+¿Qué pasa si tengo poco Stamina?,stats_funcion
+¿Qué es una support card?,cartas_soporte
+¿Cuántas cartas puedo equipar antes de empezar la carrera?,cartas_soporte
+¿Para qué se usan las cartas amigo?,cartas_soporte
+¿Qué tipos de cartas existen en el juego?,cartas_soporte
+¿Cuáles son las mejores cartas para URA Finale?,cartas_recomendadas
+¿Qué cartas me recomiendas para Unity Cup?,cartas_recomendadas
+Dime las cartas SSR más fuertes,cartas_recomendadas
+¿Qué cartas debería sacar en el gacha?,cartas_recomendadas
+¿Qué quieren decir las distancias de cada personaje?,distancias_aptitudes
+¿Cuánto mide una carrera de sprint?,distancias_aptitudes
+¿Qué significa la letra que aparece en la aptitud de pasto?,distancias_aptitudes
+¿Qué es el estilo de carrera de una uma?,distancias_aptitudes
+¿En qué pista y distancia debería correr a mi uma?,distancia_pista_recomendada
+"Mi personaje tiene A en tierra, ¿qué carreras le sirven?",distancia_pista_recomendada
+¿Qué distancia le conviene a una uma con mucha velocidad?,distancia_pista_recomendada
+¿Elijo pasto o tierra para mi personaje?,distancia_pista_recomendada
+¿Qué uso les doy a los zapatos y estandartes?,recompensas_items
+¿Para qué sirve el despertador?,recompensas_items
+¿Qué se hace con las bandas que dan en las G1?,recompensas_items
+¿Cómo puedo repetir una carrera objetivo que perdí?,recompensas_items
+¿Con qué escenario conviene comenzar?,mejor_escenario
+¿En qué se diferencian los dos primeros escenarios?,mejor_escenario
+¿Unity Cup es mejor que URA?,mejor_escenario
+¿Qué escenario me enseña mejor el juego?,mejor_escenario
+¿Qué es heredar de otra uma?,herencias
+¿Cómo sirven las chispas?,herencias
+¿Para qué escojo padres antes de iniciar la carrera?,herencias
+¿Cómo funciona el legado entre personajes?,herencias
+¿Qué habilidades me conviene adquirir?,habilidades_comprar
+¿En qué utilizo los puntos de habilidad?,habilidades_comprar
+¿Qué skills compro para una carrera larga?,habilidades_comprar
+¿Las habilidades doradas son mejores que las blancas?,habilidades_comprar
+¿Cómo hago para subir de nivel a mis cartas?,subir_nivel
+¿Cómo mejoro el potencial de mi personaje?,subir_nivel
+¿Cómo aumento el límite de una carta de soporte?,subir_nivel
+¿Qué se necesita para fortalecer a mi uma?,subir_nivel
+¿Puedes explicarlo con más detalle?,pedir_mas_detalle
+Dame otro ejemplo,pedir_mas_detalle
+"No comprendí bien, ¿me lo repites?",pedir_mas_detalle
+¿Y para el otro escenario es lo mismo?,pedir_mas_detalle
+"Hola, buenas tardes",saludo
+¿Qué hay?,saludo
+"Hola, tengo dudas",saludo
+"Buenas, ¿hay alguien?",saludo
+"Muchas gracias, hasta luego",despedida
+"Ya terminé, adiós",despedida
+Nos vemos pronto,despedida
+Gracias por tu ayuda,despedida
+¿Cuál es la mejor laptop?,fuera_dominio
+¿Cómo se prepara un pastel?,fuera_dominio
+¿Quién descubrió América?,fuera_dominio
+¿Cómo apostar en carreras de caballos reales?,fuera_dominio
+¿Cómo es Biwa Hayahide?,info_personaje
+¿Qué crecimiento tiene Curren Chan?,info_personaje
+Dime los objetivos de Satono Diamond,info_personaje
+¿Qué aptitudes tiene Matikane Tannhauser?,info_personaje
+¿Cómo es la carta de Smart Falcon?,info_carta
+¿Qué bonos tiene Hishi Amazon?,info_carta
+¿Qué habilidad da la carta de Narita Brian?,info_carta
+¿Cuánta amistad inicial trae la carta de Sweep Tosho?,info_carta
+¿Qué estilo y distancia le convienen a Silence Suzuka?,distancia_pista_recomendada
+¿Sakura Bakushin O es fácil de entrenar?,uma_facil_entrenar
+dime una uma facilita pa pasar ura finale,uma_facil_entrenar
+cual personage recomiendas pa alguien q va empezando,uma_facil_entrenar
+q chica caballo es la menos complicada de entrenar,uma_facil_entrenar
+q hace cada una de las 5 estadisticas,stats_funcion
+pa q sirve subir wit y guts,stats_funcion
+cual es la funcion de power en la carrera,stats_funcion
+q diferencia hay entre resistencia y velocidad,stats_funcion
+q son las tarjetas de soporte y cuantas van en el deck,cartas_soporte
+"explicame la diferencia entre cartas r, sr y ssr",cartas_soporte
+como funcionan los vinculos con las support cards,cartas_soporte
+pa q sirven las cartas tipo pal o amigo,cartas_soporte
+q cartas de velocidad me recomiendas llevar,cartas_recomendadas
+cuales son las mejores cartas pa entrenar en aoharu,cartas_recomendadas
+dime buenas cartas de stamina para distancia larga,cartas_recomendadas
+q cartas conviene equipar en el mazo,cartas_recomendadas
+q significan los grados de aptitud de la s a la g,distancias_aptitudes
+cual es la diferencia entre pista turf y dirt,distancias_aptitudes
+q quiere decir q una uma sea late surger o end closer,distancias_aptitudes
+"cuantos metros son sprint, mile, media y larga",distancias_aptitudes
+en q distancia y estilo rinde mejor Daiwa Scarlet,distancia_pista_recomendada
+"tengo una uma con aptitud a en mile y b en sprint, cual elijo",distancia_pista_recomendada
+donde me conviene correr a Maruzensky,distancia_pista_recomendada
+pa q se usan las bandas o sashes de carreras g1,recompensas_items
+como funcionan los relojes despertadores cuando pierdes,recompensas_items
+q utilidad tienen los zapatos q caen en las carreras,recompensas_items
+q premios dan al ganar carreras objetivo,recompensas_items
+q diferencia principal hay entre ura finale y unity cup,mejor_escenario
+por cual escenario deberia empezar si soy principiante,mejor_escenario
+q es el modo aoharu o unity cup,mejor_escenario
+cual de los dos escenarios es mas facil de completar,mejor_escenario
+pa q sirven los sparks o chispas al heredar,herencias
+como funciona el sistema de padres y legado,herencias
+"q dan las chispas azules, rosas y blancas",herencias
+por q conviene pedir prestada una uma de herencia,herencias
+q tipo de habilidades conviene comprar primero,habilidades_comprar
+pa q sirven los hints en las skills,habilidades_comprar
+q habilidades recomiendas pa carreras de milla,habilidades_comprar
+es mejor comprar skills doradas o varias normales,habilidades_comprar
+como se rompe el limite de nivel de las cartas,subir_nivel
+con q materiales subo el potencial de una uma,subir_nivel
+pa q sirven las copias repetidas de una carta de soporte,subir_nivel
+como subo de nivel mis personajes fuera de carrera,subir_nivel
+dime las aptitudes y metas de stats de Symboli Rudolf,info_personaje
+q bonos de crecimiento tiene Rice Shower,info_personaje
+pasame la ficha de Taiki Shuttle,info_personaje
+q objetivos pide Gold Ship,info_personaje
+q bonos da la carta de Tazuna Hayakawa en mlb,info_carta
+pasame la info de la carta de Rice Shower power,info_carta
+q habilidad trae Silence Suzuka ssr,info_carta
+q tan buena es Biko Pegasus en unity cup,info_carta
+profundiza un poco mas en eso porfa,pedir_mas_detalle
+me puedes dar otro ejemplo de eso,pedir_mas_detalle
+explicamelo mas a detalle,pedir_mas_detalle
+y eso como aplica en el otro escenario,pedir_mas_detalle
+"hola buenas, me puedes ayudar",saludo
+q tal chatbot,saludo
+"buenos dias, vengo a preguntar sobre umas",saludo
+hola amigo,saludo
+"muchas gracias por todo, hasta luego",despedida
+"ya es todo por hoy, nos vemos",despedida
+"gracias, me sirvio mucho, adios",despedida
+"sale bye, gracias",despedida
+cual es la capital de japon,fuera_dominio
+recomiendame un juego parecido a zelda,fuera_dominio
+como se hace arroz blanco,fuera_dominio
+cuantos planetas tiene el sistema solar,fuera_dominio

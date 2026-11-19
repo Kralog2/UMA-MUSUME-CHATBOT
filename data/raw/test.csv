@@ -1,4 +1,4 @@
-﻿texto,intencion
+texto,intencion
 ¿Qué uma elijo si apenas estoy empezando el juego?,uma_facil_entrenar
 Busco una uma que sea sencilla de entrenar,uma_facil_entrenar
 ¿Cuál personaje me ayuda a terminar mi primera carrera sin sufrir?,uma_facil_entrenar
@@ -135,3 +135,37 @@ cual es la capital de japon,fuera_dominio
 recomiendame un juego parecido a zelda,fuera_dominio
 como se hace arroz blanco,fuera_dominio
 cuantos planetas tiene el sistema solar,fuera_dominio
+que personaje me recomiendas para ganar facil siendo novato,uma_facil_entrenar
+cual uma es menos exigente con los stats para empezar,uma_facil_entrenar
+en que afecta tener poca inteligencia durante la carrera,stats_funcion
+que diferencia practica hay entre resistencia y coraje,stats_funcion
+que beneficios da entrenar junto a tus cartas de apoyo,cartas_soporte
+como se clasifican las cartas de soporte por tipo y rareza,cartas_soporte
+que mazo f2p con cartas sr recomiendas para unity cup,cartas_recomendadas
+cuales cartas van mejor para una corredora front en aoharu,cartas_recomendadas
+que diferencia hay entre correr en pasto y correr en arena,distancias_aptitudes
+como influye la letra de aptitud en la velocidad de mi uma,distancias_aptitudes
+en que distancia y pista rinde mejor El Condor Pasa,distancia_pista_recomendada
+que estilo de carrera le conviene mas a Rice Shower,distancia_pista_recomendada
+como se usan los relojes cuando pierdo una carrera importante,recompensas_items
+para que sirven los zapatos y bandas que gano compitiendo,recompensas_items
+que diferencias clave hay entre ura finale y aoharu cup,mejor_escenario
+por que recomiendan empezar en ura finale antes que unity,mejor_escenario
+que aportan las chispas azules y rosas de los padres,herencias
+por que es importante elegir buenos legados antes de entrenar,herencias
+que habilidades debo priorizar si mi uma corre de cierre,habilidades_comprar
+como ahorro puntos de habilidad usando los hints,habilidades_comprar
+como rompo el limite de nivel de mis cartas duplicadas,subir_nivel
+que necesito para mejorar el potencial de mi personaje,subir_nivel
+cuales son las aptitudes y crecimiento de Super Creek,info_personaje
+dime las metas de stats de Tokai Teio,info_personaje
+que bonos ofrece Marvelous Sunday sr a nivel maximo,info_carta
+que habilidad y stats da Vodka ssr de poder,info_carta
+puedes profundizar un poco mas en ese punto,pedir_mas_detalle
+explicamelo con otro ejemplo por favor,pedir_mas_detalle
+hola buenas vengo a hacerte unas preguntas del juego,saludo
+que tal bot me puedes ayudar con umamusume,saludo
+gracias por resolver mis dudas hasta luego,despedida
+ya termine mis consultas muchas gracias adios,despedida
+tengo el corazon roto porque no me hace caso,fuera_dominio
+cual es la receta para hacer tacos al pastor,fuera_dominio

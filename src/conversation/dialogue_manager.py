@@ -17,6 +17,7 @@ import re
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
+from .confidence_manager import ConfidenceManager
 from .context_manager import ContextManager, Turno
 from .knowledge_base import ESCENARIOS, KnowledgeBase, normalizar
 
@@ -58,9 +59,11 @@ _TAM_PAGINA = 5
 class DialogueManager:
     def __init__(self, predictor: Predictor, directorio_datos: Union[str, Path],
                  umbral: Optional[float] = None, seed: Optional[int] = None):
-        """Carga conocimiento y respuestas, configura el predictor y crea el contexto."""
+        """Inicializa los componentes y el estado necesarios para operar."""
         d = Path(directorio_datos)
         self.predictor = predictor
+        self.gestor_confianza = ConfidenceManager() if getattr(predictor, "politica_v3", False) and umbral is None else None
+        self.diagnostico = None
         self.kb = KnowledgeBase(d)
         self.resp: Dict[str, Any] = json.loads((d / "responses_extra.json").read_text(encoding="utf-8"))
         self.resp.update(json.loads((d / "responses.json").read_text(encoding="utf-8")))  # la hoja manda
@@ -73,11 +76,13 @@ class DialogueManager:
 
     # API
     def reiniciar(self) -> None:
-        """Reinicia el contexto conversacional para comenzar una conversación nueva."""
+        """Botón/comando de nueva conversación (lo usa la interfaz)."""
         self.ctx.reset()
+        self.diagnostico = None
 
     def responder(self, mensaje: str) -> Dict[str, Any]:
-        """Clasifica y responde al mensaje, actualizando el contexto de la conversación."""
+        """Procesa un turno, aplica reglas contextuales y evalúa la confianza antes de responder."""
+        self.diagnostico = None
         texto = (mensaje or "").strip()
         if not texto:
             return self._salida(self._elegir("vacio"), "vacio", 1.0, {}, "sistema")
@@ -113,11 +118,25 @@ class DialogueManager:
         # 3) Clasificador entrenado
 
         if intent is None:
-            intent, conf = self.predictor(texto)
+            candidatos = self.predictor.top_k(texto) if self.gestor_confianza else None
+            intent, conf = candidatos[0] if candidatos else self.predictor(texto)
             tema_intent = (ctx.tema or {}).get("intent")
             claves = ENTIDAD_REPETIBLE.get(tema_intent or "", [])
             if claves and any(k in ent for k in claves) and self._solo_entidad(texto):
                 intent, conf, fuente = tema_intent, 1.0, "contexto"   
+            elif candidatos:
+                self.diagnostico = self.gestor_confianza.evaluar(candidatos)
+                if self.diagnostico["accion"] != "aceptar":
+                    # No contaminar slots ni tema con una clasificación incierta.
+                    if self.diagnostico["accion"] == "aclarar":
+                        respuesta = self._pregunta_confianza(candidatos)
+                        ctx.desconocidos_seguidos = 0
+                        fuente = "confianza_ambigua"
+                    else:
+                        respuesta = self._h_desconocido(ent)
+                        fuente = "umbral"
+                    ctx.registrar_turno(Turno(texto, "desconocido", float(conf), respuesta, dict(ent)))
+                    return self._salida(respuesta, "desconocido", conf, ent, fuente)
             elif conf < self.umbral:
                 intent, fuente = "desconocido", "umbral"
 
@@ -134,12 +153,25 @@ class DialogueManager:
     # Utilidades
 
     def _salida(self, respuesta, intent, conf, ent, fuente):
-        """Construye la respuesta pública con intención, entidades y contexto actual."""
+        """Construye la respuesta estructurada con contexto y diagnóstico."""
         return {"respuesta": respuesta, "intencion": intent, "confianza": round(float(conf), 3),
-                "entidades": ent, "fuente": fuente, "contexto": self.ctx.snapshot()}
+                "entidades": ent, "fuente": fuente, "contexto": self.ctx.snapshot(), "diagnostico_confianza": self.diagnostico}
+
+    def _pregunta_confianza(self, candidatos):
+        """Formula una aclaración con las alternativas plausibles, sin afirmar que son correctas."""
+        etiquetas = {"cartas_recomendadas": "recomendaciones de cartas", "cartas_soporte": "cómo funcionan las cartas de soporte",
+                     "info_carta": "información de una carta concreta", "info_personaje": "información de un personaje",
+                     "distancia_pista_recomendada": "la pista o distancia adecuada para una uma", "distancias_aptitudes": "las aptitudes",
+                     "subir_nivel": "subir de nivel", "herencias": "las herencias", "mejor_escenario": "los escenarios",
+                     "habilidades_comprar": "las habilidades", "stats_funcion": "las estadísticas", "recompensas_items": "los objetos",
+                     "uma_facil_entrenar": "umas para principiantes", "pedir_mas_detalle": "ampliar el tema anterior"}
+        opciones = [etiquetas[i] for i, _ in candidatos[:2] if i in etiquetas]
+        if len(opciones) == 2:
+            return f"No estoy seguro de haber entendido. ¿Te refieres a {opciones[0]} o a {opciones[1]}? Si es otro tema, reformula tu pregunta."
+        return "No estoy seguro de haber entendido. ¿Puedes concretar tu pregunta sobre Uma Musume?"
 
     def _elegir(self, clave: str, **fmt) -> str:
-        """Elige una variante de respuesta y la formatea evitando repetir la anterior."""
+        """Elige una variante distinta de la última usada para esa clave."""
         opciones = self.resp[clave]
         ultimo = self.ctx.ultima_variante.get(clave)
         idx = [i for i in range(len(opciones)) if i != ultimo] or list(range(len(opciones)))
@@ -148,21 +180,21 @@ class DialogueManager:
         return opciones[i].format(**fmt)
 
     def _solo_entidad(self, texto: str) -> bool:
-        """Indica si el mensaje contiene solo entidades y palabras de enlace comunes."""
+        """Comprueba si el mensaje contiene únicamente entidades y palabras auxiliares."""
         return not (set(self.kb.quitar_entidades(texto).split()) - _STOP)
 
     @staticmethod
     def _clave_escenario(nombre: Optional[str]) -> Optional[str]:
-        """Convierte el nombre visible de un escenario a su clave interna."""
+        """Convierte el nombre de escenario a su clave interna."""
         return {v: k for k, v in ESCENARIOS.items()}.get(nombre) if nombre else None
 
     @staticmethod
     def _unir(items: List[str]) -> str:
-        """Une opciones en una lista legible o indica que no hay opciones con A."""
+        """Une las aptitudes disponibles o señala su ausencia."""
         return ", ".join(items) if items else "ninguna con A"
 
     def _texto_fila(self, fila: dict) -> str:
-        """Formatea una fila de conocimiento con su nombre, descripción y detalle."""
+        """Formatea la descripción y detalle de un registro."""
         nombre = fila["name"][0].upper() + fila["name"][1:]
         t = f"{nombre}: {fila['description']}"
         t += "." if not t.endswith(".") else ""
@@ -171,7 +203,7 @@ class DialogueManager:
         return t
 
     def _filas_mencionadas(self, ent, categorias: List[str]) -> List[dict]:
-        """Busca en la base de conocimiento las filas de las entidades detectadas."""
+        """Recupera registros asociados a las entidades detectadas."""
         out = []
         for cat in categorias:
             nombre = ent.get("k_" + cat)
@@ -181,11 +213,11 @@ class DialogueManager:
         return out
 
     def _respuesta_conocimiento(self, filas: List[dict]) -> str:
-        """Crea una respuesta con el texto de las filas de conocimiento recibidas."""
+        """Compone una respuesta a partir de registros de conocimiento."""
         return self._elegir("_knowledge", texto=" ".join(self._texto_fila(f) for f in filas))
 
     def _aclarar(self, intent: str, slot: str = "personaje") -> str:
-        """Registra el dato que falta y selecciona una pregunta de aclaración adecuada."""
+        """Registra y solicita un dato necesario para responder."""
         self.ctx.pedir_aclaracion(intent, slot)
         if slot == "card":
             ej = [self.kb.etiqueta_carta(c) for c in list(self.kb.cartas)[:4]]
@@ -195,21 +227,20 @@ class DialogueManager:
     # Manejadores
 
     def _h_saludo(self, ent):
-        """Devuelve una respuesta de saludo."""
+        """Devuelve un saludo."""
         return self._elegir("saludo")
-
     def _h_fuera_dominio(self, ent):
-        """Responde que la consulta está fuera del dominio del chatbot."""
+        """Informa que el tema está fuera del ámbito del chatbot."""
         return self._elegir("fuera_dominio")
 
     def _h_despedida(self, ent):
-        """Devuelve una despedida y limpia el contexto de la conversación."""
+        """Responde la despedida y limpia el contexto."""
         r = self._elegir("despedida")
         self.ctx.reset()
         return r
 
     def _h_desconocido(self, ent):
-        """Responde a una intención no reconocida y ofrece ayuda tras dos casos seguidos."""
+        """Solicita reformular o presenta ejemplos después de varios fallos."""
         self.ctx.desconocidos_seguidos += 1
         if self.ctx.desconocidos_seguidos >= 2:
             self.ctx.desconocidos_seguidos = 0
@@ -217,7 +248,7 @@ class DialogueManager:
         return self._elegir("_fallback")
 
     def _h_stats_funcion(self, ent):
-        """Explica la estadística mencionada o presenta la respuesta general sobre stats."""
+        """Explica estadísticas y guarda el tema."""
         stat = ent.get("k_stat")
         self.ctx.set_tema("stats_funcion", stat=stat)
         if stat:
@@ -225,13 +256,13 @@ class DialogueManager:
         return self._elegir("stats_funcion")
 
     def _h_cartas_soporte(self, ent):
-        """Explica información general o específica sobre cartas y rarezas."""
+        """Explica cartas de soporte y sus categorías."""
         filas = self._filas_mencionadas(ent, ["carta", "rareza"])
         self.ctx.set_tema("cartas_soporte", carta=ent.get("k_carta"), rareza=ent.get("k_rareza"))
         return self._respuesta_conocimiento(filas) if filas else self._elegir("cartas_soporte")
 
     def _filtros_cartas(self, ent) -> Dict[str, Optional[str]]:
-        """Combina filtros extraídos del mensaje con el escenario guardado en contexto."""
+        """Obtiene los filtros de recomendación de cartas desde entidades y contexto."""
         stat = None
         if ent.get("k_carta"):
             stat = ent["k_carta"].split(" (")[0]
@@ -242,7 +273,7 @@ class DialogueManager:
         return {"escenario": esc, "stat": stat, "rareza": ent.get("k_rareza")}
 
     def _h_cartas_recomendadas(self, ent):
-        """Recomienda cartas compatibles con los filtros y limita la lista inicial."""
+        """Recupera recomendaciones según los filtros disponibles."""
         f = self._filtros_cartas(ent)
         self.ctx.set_tema("cartas_recomendadas", **f)
         ids = self.kb.recomendar_cartas(f["escenario"], f["stat"], f["rareza"])
@@ -252,7 +283,7 @@ class DialogueManager:
         return self._elegir("cartas_recomendadas", escenario=ESCENARIOS.get(f["escenario"] or "both"), lista_cartas=lista)
 
     def _h_distancias_aptitudes(self, ent):
-        """Explica aptitudes mencionadas o interpreta una letra de calificación."""
+        """Explica aptitudes de pista, distancia y estilo."""
         self.ctx.set_tema("distancias_aptitudes")
         m = _RX_LETRA.search(self._texto)
         if m and not self._filas_mencionadas(ent, ["distancia", "pista", "estilo"]):
@@ -262,7 +293,7 @@ class DialogueManager:
         return self._respuesta_conocimiento(filas) if filas else self._elegir("distancias_aptitudes")
 
     def _h_distancia_pista_recomendada(self, ent):
-        """Indica las pistas, distancias y estilos adecuados para el personaje activo."""
+        """Consulta aptitudes para recomendar pistas y distancias."""
         clave = self.ctx.slots["personaje"]
         if not clave:
             if self.ctx.aclaracion_previa == "distancia_pista_recomendada":  
@@ -287,7 +318,7 @@ class DialogueManager:
         return " ".join(partes + mal)
 
     def _h_info_personaje(self, ent):
-        """Presenta aptitudes, crecimiento y objetivos del personaje activo."""
+        """Construye la ficha del personaje o solicita su nombre."""
         clave = self.ctx.slots["personaje"]
         if not clave:
             if "card" in ent:
@@ -302,7 +333,7 @@ class DialogueManager:
                             crecimiento=self.kb.crecimiento(clave), objetivos=self.kb.objetivos(clave))
 
     def _h_uma_facil_entrenar(self, ent):
-        """Enumera personajes para principiantes y evalúa uno si fue mencionado."""
+        """Consulta personajes recomendados para principiantes."""
         lista = self.kb.principiantes()
         self.ctx.set_tema("uma_facil_entrenar")
         if not lista:
@@ -316,13 +347,13 @@ class DialogueManager:
         return self._elegir("uma_facil_entrenar", lista_umas=", ".join(lista))
 
     def _h_recompensas_items(self, ent):
-        """Explica el objeto de recompensa mencionado o la información general disponible."""
+        """Explica objetos y recompensas."""
         filas = self._filas_mencionadas(ent, ["item"])
         self.ctx.set_tema("recompensas_items", item=ent.get("k_item"))
         return self._respuesta_conocimiento(filas) if filas else self._elegir("recompensas_items")
 
     def _h_mejor_escenario(self, ent):
-        """Explica el escenario mencionado o responde con una comparación general."""
+        """Explica o recomienda escenarios."""
         filas = self._filas_mencionadas(ent, ["escenario"])
         if filas:
             self.ctx.set_tema("mejor_escenario", escenario=ent["k_escenario"])
@@ -332,24 +363,24 @@ class DialogueManager:
         return self._elegir("mejor_escenario")
 
     def _h_herencias(self, ent):
-        """Explica la herencia o el color de herencia detectado en el mensaje."""
+        """Explica los conceptos de herencia."""
         filas = self._filas_mencionadas(ent, ["herencia"])
         self.ctx.set_tema("herencias", color=ent.get("k_herencia"))
         return self._respuesta_conocimiento(filas) if filas else self._elegir("herencias")
 
     def _h_habilidades_comprar(self, ent):
-        """Explica la habilidad mencionada o da información general para comprar habilidades."""
+        """Explica las habilidades y sus categorías."""
         filas = self._filas_mencionadas(ent, ["habilidad"])
         self.ctx.set_tema("habilidades_comprar", tipo=ent.get("k_habilidad"))
         return self._respuesta_conocimiento(filas) if filas else self._elegir("habilidades_comprar")
 
     def _h_subir_nivel(self, ent):
-        """Responde a consultas generales sobre cómo subir de nivel."""
+        """Explica la progresión de nivel."""
         self.ctx.set_tema("subir_nivel")
         return self._elegir("subir_nivel")
 
     def _h_info_carta(self, ent):
-        """Describe una carta y sus efectos para el límite de ruptura solicitado."""
+        """Consulta los efectos y límites de una carta."""
         cid = ent.get("card") or self.ctx.slots["card"]
         if not cid:
             return self._aclarar("info_carta", "card")
@@ -375,7 +406,7 @@ class DialogueManager:
     # Para pedir más detalle
 
     def _etiqueta_tema(self, t: Dict[str, Any]) -> str:
-        """Genera una etiqueta legible para el tema de conversación registrado."""
+        """Construye una etiqueta legible del tema activo."""
         i = t["intent"]
         if i == "stats_funcion": return f"la estadística {t['stat'].capitalize()}" if t.get("stat") else "las estadísticas"
         if i in ("info_personaje", "distancia_pista_recomendada"):
@@ -388,7 +419,7 @@ class DialogueManager:
                 "subir_nivel": "subir de nivel", "uma_facil_entrenar": "las umas para principiantes"}.get(i, "ese tema")
 
     def _detalle(self, t: Dict[str, Any], nivel: int) -> Optional[str]:
-        """Obtiene el siguiente detalle disponible para el tema y nivel solicitados."""
+        """Recupera información adicional o pagina recomendaciones."""
         i, kb = t["intent"], self.kb
         todas = lambda cat: " ".join(f"{f['name'][0].upper() + f['name'][1:]}: {f['detail']}." for f in kb.filas(cat) if f["detail"])
         if i == "cartas_recomendadas":  # paginación: cada "más" muestra las siguientes cartas
@@ -446,7 +477,7 @@ class DialogueManager:
         return None
 
     def _h_pedir_mas_detalle(self, ent):
-        """Resuelve una petición de más detalle, incluida la paginación de resultados."""
+        """Amplía el tema activo o resuelve un cambio de escenario."""
         ctx = self.ctx
         t = ctx.tema
         if not t:
@@ -464,5 +495,5 @@ class DialogueManager:
         return self._elegir("pedir_mas_detalle", tema=self._etiqueta_tema(t)).rstrip() + " " + texto
 
     def _aclarar_tema(self):
-        """Pide al usuario que indique el tema del que quiere más información."""
+        """Solicita un tema cuando falta contexto."""
         return self._elegir("_aclarar_tema")
