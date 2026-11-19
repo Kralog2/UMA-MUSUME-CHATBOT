@@ -99,3 +99,14 @@ Ver [documentación de actualización](docs/ETAPA_5_1_DBCV3.md). Los datos activ
 ## Etapa 5.2: gestor de confianza
 
 Con `--modelo v3` se activa la política de confianza y margen. Consulte `docs/ETAPA_5_2_CONFIANZA.md` para criterios, métricas, pruebas y contrato HTTP actualizado. Reproduzca la selección con `python -m src.evaluation.ajustar_confianza` y las pruebas con `python tests/test_confidence.py`.
+
+## Etapa 5.3 — Contexto avanzado
+
+Con el modelo `v3`, el diálogo reconoce continuaciones breves, guarda preferencias y permite elegir una intención pendiente escribiendo `1` o `2`. El contexto HTTP incorpora `preferencias` y `pendiente_confianza` sin modificar las rutas. Las recomendaciones aún no filtran por personaje, distancia, estilo, pista o disponibilidad F2P; estos datos se conservan para la etapa 5.4.
+
+```powershell
+python -m src.chat_console --modelo v3
+python tests/test_context.py
+```
+
+Consulta `docs/ETAPA_5_3_CONTEXTO.md` para conocer reglas, pruebas y limitaciones.

@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from .confidence_manager import ConfidenceManager
+from .context_resolver import ETIQUETAS, elegir_opcion, preferencias, seguimiento
 from .context_manager import ContextManager, Turno
 from .knowledge_base import ESCENARIOS, KnowledgeBase, normalizar
 
@@ -98,12 +99,28 @@ class DialogueManager:
 
         intent, conf, fuente = None, 1.0, "clasificador"
 
-        # 2) Contestar una aclaración pendiente
+        # 2) Resolver una elección de intención sin volver a clasificar el ordinal.
+        pc = ctx.pendiente_confianza
+        ctx.pendiente_confianza = None
+        if pc:
+            elegida = elegir_opcion(texto, pc["opciones"])
+            if elegida:
+                intent, fuente = elegida, "aclaracion_confianza"
+                conf = pc["probabilidades"][elegida]
+                ent = dict(pc["entidades"])
+                self._texto, self._norm = pc["texto"], normalizar(pc["texto"])
+            elif self._norm in ("si", "no", "no se", "cualquiera"):
+                ctx.pendiente_confianza = pc
+                respuesta = "Elige la opción 1 o 2, o escribe una pregunta nueva."
+                ctx.registrar_turno(Turno(texto, "desconocido", 0.0, respuesta, {}))
+                return self._salida(respuesta, "desconocido", 0.0, {}, "confianza_ambigua")
+
+        # 3) Contestar una aclaración pendiente
 
         pend = ctx.pendiente
         ctx.aclaracion_previa = pend["intent"] if pend else None
         ctx.limpiar_pendiente()
-        if pend and pend["slot"] in ent:
+        if intent is None and pend and pend["slot"] in ent and self._solo_entidad(texto):
             intent, fuente = pend["intent"], "aclaracion"
 
         # Reglas de seguimiento que solo tienen sentido con contexto
@@ -115,7 +132,12 @@ class DialogueManager:
                 _RX_LB.search(self._norm) or _RX_MLB.search(self._norm) or _RX_SIN_LB.search(self._norm)):
             intent, fuente = "info_carta", "regla"                 
 
-        # 3) Clasificador entrenado
+        if intent is None and self.gestor_confianza:
+            continuacion = seguimiento(texto, ent, ctx, self._solo_entidad(texto))
+            if continuacion:
+                intent, fuente = continuacion, "contexto"
+
+        # 4) Clasificador entrenado
 
         if intent is None:
             candidatos = self.predictor.top_k(texto) if self.gestor_confianza else None
@@ -130,6 +152,10 @@ class DialogueManager:
                     # No contaminar slots ni tema con una clasificación incierta.
                     if self.diagnostico["accion"] == "aclarar":
                         respuesta = self._pregunta_confianza(candidatos)
+                        opciones = [i for i, _ in candidatos[:2]]
+                        if all(i in ETIQUETAS for i in opciones):
+                            ctx.pendiente_confianza = {"opciones": opciones,
+                                "probabilidades": dict(candidatos[:2]), "entidades": dict(ent), "texto": texto}
                         ctx.desconocidos_seguidos = 0
                         fuente = "confianza_ambigua"
                     else:
@@ -140,10 +166,13 @@ class DialogueManager:
             elif conf < self.umbral:
                 intent, fuente = "desconocido", "umbral"
 
-        ctx.actualizar_slots({"personaje": ent.get("personaje"), "card": ent.get("card"),
-                              "escenario": self._clave_escenario(ent.get("k_escenario"))})
+        if intent not in ("desconocido", "fuera_dominio", "saludo", "despedida"):
+            ctx.actualizar_slots({"personaje": ent.get("personaje"), "card": ent.get("card"),
+                                  "escenario": self._clave_escenario(ent.get("k_escenario"))})
         if intent != "desconocido":
             ctx.desconocidos_seguidos = 0
+        if intent not in ("cartas_recomendadas", "pedir_mas_detalle", "saludo", "fuera_dominio", "desconocido"):
+            ctx.preferencias.clear()
         manejador = getattr(self, f"_h_{intent}", self._h_desconocido)
         respuesta = manejador(ent)
         if intent not in _TERMINALES:
@@ -159,15 +188,9 @@ class DialogueManager:
 
     def _pregunta_confianza(self, candidatos):
         """Formula una aclaración con las alternativas plausibles, sin afirmar que son correctas."""
-        etiquetas = {"cartas_recomendadas": "recomendaciones de cartas", "cartas_soporte": "cómo funcionan las cartas de soporte",
-                     "info_carta": "información de una carta concreta", "info_personaje": "información de un personaje",
-                     "distancia_pista_recomendada": "la pista o distancia adecuada para una uma", "distancias_aptitudes": "las aptitudes",
-                     "subir_nivel": "subir de nivel", "herencias": "las herencias", "mejor_escenario": "los escenarios",
-                     "habilidades_comprar": "las habilidades", "stats_funcion": "las estadísticas", "recompensas_items": "los objetos",
-                     "uma_facil_entrenar": "umas para principiantes", "pedir_mas_detalle": "ampliar el tema anterior"}
-        opciones = [etiquetas[i] for i, _ in candidatos[:2] if i in etiquetas]
+        opciones = [ETIQUETAS[i] for i, _ in candidatos[:2] if i in ETIQUETAS]
         if len(opciones) == 2:
-            return f"No estoy seguro de haber entendido. ¿Te refieres a {opciones[0]} o a {opciones[1]}? Si es otro tema, reformula tu pregunta."
+            return f"No estoy seguro de haber entendido. ¿Te refieres a 1) {opciones[0]} o 2) {opciones[1]}? Escribe 1 o 2, o reformula tu pregunta."
         return "No estoy seguro de haber entendido. ¿Puedes concretar tu pregunta sobre Uma Musume?"
 
     def _elegir(self, clave: str, **fmt) -> str:
@@ -270,17 +293,42 @@ class DialogueManager:
         elif ent.get("k_stat"):
             stat = ent["k_stat"].capitalize()
         esc = self._clave_escenario(ent.get("k_escenario")) or self.ctx.slots["escenario"]
-        return {"escenario": esc, "stat": stat, "rareza": ent.get("k_rareza")}
+        anterior = self.ctx.tema or {}
+        pref = preferencias(self._texto, ent)
+        continuidad = anterior.get("intent") == "cartas_recomendadas"
+        if continuidad:
+            stat = stat or anterior.get("stat")
+        rareza = pref.get("rareza", anterior.get("rareza") if continuidad else None)
+        if pref.get("sin_ssr") and rareza == "SSR":
+            rareza = None
+        if not self.gestor_confianza:
+            rareza = ent.get("k_rareza") or (anterior.get("rareza") if continuidad else None)
+        return {"escenario": esc, "stat": stat, "rareza": rareza}
 
     def _h_cartas_recomendadas(self, ent):
         """Recupera recomendaciones según los filtros disponibles."""
         f = self._filtros_cartas(ent)
+        anteriores = dict(self.ctx.preferencias)
+        if (self.ctx.tema or {}).get("intent") != "cartas_recomendadas":
+            self.ctx.preferencias.clear()
+        self.ctx.preferencias.update(preferencias(self._texto, ent))
+        if preferencias(self._texto, ent).get("rareza") == "SSR":
+            self.ctx.preferencias["sin_ssr"] = False
+        if self.ctx.preferencias.get("sin_ssr") and f["rareza"] == "SSR":
+            f["rareza"] = None
         self.ctx.set_tema("cartas_recomendadas", **f)
+        if anteriores != self.ctx.preferencias:
+            self.ctx.nivel_detalle = 0
         ids = self.kb.recomendar_cartas(f["escenario"], f["stat"], f["rareza"])
+        if self.ctx.preferencias.get("sin_ssr"):
+            ids = [i for i in ids if self.kb.cartas[i]["rarity"] != "SSR"]
         if not ids:
             return self._elegir("_cartas_sin_resultados")
         lista = ", ".join(self.kb.etiqueta_carta(i) for i in ids[:_TAM_PAGINA])
-        return self._elegir("cartas_recomendadas", escenario=ESCENARIOS.get(f["escenario"] or "both"), lista_cartas=lista)
+        respuesta = self._elegir("cartas_recomendadas", escenario=ESCENARIOS.get(f["escenario"] or "both"), lista_cartas=lista)
+        if any(self.ctx.preferencias.get(k) for k in ("distancia", "pista", "estilo", "f2p")) or self.ctx.slots["personaje"]:
+            respuesta += " He conservado tus preferencias, pero esta lista aún no está personalizada por personaje, distancia, estilo, pista ni disponibilidad F2P."
+        return respuesta
 
     def _h_distancias_aptitudes(self, ent):
         """Explica aptitudes de pista, distancia y estilo."""
@@ -424,6 +472,8 @@ class DialogueManager:
         todas = lambda cat: " ".join(f"{f['name'][0].upper() + f['name'][1:]}: {f['detail']}." for f in kb.filas(cat) if f["detail"])
         if i == "cartas_recomendadas":  # paginación: cada "más" muestra las siguientes cartas
             ids = kb.recomendar_cartas(t.get("escenario"), t.get("stat"), t.get("rareza"))
+            if self.ctx.preferencias.get("sin_ssr"):
+                ids = [c for c in ids if kb.cartas[c]["rarity"] != "SSR"]
             pag = ids[_TAM_PAGINA * (nivel + 1): _TAM_PAGINA * (nivel + 2)]
             return ("Otras opciones: " + ", ".join(kb.etiqueta_carta(c) for c in pag) +
                     ". (Orden: rareza y luego suma de bonos de entrenamiento, amistad y carrera con MLB.)") if pag else None
@@ -483,7 +533,9 @@ class DialogueManager:
         if not t:
             return self._aclarar_tema()
         if t["intent"] in ("cartas_recomendadas", "mejor_escenario") and (
-                ent.get("k_escenario") or (_RX_OTRO_ESC.search(self._norm) and ctx.slots["escenario"])):
+                ent.get("k_escenario") or _RX_OTRO_ESC.search(self._norm)):
+            if not ent.get("k_escenario") and not ctx.slots["escenario"]:
+                return "¿Te refieres a URA Finale o Unity Cup? Indica el escenario para continuar."
             if not ent.get("k_escenario"):
                 otro = "unity_cup" if ctx.slots["escenario"] == "ura_finale" else "ura_finale"
                 ent = dict(ent, k_escenario=ESCENARIOS[otro]); ctx.slots["escenario"] = otro
