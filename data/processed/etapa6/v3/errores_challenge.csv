@@ -1,0 +1,14 @@
+﻿texto,real,predicha,confianza,segunda,margen,correcta
+¿Qué supports pondrías en un equipo de carreras de milla?,cartas_recomendadas,fuera_dominio,0.3732668575334147,distancias_aptitudes,0.2065342142378728,False
+No sé para qué hay cartas de velocidad y de fuerza,cartas_soporte,cartas_recomendadas,0.4642637040312346,cartas_soporte,0.23899547348584627,False
+"Para Taiki Shuttle, ¿cuál pista conviene más?",distancia_pista_recomendada,info_personaje,0.247014574697012,distancia_pista_recomendada,0.041512602562200906,False
+Quiero elegir el terreno adecuado para mi corredora,distancia_pista_recomendada,uma_facil_entrenar,0.45312563527409466,distancia_pista_recomendada,0.30111544872316354,False
+¿Cómo leo las letras de aptitud de una corredora?,distancias_aptitudes,info_personaje,0.3798478442507972,distancias_aptitudes,0.012106409282698738,False
+¿Qué significa la palabra democracia?,fuera_dominio,distancias_aptitudes,0.4234340984625421,stats_funcion,0.13463548662110503,False
+¿Cómo limpio el filtro de mi lavadora?,fuera_dominio,subir_nivel,0.5441448647434934,fuera_dominio,0.3429958214648433,False
+Explícame la crianza y los legados en Uma Musume,herencias,uma_facil_entrenar,0.3059920034335827,stats_funcion,0.08503757796635877,False
+¿Cuál es el efecto de esta carta al subir su límite?,info_carta,fuera_dominio,0.34555426177451887,subir_nivel,0.15162140306720828,False
+Quiero conocer los atributos de Sakura Bakushin O,info_personaje,stats_funcion,0.2365446038149202,info_personaje,0.07197930776174033,False
+¿Qué modo de entrenamiento resulta más fácil para empezar?,mejor_escenario,uma_facil_entrenar,0.7699095734471502,mejor_escenario,0.7264659042803343,False
+Profundiza en la recomendación anterior,pedir_mas_detalle,stats_funcion,0.24812332459862096,pedir_mas_detalle,0.06085614685257826,False
+¿Dónde se potencian las cartas de apoyo?,subir_nivel,cartas_soporte,0.6848596875052066,subir_nivel,0.4813670572421419,False

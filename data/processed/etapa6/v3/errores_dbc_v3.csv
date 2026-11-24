@@ -1,0 +1,14 @@
+﻿texto,real,predicha,confianza,segunda,margen,correcta
+Dime las cartas SSR más fuertes,cartas_recomendadas,cartas_soporte,0.4711373681669378,cartas_recomendadas,0.2499937314594799,False
+¿Qué se necesita para fortalecer a mi uma?,subir_nivel,distancia_pista_recomendada,0.28177857797341976,subir_nivel,0.1354268974373505,False
+¿Y para el otro escenario es lo mismo?,pedir_mas_detalle,mejor_escenario,0.498007002164744,pedir_mas_detalle,0.36545760961204765,False
+¿Qué hay?,saludo,mejor_escenario,0.37207786954747185,cartas_soporte,0.28741471476565206,False
+¿Quién descubrió América?,fuera_dominio,uma_facil_entrenar,0.44884907651690753,fuera_dominio,0.020437470345451625,False
+dime una uma facilita pa pasar ura finale,uma_facil_entrenar,mejor_escenario,0.47369387501835647,uma_facil_entrenar,0.19445886986578698,False
+q cartas conviene equipar en el mazo,cartas_recomendadas,cartas_soporte,0.46440700065736795,cartas_recomendadas,0.16958971329164518,False
+"tengo una uma con aptitud a en mile y b en sprint, cual elijo",distancia_pista_recomendada,distancias_aptitudes,0.451988833157173,distancia_pista_recomendada,0.16261920155170528,False
+recomiendame un juego parecido a zelda,fuera_dominio,cartas_recomendadas,0.39370421767957337,fuera_dominio,0.094055840001048,False
+cuantos planetas tiene el sistema solar,fuera_dominio,herencias,0.3820346441564938,info_personaje,0.128220162961876,False
+que diferencia hay entre correr en pasto y correr en arena,distancias_aptitudes,distancia_pista_recomendada,0.3996732887617541,distancias_aptitudes,0.17855375758299122,False
+como influye la letra de aptitud en la velocidad de mi uma,distancias_aptitudes,stats_funcion,0.5097597614064697,distancias_aptitudes,0.2517651939156442,False
+tengo el corazon roto porque no me hace caso,fuera_dominio,pedir_mas_detalle,0.35459023377375554,fuera_dominio,0.104123815122098,False

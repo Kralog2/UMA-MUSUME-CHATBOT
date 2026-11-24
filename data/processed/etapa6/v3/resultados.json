@@ -1,0 +1,61 @@
+{
+  "fecha_utc": "2026-11-24T18:09:58.356219+00:00",
+  "modelo": "v3",
+  "clasificacion": {
+    "dbc_v3_test_historico": {
+      "archivo": "data\\raw\\test.csv",
+      "muestras": 170,
+      "accuracy": 0.92353,
+      "precision_macro": 0.93039,
+      "recall_macro": 0.92353,
+      "f1_macro": 0.92174,
+      "top3_accuracy": 0.99412,
+      "latencia_predict_ms_p50": 5.654,
+      "latencia_predict_ms_p95": 7.017,
+      "errores": 13
+    },
+    "challenge_etapa3_historico": {
+      "archivo": "data\\challenge\\evaluacion_nueva_v1.csv",
+      "muestras": 68,
+      "accuracy": 0.80882,
+      "precision_macro": 0.84342,
+      "recall_macro": 0.80882,
+      "f1_macro": 0.81113,
+      "top3_accuracy": 0.97059,
+      "latencia_predict_ms_p50": 5.469,
+      "latencia_predict_ms_p95": 6.034,
+      "errores": 13
+    }
+  },
+  "confianza": {
+    "muestras": 68,
+    "acciones": {
+      "aceptar": 51,
+      "aclarar": 13,
+      "reformular": 4
+    },
+    "cobertura": 0.75,
+    "precision_selectiva": 0.90196,
+    "errores_aceptados": 5,
+    "nota": "Mide la decisión inicial, NO el éxito de aclaraciones posteriores."
+  },
+  "conversaciones": {
+    "escenarios": 15,
+    "escenarios_completados": 15,
+    "tasa_exito_escenario": 1.0,
+    "turnos": 34,
+    "turnos_correctos": 34,
+    "tasa_exito_turno": 1.0,
+    "latencia_dialogo_ms_p50": 6.076,
+    "latencia_dialogo_ms_p95": 6.64
+  },
+  "api": {
+    "salud_http": 200,
+    "modelo_reportado": "v3",
+    "peticiones": 25,
+    "respuestas_http_200": 25,
+    "latencia_api_local_ms_p50": 20.496,
+    "latencia_api_local_ms_p95": 22.907,
+    "advertencia": "TestClient en el mismo proceso; no representa latencia de red ni carga multiusuario."
+  }
+}
