@@ -1,13 +1,13 @@
 # UMA MUSUME ChatBot v4.0 — plan incremental
 
-## Estado actual: etapas 7 (integración) y 8 (estado y filtros)
+## Estado actual: etapas 7–9 completadas
 - Se integró el frontend Streamlit del equipo en `frontend/app_frontend.py`.
 - Se conservó el avatar incrustado y se incluyó `frontend/avatar.png` como recurso separado.
 - Se agregó `frontend/requirements.txt` sin alterar las dependencias del backend.
 - Consola y API arrancan con el modelo `v3` si no se especifica otro; se conservan opciones históricas.
 - Se agregaron pruebas de contrato `tests/test_integracion_frontend.py`.
 
-**La Etapa 8 corrige los defectos 1–4 del listado.** Las demás correcciones aún están pendientes.
+**La Etapa 8 corrige los defectos 1–4 y la Etapa 9 aborda los defectos 5–9 del listado.** Las etapas 10–13 están pendientes. Consulta [`ETAPA_9_SEGUIMIENTOS_NEGACIONES.md`](ETAPA_9_SEGUIMIENTOS_NEGACIONES.md).
 
 ## Hoja de ruta
 | Etapa | Objetivo | Problemas |

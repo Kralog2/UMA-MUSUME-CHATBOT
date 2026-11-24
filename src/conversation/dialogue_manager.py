@@ -1,7 +1,7 @@
 """Gestor de diálogo, contexto y recomendaciones del chatbot.
 
-Etapa 8: valida los filtros de cartas, limita la continuidad al mismo personaje
-y revierte los cambios de estado cuando una búsqueda no devuelve resultados.
+Etapas 8–9: valida filtros, preserva el estado y distingue continuaciones,
+negaciones parciales de SSR y solicitudes de alternativas trazables.
 
 Flujo por mensaje:
   1) Recibe el texto
@@ -23,7 +23,7 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from .confidence_manager import ConfidenceManager
 from .card_recommender import ordenar, describir, objetivos
-from .context_resolver import ETIQUETAS, elegir_opcion, preferencias, seguimiento
+from .context_resolver import ETIQUETAS, elegir_opcion, preferencias, seguimiento, analizar_ssr
 from .context_manager import ContextManager, Turno
 from .knowledge_base import ESCENARIOS, KnowledgeBase, normalizar
 
@@ -37,7 +37,7 @@ ENTIDAD_REPETIBLE = {
     "recompensas_items": ["k_item"], "distancias_aptitudes": ["k_distancia", "k_pista", "k_estilo"],
 }
 _STOP = {"y", "e", "de", "del", "el", "la", "los", "las", "a", "que", "tal", "pero", "ahora", "entonces",
-         "tambien", "con", "sobre", "para", "en", "hablame", "cuentame", "dime", "pues", "oye", "ahi", "ese", "esa"}
+         "tambien", "con", "sobre", "para", "en", "pues", "oye", "ahi", "ese", "esa"}
 _TERMINALES = {"despedida"}
 _RX_REINICIO = re.compile(
     r"\b(reinici\w+|resete\w*|reset|nueva conversacion|nuevo chat|empez\w+ (de nuevo|otra vez|de cero|desde cero)|"
@@ -139,6 +139,24 @@ class DialogueManager:
                 _RX_LB.search(self._norm) or _RX_MLB.search(self._norm) or _RX_SIN_LB.search(self._norm)):
             intent, fuente = "info_carta", "regla"                 
 
+        # Etapa 9: aclarar inventario parcial sin establecer una exclusión SSR falsa.
+        estado_ssr = analizar_ssr(texto)
+        if intent is None and tema_intent == "cartas_recomendadas" and estado_ssr["parcial"]:
+            respuesta = ("Entiendo que tienes algunas SSR, pero no todas. "
+                         "¿Cuáles te faltan? Puedo mostrar alternativas SR por rol, "
+                         "sin suponer cuáles cartas posees.")
+            ctx.registrar_turno(Turno(texto, "aclaracion_inventario", 1.0, respuesta, dict(ent)))
+            return self._salida(respuesta, "aclaracion_inventario", 1.0, ent, "contexto")
+        if intent is None and tema_intent == "cartas_recomendadas" and (
+                estado_ssr["sustituciones"] or estado_ssr["faltan_especificas"]):
+            intent, fuente = "sustituciones_cartas", "contexto"
+
+        # Una petición explícita de ficha de personaje no es una continuación.
+        if intent is None and ent.get("personaje") and re.match(
+                r"^(?:hablame|cuentame|dime) (?:de|sobre)\b", self._norm) and not re.search(
+                r"\b(?:cartas?|soportes?|mazo|deck)\b", self._norm):
+            intent, fuente = "info_personaje", "regla"
+
         if intent is None and self.gestor_confianza:
             continuacion = seguimiento(texto, ent, ctx, self._solo_entidad(texto))
             if continuacion:
@@ -180,7 +198,7 @@ class DialogueManager:
                                   "escenario": self._clave_escenario(ent.get("k_escenario"))})
         if intent != "desconocido":
             ctx.desconocidos_seguidos = 0
-        if intent not in ("cartas_recomendadas", "pedir_mas_detalle", "saludo", "fuera_dominio", "desconocido"):
+        if intent not in ("cartas_recomendadas", "sustituciones_cartas", "pedir_mas_detalle", "saludo", "fuera_dominio", "desconocido"):
             ctx.preferencias.clear()
         manejador = getattr(self, f"_h_{intent}", self._h_desconocido)
         respuesta = manejador(ent)
@@ -336,6 +354,39 @@ class DialogueManager:
         if pref_nuevas.get("sin_ssr") and rareza == "SSR":
             rareza = None
         return {"escenario": esc, "stat": stat, "rareza": rareza}
+
+    def _h_sustituciones_cartas(self, ent):
+        """Propone SR por rol como alternativas ilustrativas a SSR, sin inventar inventario.
+
+        La correspondencia compara la estadística principal y compatibilidad; no
+        afirma equivalencia de habilidades, costos ni propiedad de las cartas.
+        """
+        tema = self.ctx.tema or {}
+        if tema.get("intent") != "cartas_recomendadas":
+            return "Primero dime para qué personaje necesitas cartas y después te propongo alternativas SR."
+        pref = dict(self.ctx.preferencias)
+        pref.pop("sin_ssr", None)
+        pref.pop("rareza", None)
+        personaje = tema.get("personaje")
+        escenario = tema.get("escenario")
+        stat = tema.get("stat")
+        ssr = ordenar(self.kb, escenario, stat, "SSR", personaje, pref)
+        sr = ordenar(self.kb, escenario, stat, "SR", personaje, pref)
+        parejas = []
+        for origen in ssr:
+            rol = self.kb.cartas[origen["id"]]["stat"]
+            alternativa = next((c for c in sr if self.kb.cartas[c["id"]]["stat"] == rol), None)
+            if alternativa and (rol, alternativa["id"]) not in {(r, a) for r, a, _ in parejas}:
+                parejas.append((rol, alternativa["id"], origen["id"]))
+            if len(parejas) >= 4:
+                break
+        if not parejas:
+            return "No encontré parejas SSR/SR del mismo rol con tus filtros actuales. Puedes indicar qué carta necesitas sustituir o cambiar las restricciones."
+        partes = ["Alternativas SR orientativas por el mismo rol (no equivalencias exactas):"]
+        for rol, alternativa, origen in parejas:
+            partes.append(f"• {self.kb.etiqueta_carta(origen)} → {self.kb.etiqueta_carta(alternativa)} ({rol}).")
+        partes.append("No conozco cuáles SSR tienes; si me dices las que te faltan, puedo acotar la búsqueda. No cambié tus preferencias guardadas.")
+        return "\n".join(partes)
 
     def _h_cartas_recomendadas(self, ent):
         """Calcula primero la recomendación y confirma el contexto solo si es válida."""

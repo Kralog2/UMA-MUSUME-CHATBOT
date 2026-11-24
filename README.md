@@ -1,4 +1,4 @@
-# UMA MUSUME ChatBot v3.4
+# UMA MUSUME ChatBot v3.5
 
 Asistente conversacional académico en español especializado en **Uma Musume Pretty Derby**, desarrollado mediante procesamiento de lenguaje natural (NLP), aprendizaje supervisado y un sistema de recomendaciones basado en conocimiento.
 
@@ -305,6 +305,22 @@ python tests/run_conversation_tests.py --modelo v3
 ```
 
 Detalles, pruebas y limitaciones: [`docs/ETAPA_8_ESTADO_FILTROS.md`](docs/ETAPA_8_ESTADO_FILTROS.md).
+
+### Etapa 9 — Seguimientos, negaciones, rarezas y sustituciones (v4.0)
+
+Se corrigieron las continuaciones de escenario y rareza en preguntas breves; ahora
+las negaciones de SSR distinguen entre **no tener ninguna** y **no tener todas**.
+Las solicitudes de alternativas proponen pares orientativos SSR→SR por rol y
+no inventan qué cartas posee el jugador. «Háblame de Gold Ship» se reconoce
+como una consulta nueva.
+
+```powershell
+python tests/test_etapa9_seguimientos.py
+python -m unittest discover -s tests -p "test_*.py"
+python tests/run_conversation_tests.py --modelo v3
+```
+
+Metodología, cambios y limitaciones: [`docs/ETAPA_9_SEGUIMIENTOS_NEGACIONES.md`](docs/ETAPA_9_SEGUIMIENTOS_NEGACIONES.md).
 
 
 ## 7. Versiones del proyecto

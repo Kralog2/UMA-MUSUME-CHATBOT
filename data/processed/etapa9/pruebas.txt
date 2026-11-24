@@ -1,0 +1,15 @@
+UMA MUSUME ChatBot — evidencias Etapa 9
+
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.174s
+
+OK
+
+----------------------------------------------------------------------
+Ran 40 tests in 1.000s
+
+OK
+
+Resultado: 34/34 pasos correctos  ✔ TODAS LAS PRUEBAS PASARON
+OK: 4 grupos de pruebas HTTP superados
