@@ -1,6 +1,6 @@
 ﻿texto,real,predicha,confianza,segunda,margen,correcta
 Dime las cartas SSR más fuertes,cartas_recomendadas,cartas_soporte,0.4711373681669378,cartas_recomendadas,0.2499937314594799,False
-¿Qué se necesita para fortalecer a mi uma?,subir_nivel,distancia_pista_recomendada,0.28177857797341976,subir_nivel,0.1354268974373505,False
+¿Qué se necesita para fortalecer a mi uma?,subir_nivel,distancia_pista_recomendada,0.2817785779734197,subir_nivel,0.13542689743735045,False
 ¿Y para el otro escenario es lo mismo?,pedir_mas_detalle,mejor_escenario,0.498007002164744,pedir_mas_detalle,0.36545760961204765,False
 ¿Qué hay?,saludo,mejor_escenario,0.37207786954747185,cartas_soporte,0.28741471476565206,False
 ¿Quién descubrió América?,fuera_dominio,uma_facil_entrenar,0.44884907651690753,fuera_dominio,0.020437470345451625,False

@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     parser=argparse.ArgumentParser(description="Chatbot Uma Musume")
-    parser.add_argument("--modelo", choices=["original", "reforzado", "v3"], default="original")
+    parser.add_argument("--modelo", choices=["original", "reforzado", "v3"], default="v3")
     args=parser.parse_args()
     ruta=ROOT/"artifacts"/{"original":"mejor_modelo.joblib","reforzado":"modelo_reforzado_etapa3.joblib","v3":"modelo_v3.joblib"}[args.modelo]
     dm=DialogueManager(construir_predictor(ruta), ROOT/"data/game")

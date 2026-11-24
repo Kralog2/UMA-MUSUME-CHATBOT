@@ -30,7 +30,7 @@ MODEL_PATHS = {
     "original": ROOT / "artifacts" / "mejor_modelo.joblib",
     "reforzado": ROOT / "artifacts" / "modelo_reforzado_etapa3.joblib",
 }
-MODEL_NAME = os.getenv("UMABOT_MODELO", "reforzado").strip().lower()
+MODEL_NAME = os.getenv("UMABOT_MODELO", "v3").strip().lower()
 if MODEL_NAME not in MODEL_PATHS:
     raise ValueError("UMABOT_MODELO debe ser 'original', 'reforzado' o 'v3'")
 

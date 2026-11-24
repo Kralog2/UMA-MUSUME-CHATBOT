@@ -1,35 +1,35 @@
 ﻿conversacion,turno,mensaje,intencion_obtenida,fuente,correcto,errores,latencia_ms
-"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",1,¿Qué aptitudes tiene Gold Ship?,info_personaje,clasificador,True,,6.314
-"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",2,¿En qué distancia le conviene correr?,distancia_pista_recomendada,contexto,True,,0.928
-"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",3,¿Y Silence Suzuka?,distancia_pista_recomendada,contexto,True,,6.447
-"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",4,explícame más,pedir_mas_detalle,contexto,True,,0.348
-Aclaración cuando falta el personaje y luego uso del dato,1,¿En qué pista debería correr mi uma?,distancia_pista_recomendada,clasificador,True,,6.195
-Aclaración cuando falta el personaje y luego uso del dato,2,Vodka,distancia_pista_recomendada,aclaracion,True,,0.259
-Aclaración cuando falta el personaje y luego uso del dato,3,¿Qué estilo le conviene?,distancia_pista_recomendada,contexto,True,,0.462
-Carta con límite de nivel (usa MLB por defecto) y seguimiento,1,¿Qué bonos da la carta de Fine Motion?,info_carta,clasificador,True,,6.412
-Carta con límite de nivel (usa MLB por defecto) y seguimiento,2,¿Y con 0LB?,info_carta,regla,True,,0.159
-Carta con límite de nivel (usa MLB por defecto) y seguimiento,3,explícame más,pedir_mas_detalle,contexto,True,,0.341
-"Cartas por escenario, cambio de escenario y paginación",1,¿Qué cartas me recomiendas para Unity Cup?,cartas_recomendadas,clasificador,True,,6.865
-"Cartas por escenario, cambio de escenario y paginación",2,¿Y para el otro escenario es lo mismo?,pedir_mas_detalle,regla,True,,0.508
-"Cartas por escenario, cambio de escenario y paginación",3,dame más opciones,pedir_mas_detalle,contexto,True,,0.51
-Escenario recomendado queda en contexto,1,¿Cuál es el mejor escenario para empezar?,mejor_escenario,clasificador,True,,6.296
-Escenario recomendado queda en contexto,2,¿Qué cartas uso ahí?,cartas_recomendadas,clasificador,True,,6.117
-Stats: respuesta específica y ampliación por niveles,1,¿Para qué sirve Stamina?,stats_funcion,clasificador,True,,5.852
-Stats: respuesta específica y ampliación por niveles,2,Explícame más,pedir_mas_detalle,contexto,True,,0.349
-Stats: respuesta específica y ampliación por niveles,3,¿Y qué más?,pedir_mas_detalle,contexto,True,,0.283
-Uma fácil de entrenar y pregunta sobre una uma concreta,1,¿Cuál es la umamusume más fácil de entrenar?,uma_facil_entrenar,clasificador,True,,6.152
-Uma fácil de entrenar y pregunta sobre una uma concreta,2,¿Special Week es fácil de entrenar?,uma_facil_entrenar,clasificador,True,,6.518
-Significado de una letra de aptitud,1,¿Qué significa tener una A en pasto?,distancias_aptitudes,clasificador,True,,6.107
-Herencia por color,1,¿Qué hacen las chispas azules?,herencias,clasificador,True,,6.191
-Personaje que solo tiene carta,1,¿Qué aptitudes tiene Biko Pegasus?,info_personaje,clasificador,True,,6.058
-Pregunta ambigua sin contexto,1,Explícame más,pedir_mas_detalle,clasificador,True,,5.878
-Fuera de dominio y recuperación,1,¿Cuál es la capital de Francia?,fuera_dominio,clasificador,True,,6.111
-Fuera de dominio y recuperación,2,¿Para qué sirve cada stat?,stats_funcion,clasificador,True,,6.343
-Mensaje sin sentido y ayuda tras dos fallos,1,asdfgh qwerty zxcv,desconocido,umbral,True,,8.25
-Mensaje sin sentido y ayuda tras dos fallos,2,zzz xkcd plmoknijb,desconocido,umbral,True,,5.913
-Reinicio elimina el contexto,1,¿Qué aptitudes tiene Rice Shower?,info_personaje,clasificador,True,,6.171
-Reinicio elimina el contexto,2,empecemos de nuevo,reinicio,regla,True,,0.227
-Reinicio elimina el contexto,3,¿En qué pista debería correr mi uma?,distancia_pista_recomendada,clasificador,True,,6.198
-Saludo y despedida (la despedida limpia el contexto),1,"Hola, buenas tardes",saludo,clasificador,True,,5.775
-Saludo y despedida (la despedida limpia el contexto),2,¿Qué aptitudes tiene Vodka?,info_personaje,clasificador,True,,6.093
-Saludo y despedida (la despedida limpia el contexto),3,"Gracias, adiós",despedida,clasificador,True,,5.707
+"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",1,¿Qué aptitudes tiene Gold Ship?,info_personaje,clasificador,True,,4.252
+"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",2,¿En qué distancia le conviene correr?,distancia_pista_recomendada,contexto,True,,0.683
+"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",3,¿Y Silence Suzuka?,distancia_pista_recomendada,contexto,True,,3.837
+"Personaje y seguimientos (4 turnos, cambio de personaje por contexto)",4,explícame más,pedir_mas_detalle,contexto,True,,0.223
+Aclaración cuando falta el personaje y luego uso del dato,1,¿En qué pista debería correr mi uma?,distancia_pista_recomendada,clasificador,True,,3.893
+Aclaración cuando falta el personaje y luego uso del dato,2,Vodka,distancia_pista_recomendada,aclaracion,True,,0.146
+Aclaración cuando falta el personaje y luego uso del dato,3,¿Qué estilo le conviene?,distancia_pista_recomendada,contexto,True,,0.286
+Carta con límite de nivel (usa MLB por defecto) y seguimiento,1,¿Qué bonos da la carta de Fine Motion?,info_carta,clasificador,True,,4.397
+Carta con límite de nivel (usa MLB por defecto) y seguimiento,2,¿Y con 0LB?,info_carta,regla,True,,0.091
+Carta con límite de nivel (usa MLB por defecto) y seguimiento,3,explícame más,pedir_mas_detalle,contexto,True,,0.204
+"Cartas por escenario, cambio de escenario y paginación",1,¿Qué cartas me recomiendas para Unity Cup?,cartas_recomendadas,clasificador,True,,4.451
+"Cartas por escenario, cambio de escenario y paginación",2,¿Y para el otro escenario es lo mismo?,pedir_mas_detalle,regla,True,,0.312
+"Cartas por escenario, cambio de escenario y paginación",3,dame más opciones,pedir_mas_detalle,contexto,True,,0.325
+Escenario recomendado queda en contexto,1,¿Cuál es el mejor escenario para empezar?,mejor_escenario,clasificador,True,,4.078
+Escenario recomendado queda en contexto,2,¿Qué cartas uso ahí?,cartas_recomendadas,clasificador,True,,3.85
+Stats: respuesta específica y ampliación por niveles,1,¿Para qué sirve Stamina?,stats_funcion,clasificador,True,,3.868
+Stats: respuesta específica y ampliación por niveles,2,Explícame más,pedir_mas_detalle,contexto,True,,0.206
+Stats: respuesta específica y ampliación por niveles,3,¿Y qué más?,pedir_mas_detalle,contexto,True,,0.157
+Uma fácil de entrenar y pregunta sobre una uma concreta,1,¿Cuál es la umamusume más fácil de entrenar?,uma_facil_entrenar,clasificador,True,,4.049
+Uma fácil de entrenar y pregunta sobre una uma concreta,2,¿Special Week es fácil de entrenar?,uma_facil_entrenar,clasificador,True,,4.043
+Significado de una letra de aptitud,1,¿Qué significa tener una A en pasto?,distancias_aptitudes,clasificador,True,,3.871
+Herencia por color,1,¿Qué hacen las chispas azules?,herencias,clasificador,True,,3.794
+Personaje que solo tiene carta,1,¿Qué aptitudes tiene Biko Pegasus?,info_personaje,clasificador,True,,3.803
+Pregunta ambigua sin contexto,1,Explícame más,pedir_mas_detalle,clasificador,True,,3.618
+Fuera de dominio y recuperación,1,¿Cuál es la capital de Francia?,fuera_dominio,clasificador,True,,3.792
+Fuera de dominio y recuperación,2,¿Para qué sirve cada stat?,stats_funcion,clasificador,True,,3.763
+Mensaje sin sentido y ayuda tras dos fallos,1,asdfgh qwerty zxcv,desconocido,umbral,True,,3.612
+Mensaje sin sentido y ayuda tras dos fallos,2,zzz xkcd plmoknijb,desconocido,umbral,True,,3.533
+Reinicio elimina el contexto,1,¿Qué aptitudes tiene Rice Shower?,info_personaje,clasificador,True,,3.832
+Reinicio elimina el contexto,2,empecemos de nuevo,reinicio,regla,True,,0.108
+Reinicio elimina el contexto,3,¿En qué pista debería correr mi uma?,distancia_pista_recomendada,clasificador,True,,3.885
+Saludo y despedida (la despedida limpia el contexto),1,"Hola, buenas tardes",saludo,clasificador,True,,3.683
+Saludo y despedida (la despedida limpia el contexto),2,¿Qué aptitudes tiene Vodka?,info_personaje,clasificador,True,,3.995
+Saludo y despedida (la despedida limpia el contexto),3,"Gracias, adiós",despedida,clasificador,True,,3.695

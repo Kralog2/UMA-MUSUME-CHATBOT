@@ -288,6 +288,10 @@ Metodología y limitaciones: [`docs/ETAPA_6_EVALUACION_INTEGRAL.md`](docs/ETAPA_
 Los conjuntos y conversaciones de esta etapa no son datos ciegos nuevos; la
 evaluación humana de calidad debe completarse antes de declarar validada la utilidad.
 
+### Etapa 7: Integración Streamlit (inicio del plan v4.0)
+
+El frontend entregado por el equipo se encuentra en `frontend/app_frontend.py`. La consola y la API utilizan el modelo V3 por defecto. Para instalar el frontend y arrancar ambos servicios, consulta [Plan e integración v4.0](docs/VERSION_4_0_PLAN.md).
+
 
 ## 7. Versiones del proyecto
 

@@ -1,6 +1,6 @@
 # Etapa 6 — Resultados de evaluación integral
 
-Generado (UTC): 2026-11-24T18:09:58.356219+00:00
+Generado (UTC): 2026-11-24T07:43:22.059631+00:00
 
 **Importante:** los datasets y escenarios provienen de etapas previas. No son pruebas ciegas nuevas.
 
@@ -19,11 +19,11 @@ Decisiones: {'aceptar': 51, 'aclarar': 13, 'reformular': 4}. Errores aceptados: 
 ## Conversaciones de regresión
 
 Escenarios completos: **15/15**; turnos correctos: **34/34**.
-Latencia del diálogo p50/p95: 6.076 / 6.64 ms.
+Latencia del diálogo p50/p95: 3.778 / 4.302 ms.
 
 ## API local
 
-HTTP 200: **25/25**; latencia p50/p95: 20.496 / 22.907 ms.
+HTTP 200: **25/25**; latencia p50/p95: 13.446 / 29.121 ms.
 
 ## Pendiente de evaluación humana
 
