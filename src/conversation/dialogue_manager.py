@@ -1,4 +1,7 @@
-"""Gestor de diálogo
+"""Gestor de diálogo, contexto y recomendaciones del chatbot.
+
+Etapa 8: valida los filtros de cartas, limita la continuidad al mismo personaje
+y revierte los cambios de estado cuando una búsqueda no devuelve resultados.
 
 Flujo por mensaje:
   1) Recibe el texto
@@ -11,6 +14,7 @@ Flujo por mensaje:
 
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 import random
 import re
@@ -75,6 +79,7 @@ class DialogueManager:
         self._rng = random.Random(seed)
         self._norm = ""
         self._texto = ""
+        self._recomendacion_sin_resultados = False
 
     # API
     def reiniciar(self) -> None:
@@ -85,6 +90,7 @@ class DialogueManager:
     def responder(self, mensaje: str) -> Dict[str, Any]:
         """Procesa un turno, aplica reglas contextuales y evalúa la confianza antes de responder."""
         self.diagnostico = None
+        self._recomendacion_sin_resultados = False
         texto = (mensaje or "").strip()
         if not texto:
             return self._salida(self._elegir("vacio"), "vacio", 1.0, {}, "sistema")
@@ -167,6 +173,8 @@ class DialogueManager:
             elif conf < self.umbral:
                 intent, fuente = "desconocido", "umbral"
 
+        # Preparar una copia para deshacer cambios si la recomendación queda vacía.
+        estado_previo = deepcopy((ctx.slots, ctx.tema, ctx.preferencias, ctx.nivel_detalle))
         if intent not in ("desconocido", "fuera_dominio", "saludo", "despedida"):
             ctx.actualizar_slots({"personaje": ent.get("personaje"), "card": ent.get("card"),
                                   "escenario": self._clave_escenario(ent.get("k_escenario"))})
@@ -176,6 +184,9 @@ class DialogueManager:
             ctx.preferencias.clear()
         manejador = getattr(self, f"_h_{intent}", self._h_desconocido)
         respuesta = manejador(ent)
+        if self._recomendacion_sin_resultados:
+            # Una consulta fallida no debe reemplazar el último contexto confirmado.
+            ctx.slots, ctx.tema, ctx.preferencias, ctx.nivel_detalle = estado_previo
         if intent not in _TERMINALES:
             ctx.registrar_turno(Turno(texto, intent, float(conf), respuesta, dict(ent)))
         return self._salida(respuesta, intent, conf, ent, fuente)
@@ -286,42 +297,70 @@ class DialogueManager:
         self.ctx.set_tema("cartas_soporte", carta=ent.get("k_carta"), rareza=ent.get("k_rareza"))
         return self._respuesta_conocimiento(filas) if filas else self._elegir("cartas_soporte")
 
-    def _filtros_cartas(self, ent) -> Dict[str, Optional[str]]:
-        """Obtiene los filtros de recomendación de cartas desde entidades y contexto."""
-        stat = None
-        if ent.get("k_carta"):
-            stat = ent["k_carta"].split(" (")[0]
-            stat = stat.capitalize()
-        elif ent.get("k_stat"):
-            stat = ent["k_stat"].capitalize()
-        esc = self._clave_escenario(ent.get("k_escenario")) or self.ctx.slots["escenario"]
+    @staticmethod
+    def _estadistica_carta(ent: Dict[str, str]) -> Optional[str]:
+        """Acepta únicamente estadísticas válidas, nunca conceptos como «mazo»."""
+        estadisticas_validas = {"Speed", "Stamina", "Power", "Guts", "Wit", "Pal"}
+        concepto = ent.get("k_carta", "")
+        if concepto.endswith("(carta)"):
+            candidata = concepto.split(" (", 1)[0].capitalize()
+            if candidata in estadisticas_validas:
+                return candidata
+        explicita = ent.get("k_stat", "").capitalize()
+        return explicita if explicita in estadisticas_validas else None
+
+    def _continuidad_cartas(self, ent: Dict[str, str]) -> bool:
+        """Solo hereda filtros cuando continúa el mismo personaje y la misma intención."""
         anterior = self.ctx.tema or {}
-        pref = preferencias(self._texto, ent)
-        continuidad = anterior.get("intent") == "cartas_recomendadas"
-        if continuidad:
-            stat = stat or anterior.get("stat")
-        rareza = pref.get("rareza", anterior.get("rareza") if continuidad else None)
-        if pref.get("sin_ssr") and rareza == "SSR":
+        return anterior.get("intent") == "cartas_recomendadas" and (
+            not ent.get("personaje") or ent["personaje"] == anterior.get("personaje")
+        )
+
+    def _filtros_cartas(self, ent) -> Dict[str, Optional[str]]:
+        """Resuelve filtros válidos, sin heredar restricciones de otro personaje."""
+        continuidad = self._continuidad_cartas(ent)
+        anterior = self.ctx.tema or {}
+        pref_nuevas = preferencias(self._texto, ent)
+        stat = self._estadistica_carta(ent)
+        if continuidad and not stat:
+            stat = anterior.get("stat")
+        # Un cambio de personaje no debe mantener el escenario de una búsqueda previa.
+        escenario_explicito = self._clave_escenario(ent.get("k_escenario"))
+        esc = escenario_explicito or (self.ctx.slots["escenario"] if continuidad else None)
+        rareza = pref_nuevas.get("rareza", anterior.get("rareza") if continuidad else None)
+        # Los sinónimos F2P de la base de conocimiento no significan «solo SR».
+        if not self.gestor_confianza and "rareza" not in pref_nuevas:
+            entidad_rareza = ent.get("k_rareza")
+            if entidad_rareza and not pref_nuevas.get("f2p"):
+                rareza = entidad_rareza
+        if pref_nuevas.get("sin_ssr") and rareza == "SSR":
             rareza = None
-        if not self.gestor_confianza:
-            rareza = ent.get("k_rareza") or (anterior.get("rareza") if continuidad else None)
         return {"escenario": esc, "stat": stat, "rareza": rareza}
 
     def _h_cartas_recomendadas(self, ent):
-        """Recupera recomendaciones según los filtros disponibles."""
+        """Calcula primero la recomendación y confirma el contexto solo si es válida."""
+        continuidad = self._continuidad_cartas(ent)
         f = self._filtros_cartas(ent)
-        anteriores = dict(self.ctx.preferencias)
-        if (self.ctx.tema or {}).get("intent") != "cartas_recomendadas":
-            self.ctx.preferencias.clear()
-        self.ctx.preferencias.update(preferencias(self._texto, ent))
-        if preferencias(self._texto, ent).get("rareza") == "SSR":
-            self.ctx.preferencias["sin_ssr"] = False
-        if self.ctx.preferencias.get("sin_ssr") and f["rareza"] == "SSR":
+        nuevas = preferencias(self._texto, ent)
+        pref = dict(self.ctx.preferencias) if continuidad else {}
+        pref.update(nuevas)
+        if nuevas.get("rareza") == "SSR":
+            pref["sin_ssr"] = False
+        if pref.get("sin_ssr") and f["rareza"] == "SSR":
             f["rareza"] = None
-        self.ctx.set_tema("cartas_recomendadas", **f, personaje=self.ctx.slots["personaje"])
-        if anteriores != self.ctx.preferencias:
-            self.ctx.nivel_detalle = 0
-        self.ctx.nivel_detalle = 0
+        # El personaje del contexto puede usarse aunque el tema anterior no fuera de cartas.
+        # No se heredan por ello los filtros de una recomendación anterior.
+        personaje = ent.get("personaje") or self.ctx.slots["personaje"]
+        filas = ordenar(self.kb, f["escenario"], f["stat"], f["rareza"], personaje, pref)
+        if not filas:
+            self._recomendacion_sin_resultados = True
+            filtros = [f"{clave}={valor}" for clave, valor in f.items() if valor]
+            filtros.extend(f"{clave}={valor}" for clave, valor in pref.items() if valor is not None)
+            descripcion = ", ".join(filtros) if filtros else "ninguno"
+            return ("No encontré cartas con estos filtros: " + descripcion +
+                    ". No cambié tus preferencias anteriores. Puedes ajustar las restricciones.")
+        self.ctx.preferencias = pref
+        self.ctx.set_tema("cartas_recomendadas", **f, personaje=personaje)
         return self._pagina_cartas(self.ctx.tema, 0)
 
     def _pagina_cartas(self, tema, pagina):

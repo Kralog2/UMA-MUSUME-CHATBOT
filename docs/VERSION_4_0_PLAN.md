@@ -1,24 +1,24 @@
 # UMA MUSUME ChatBot v4.0 — plan incremental
 
-## Estado actual: etapa 4.0 (integración inicial)
+## Estado actual: etapas 7 (integración) y 8 (estado y filtros)
 - Se integró el frontend Streamlit del equipo en `frontend/app_frontend.py`.
 - Se conservó el avatar incrustado y se incluyó `frontend/avatar.png` como recurso separado.
 - Se agregó `frontend/requirements.txt` sin alterar las dependencias del backend.
 - Consola y API arrancan con el modelo `v3` si no se especifica otro; se conservan opciones históricas.
 - Se agregaron pruebas de contrato `tests/test_integracion_frontend.py`.
 
-**Esta integración NO implementa todavía las correcciones del listado de v4.0.**
+**La Etapa 8 corrige los defectos 1–4 del listado.** Las demás correcciones aún están pendientes.
 
 ## Hoja de ruta
 | Etapa | Objetivo | Problemas |
 | --- | --- | --- |
-| 4.0 | Integrar Streamlit, unificar modelo y establecer pruebas de contrato | 22, 23 y base para 24 |
-| 4.1 | Corregir filtros, contaminación de entidades y estado por personaje | 1, 2, 3, 4 |
-| 4.2 | Seguimientos, rarezas, negación y sustituciones | 5, 6, 7, 8, 9 |
-| 4.3 | Revisar datos de cartas y recomendador de F2P | 16, 17, 18, 19, 20, 21 |
-| 4.4 | Armado real de mazos por roles y objetivos de stats | 10, 14, 15 |
-| 4.5 | Mejorar NLP y confianza con pruebas fuera de muestra | 11, 12, 13 |
-| 4.6 | Evaluación de regresión de extremo a extremo y cierre v4.0 | 24 y cobertura de todos |
+| 7 | Integrar Streamlit, unificar modelo y establecer pruebas de contrato | 22, 23 y base para 24 |
+| 8 | Corregir filtros, contaminación de entidades y estado por personaje | 1, 2, 3, 4 |
+| 9 | Seguimientos, rarezas, negación y sustituciones | 5, 6, 7, 8, 9 |
+| 10 | Revisar datos de cartas y recomendador de F2P | 16, 17, 18, 19, 20, 21 |
+| 11 | Armado real de mazos por roles y objetivos de stats | 10, 14, 15 |
+| 12 | Mejorar NLP y confianza con pruebas fuera de muestra | 11, 12, 13 |
+| 13 | Evaluación de regresión de extremo a extremo y cierre v4.0 | 24 y cobertura de todos |
 
 ## Ejecución local (dos terminales)
 1. Instalar el backend: `python -m pip install -r requirements.txt`.

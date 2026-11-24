@@ -1,4 +1,4 @@
-# UMA MUSUME ChatBot v3.2
+# UMA MUSUME ChatBot v3.4
 
 Asistente conversacional académico en español especializado en **Uma Musume Pretty Derby**, desarrollado mediante procesamiento de lenguaje natural (NLP), aprendizaje supervisado y un sistema de recomendaciones basado en conocimiento.
 
@@ -291,6 +291,20 @@ evaluación humana de calidad debe completarse antes de declarar validada la uti
 ### Etapa 7: Integración Streamlit (inicio del plan v4.0)
 
 El frontend entregado por el equipo se encuentra en `frontend/app_frontend.py`. La consola y la API utilizan el modelo V3 por defecto. Para instalar el frontend y arrancar ambos servicios, consulta [Plan e integración v4.0](docs/VERSION_4_0_PLAN.md).
+
+### Etapa 8 — Corrección de estado y filtros (desarrollo v4.0)
+
+Se corrigió el error por el término «mazo» al interpretarse como estadística,
+la persistencia de restricciones al cambiar de personaje, la asignación
+accidental de cartas homónimas y el guardado de consultas sin resultados.
+El recomendador sigue generando listas de cartas, no mazos optimizados.
+
+```powershell
+python tests/test_etapa8_estado_filtros.py
+python tests/run_conversation_tests.py --modelo v3
+```
+
+Detalles, pruebas y limitaciones: [`docs/ETAPA_8_ESTADO_FILTROS.md`](docs/ETAPA_8_ESTADO_FILTROS.md).
 
 
 ## 7. Versiones del proyecto

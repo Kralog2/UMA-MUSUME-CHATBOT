@@ -1,4 +1,8 @@
-"""Consultas a la base de datos (CSV exportados de DBC.xlsx) y extracción de entidades."""
+"""Carga los CSV de conocimiento y extrae entidades del texto del usuario.
+
+Etapa 8: evita asignar automáticamente una carta homónima cuando el usuario
+se refiere a un personaje, y conserva la carta si se solicita explícitamente.
+"""
 
 from __future__ import annotations
 
@@ -94,6 +98,7 @@ class KnowledgeBase:
     # Entidades
 
     def extraer_entidades(self, texto: str) -> Dict[str, str]:
+        """Extrae entidades y evita confundir un personaje con su carta homónima."""
         norm = normalizar(texto)
         mejor: Dict[str, tuple] = {}
         for clave, valor, rx, alias in self._patrones:
@@ -104,7 +109,16 @@ class KnowledgeBase:
                     mejor[clave] = cand
         ent = {c: v[2] for c, v in mejor.items()}
         if "card" in ent:
-            ent["card"] = self._resolver_carta(ent["card"], ent.get("k_rareza"))
+            # «Háblame de Silence Suzuka» es una consulta de personaje.
+            # Conservar la carta solo si la solicitud la menciona explícitamente.
+            card_id = self._resolver_carta(ent["card"], ent.get("k_rareza"))
+            personaje = ent.get("personaje")
+            mismo_personaje = personaje and normalizar(self.cartas[card_id]["card"].split(" (")[0]) == normalizar(self.personajes[personaje]["name"])
+            solicita_carta = bool(re.search(r"\b(?:carta|support card)\b", norm))
+            if mismo_personaje and not solicita_carta:
+                ent.pop("card")
+            else:
+                ent["card"] = card_id
         return ent
 
     def quitar_entidades(self, texto: str) -> str:
