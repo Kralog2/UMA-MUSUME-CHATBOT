@@ -1,6 +1,6 @@
 """Gestor de diálogo, contexto y recomendaciones del chatbot.
 
-Etapas 8–9: valida filtros, preserva el estado y distingue continuaciones,
+Etapas 8–10: valida filtros, preserva el estado, separa F2P de rareza y distingue continuaciones,
 negaciones parciales de SSR y solicitudes de alternativas trazables.
 
 Flujo por mensaje:
@@ -423,7 +423,12 @@ class DialogueManager:
         if not seleccion:
             if pagina:
                 return None
-            return "No encontré cartas en DBCv3 que cumplan todos los filtros. Puedes cambiar la distancia, el estilo, la pista, la rareza o el escenario. No he relajado tus restricciones."
+            criterios = [f"{k}={v}" for k, v in tema.items()
+                         if k in ("escenario", "stat", "rareza", "personaje") and v]
+            criterios += [f"{k}={v}" for k, v in pref.items() if v is not None]
+            return ("No encontré cartas con estos filtros: " + (", ".join(criterios) or "ninguno") +
+                    ". Puedes cambiar distancia, estilo, pista, rareza o escenario. "
+                    "No se han relajado tus restricciones.")
         titulo = "Otras opciones" if pagina else "Cartas recomendadas"
         titulo += " para " + self.kb.nombre_personaje(personaje) if personaje else " del catálogo"
         titulo += " — " + (ESCENARIOS[tema["escenario"]] if tema.get("escenario") else "sin escenario específico")
@@ -432,6 +437,7 @@ class DialogueManager:
         if tema.get("stat"): filtros.append("stat: " + tema["stat"])
         if tema.get("rareza"): filtros.append("rareza: " + tema["rareza"])
         if pref.get("sin_ssr"): filtros.append("sin SSR")
+        if pref.get("f2p"): filtros.append("preferencia F2P (prioridad, no exclusión)")
         partes = [titulo + "."]
         if filtros: partes.append("Criterios: " + "; ".join(filtros) + ".")
         if personaje:
@@ -441,7 +447,10 @@ class DialogueManager:
         partes.extend(f"{pagina * _TAM_PAGINA + i}. {describir(self.kb, fila)}" for i, fila in enumerate(seleccion, 1))
         partes.append("Orden orientativo por compatibilidad y bonos registrados; no es un mazo optimizado. Los bonos corresponden al límite indicado, no necesariamente al nivel que posees.")
         if pref.get("f2p"):
-            partes.append("F2P: priorizo las opciones con evidencia F2P en las notas de DBCv3 a igual compatibilidad. No conozco tu inventario ni el coste o disponibilidad actual de todas las cartas.")
+            con_evidencia = sum(1 for r in filas if r.get("f2p"))
+            partes.append(f"F2P: {con_evidencia} de {len(filas)} candidatas cuentan con evidencia de gratuidad en el catálogo; "
+                          "aparecen primero. Las demás tienen disponibilidad desconocida, no necesariamente son de pago. "
+                          "No conozco tu inventario ni la disponibilidad actual del juego.")
         partes.append(f"Mostrando {pagina * _TAM_PAGINA + 1}–{pagina * _TAM_PAGINA + len(seleccion)} de {len(filas)}.")
         if (pagina+1)*_TAM_PAGINA < len(filas): partes.append("Puedes pedir más opciones.")
         return "\n".join(partes)

@@ -1,4 +1,4 @@
-# UMA MUSUME ChatBot v3.5
+# UMA MUSUME ChatBot v3.6
 
 Asistente conversacional académico en español especializado en **Uma Musume Pretty Derby**, desarrollado mediante procesamiento de lenguaje natural (NLP), aprendizaje supervisado y un sistema de recomendaciones basado en conocimiento.
 
@@ -321,6 +321,31 @@ python tests/run_conversation_tests.py --modelo v3
 ```
 
 Metodología, cambios y limitaciones: [`docs/ETAPA_9_SEGUIMIENTOS_NEGACIONES.md`](docs/ETAPA_9_SEGUIMIENTOS_NEGACIONES.md).
+
+### Etapa 10 — Datos estructurados y recomendaciones F2P (v4.0)
+
+La disponibilidad F2P ya no se infiere de buscar literalmente `f2p` en las notas:
+la fuente activa `data/source/DBCv4_etapa10.xlsx` registra `f2p` y
+`f2p_fuente` en la hoja `Cards`, separando **rareza** de **accesibilidad**.
+Se conservó DBCv3 como respaldo, sin reentrenar el clasificador V3.
+
+Cuando el jugador solicita F2P, las seis cartas con evidencia positiva
+registrada se priorizan frente a cartas de disponibilidad desconocida.
+`sin_ssr` y la rareza explícita continúan siendo restricciones estrictas.
+Ahora la rareza desempata cuando compatibilidad y bonos coinciden. Los
+mensajes sin resultados explican sus filtros, sin eliminar restricciones.
+
+```powershell
+python scripts/export_from_xlsx.py
+python tests/test_etapa10_f2p.py
+python -m unittest discover -s tests -p "test_*.py"
+python tests/run_conversation_tests.py --modelo v3
+```
+
+Consulta [`docs/ETAPA_10_DATOS_F2P.md`](docs/ETAPA_10_DATOS_F2P.md).
+La clasificación F2P procede de notas de DBCv3 y no equivale a una
+verificación actual de disponibilidad; la exclusión de cartas del propio
+personaje sigue pendiente de contrastación con fuentes del juego.
 
 
 ## 7. Versiones del proyecto

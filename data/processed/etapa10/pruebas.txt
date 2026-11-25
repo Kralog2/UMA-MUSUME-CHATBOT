@@ -1,0 +1,13 @@
+Etapa 10 — pruebas automatizadas
+Comando: python -m unittest discover -s tests -p "test_*.py"
+..................................................
+----------------------------------------------------------------------
+Ran 50 tests in 0.994s
+
+OK
+
+Comando: python tests/run_conversation_tests.py --modelo v3
+Resultado: 34/34 pasos correctos  ✔ TODAS LAS PRUEBAS PASARON
+
+Comando: python tests/test_api.py
+OK: 4 grupos de pruebas HTTP superados

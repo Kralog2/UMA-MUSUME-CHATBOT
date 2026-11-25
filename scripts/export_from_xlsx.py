@@ -1,9 +1,9 @@
-"""Exporta DBC.xlsx (fuente de verdad editable) a los archivos que usa el chatbot.
+"""Exporta la fuente Excel vigente y valida la semántica de disponibilidad F2P.
 
 Uso:  python scripts/export_from_xlsx.py [ruta/a/DBC.xlsx]
 
-Genera en data/: characters.csv, knowledge.csv, cards.csv, cards_effects.csv, train.csv, test.csv, responses.json, intents.json  y valida los requisitos del 
-proyecto (>=10 intenciones, >=20 ejemplos por intención, >=50 de prueba, sin duplicados ni fuga train/test, >=3 variantes de respuesta)."""
+Genera los CSV y JSON en data/game y data/raw; preserva la trazabilidad.
+Etapa 10: verifica f2p=1/0/vacío sin inferir falsos y su fuente."""
 
 import json
 import re
@@ -18,12 +18,14 @@ UMBRAL_CONFIANZA = 0.30
 
 
 def norm(t):
+    """Normaliza texto para comprobar duplicados y coincidencias."""
     t = unicodedata.normalize("NFKD", str(t).lower())
     t = "".join(c for c in t if not unicodedata.combining(c))
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", t)).strip()
 
 
 def limpiar(df):
+    """Limpia columnas de Excel sin eliminar datos significativos."""
     df = df.loc[:, [c for c in df.columns if not str(c).startswith("Unnamed")]].copy()
     df.columns = [str(c).strip() for c in df.columns]
     df = df.apply(lambda col: col.map(lambda v: v.strip() if isinstance(v, str) else v))
@@ -31,6 +33,7 @@ def limpiar(df):
 
 
 def main(xlsx):
+    """Valida y exporta la base de conocimiento y los datasets etiquetados."""
     hojas = {k: limpiar(v) for k, v in pd.read_excel(xlsx, sheet_name=None, dtype=str, keep_default_na=False).items()}
     out = RAIZ / "data" / "game"
     efecto = "CardsEffects" if "CardsEffects" in hojas else "CardsEffect"
@@ -59,6 +62,18 @@ def main(xlsx):
     if set(ntr) & set(nte): errores.append("fuga: textos en train y test")
     if set(tr["intencion"]) - ids or set(te["intencion"]) - ids: errores.append("etiquetas que no están en Intents")
     ce, ca = hojas[efecto], hojas["Cards"]
+    if not {"f2p", "f2p_fuente"}.issubset(ca.columns):
+        errores.append("Cards debe incluir f2p y f2p_fuente")
+    else:
+        invalidos = ca[~ca["f2p"].isin(("", "0", "1"))]
+        if len(invalidos): errores.append("f2p solo admite 1, 0 o vacío (desconocido)")
+        sin_fuente = ca[(ca["f2p"] == "1") & (ca["f2p_fuente"] == "")]
+        if len(sin_fuente): errores.append("todas las cartas f2p=1 necesitan fuente")
+    sr = hojas["Knowledge"]
+    sr = sr[(sr["category"] == "rareza") & (sr["name"] == "SR")]
+    if len(sr) and any(p in norm(sr.iloc[0]["synonym"]).split()
+                       for p in ("f2p", "gratis", "gratuita")):
+        errores.append("sinónimos SR contienen conceptos de gratuidad")
     if set(ce["card_id"]) - set(ca["card_id"]): errores.append("CardsEffect con card_id inexistente")
     print(f"intenciones={len(ids)} train={len(tr)} test={len(te)} cartas={len(ca)} personajes={len(hojas['Characters'])}")
     print("VALIDACIÓN OK" if not errores else "ERRORES:\n - " + "\n - ".join(errores))
@@ -74,4 +89,4 @@ def main(xlsx):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else RAIZ / "data" / "source" / "DBCv3.xlsx"))
+    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else RAIZ / "data" / "source" / "DBCv4_etapa10.xlsx"))

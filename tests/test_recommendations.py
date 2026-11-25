@@ -39,13 +39,14 @@ class RecommendationTests(unittest.TestCase):
         self.assertNotIn('rice_shower_ssr',ids)
 
     def test_f2p(self):
-        """No convierte F2P en SR y usa únicamente notas existentes como evidencia."""
+        """No convierte F2P en SR y comprueba la evidencia estructurada de la Etapa 10."""
         filas = ordenar(self.kb, pref={'f2p':True})
         self.assertEqual(len(filas),len(self.kb.cartas))
         self.assertTrue(any(r['f2p'] and self.kb.cartas[r['id']]['rarity']=='SSR' for r in filas))
         for r in filas:
             if r['f2p']:
-                self.assertTrue(any('f2p' in e['note'].lower() for e in self.kb.efectos[r['id']].values()))
+                self.assertEqual(self.kb.cartas[r['id']]['f2p'], '1')
+                self.assertTrue(self.kb.cartas[r['id']]['f2p_fuente'])
 
     def test_orden_y_bonos(self):
         """Verifica estabilidad del orden, ausencia de duplicados y bonos trazables."""
