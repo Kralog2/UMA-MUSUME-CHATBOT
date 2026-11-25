@@ -1,13 +1,13 @@
 # UMA MUSUME ChatBot v4.0 — plan incremental
 
-## Estado actual: etapas 7–10 completadas
+## Estado actual: etapas 7–11 completadas
 - Se integró el frontend Streamlit del equipo en `frontend/app_frontend.py`.
 - Se conservó el avatar incrustado y se incluyó `frontend/avatar.png` como recurso separado.
 - Se agregó `frontend/requirements.txt` sin alterar las dependencias del backend.
 - Consola y API arrancan con el modelo `v3` si no se especifica otro; se conservan opciones históricas.
 - Se agregaron pruebas de contrato `tests/test_integracion_frontend.py`.
 
-**La Etapa 8 corrige los defectos 1–4; la 9 aborda los defectos 5–9 y la 10 atiende los defectos 16–19 y 21.** El supuesto de exclusión de cartas del propio personaje (20) queda pendiente de verificación. Las etapas 11–13 están pendientes. Consulta [`ETAPA_10_DATOS_F2P.md`](ETAPA_10_DATOS_F2P.md).
+**La Etapa 8 corrige los defectos 1–4; la 9 aborda los defectos 5–9 y la 10 atiende los defectos 16–19 y 21.** El supuesto de exclusión de cartas del propio personaje (20) queda pendiente de verificación. La etapa 11 está implementada y quedan pendientes 12–13. Consulta [`ETAPA_10_DATOS_F2P.md`](ETAPA_10_DATOS_F2P.md).
 
 ## Hoja de ruta
 | Etapa | Objetivo | Problemas |
@@ -35,3 +35,6 @@ En una máquina distinta, el `API_URL` de `frontend/app_frontend.py` debe apunta
 - `python tests/run_conversation_tests.py --modelo v3`
 
 La interfaz original utiliza selectores CSS de Streamlit que podrían requerir ajuste después de actualizar esa biblioteca. No se verificó el renderizado visual en navegador en esta integración inicial.
+
+
+Etapa 11: [Armador de mazos y objetivos de estadísticas](ETAPA_11_MAZOS_OBJETIVOS.md).

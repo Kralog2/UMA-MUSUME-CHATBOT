@@ -3,7 +3,8 @@
 Uso:  python scripts/export_from_xlsx.py [ruta/a/DBC.xlsx]
 
 Genera los CSV y JSON en data/game y data/raw; preserva la trazabilidad.
-Etapa 10: verifica f2p=1/0/vacío sin inferir falsos y su fuente."""
+Etapa 10: verifica f2p=1/0/vacío sin inferir falsos y su fuente.
+Etapa 11: preserva metadatos suplementarios de objetivos_stats al reexportar."""
 
 import json
 import re
@@ -42,6 +43,14 @@ def main(xlsx):
     for clave, g in r.sort_values(["intencion", "variante"]).groupby("intencion", sort=False):
         resp[clave] = g["respuesta"].tolist()
     intents = {"umbral_confianza": UMBRAL_CONFIANZA, "intenciones": hojas["Intents"].to_dict("records")}
+    # La clase experimental objetivos_stats se administra como extensión etiquetada
+    # independiente de DBCv4 para no alterar los datos originales del equipo.
+    anterior = out / 'intents.json'
+    if anterior.exists():
+        registros = json.loads(anterior.read_text(encoding='utf-8')).get('intenciones', [])
+        existentes = {r['intencion'] for r in intents['intenciones']}
+        intents['intenciones'].extend(r for r in registros
+            if r['intencion'] == 'objetivos_stats' and r['intencion'] not in existentes)
 
     # Validaciones
 

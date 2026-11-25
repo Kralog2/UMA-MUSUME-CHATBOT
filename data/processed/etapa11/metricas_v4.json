@@ -1,0 +1,10 @@
+{
+  "n_entrenamiento": 613,
+  "intenciones": 18,
+  "cv_accuracy_media": 0.7602692256430761,
+  "cv_f1_macro_media": 0.7525031123560536,
+  "prueba_sintetica_objetivos_n": 10,
+  "prueba_sintetica_objetivos_accuracy": 0.7,
+  "prueba_sintetica_objetivos_f1": 0.20588235294117646,
+  "advertencia": "Evaluación sintética focalizada: no prueba el rendimiento global de 18 intenciones. La calibración/umbrales de confianza V3 no se transfieren automáticamente."
+}

@@ -136,6 +136,14 @@
       "usa_contexto": "no",
       "accion_del_gestor_de_dialogo": "Informa límites y redirige al dominio",
       "categorias_knowledge": ""
+    },
+    {
+      "intencion": "objetivos_stats",
+      "descripcion": "Pregunta metas u objetivos numéricos de Speed, Stamina, Power, Guts o Wit para un personaje",
+      "ejemplo": "¿Cuáles son las estadísticas ideales para Gold Ship?",
+      "usa_contexto": "sí (personaje y escenario)",
+      "accion_del_gestor_de_dialogo": "Recupera *_goal de characters.csv e indica que los objetivos no están desglosados por escenario",
+      "categorias_knowledge": ""
     }
   ]
 }

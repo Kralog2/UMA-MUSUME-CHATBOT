@@ -1,5 +1,7 @@
 """Gestor de diálogo, contexto y recomendaciones del chatbot.
 
+Etapa 11: incorpora mazos orientativos y la intención objetivos_stats.
+
 Etapas 8–10: valida filtros, preserva el estado, separa F2P de rareza y distingue continuaciones,
 negaciones parciales de SSR y solicitudes de alternativas trazables.
 
@@ -23,6 +25,7 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from .confidence_manager import ConfidenceManager
 from .card_recommender import ordenar, describir, objetivos
+from .deck_builder import construir_mazo, explicar_mazo
 from .context_resolver import ETIQUETAS, elegir_opcion, preferencias, seguimiento, analizar_ssr
 from .context_manager import ContextManager, Turno
 from .knowledge_base import ESCENARIOS, KnowledgeBase, normalizar
@@ -33,7 +36,7 @@ ENTIDAD_REPETIBLE = {
     "info_personaje": ["personaje"], "distancia_pista_recomendada": ["personaje"],
     "uma_facil_entrenar": ["personaje"], "info_carta": ["card"],
     "cartas_recomendadas": ["k_escenario"], "mejor_escenario": ["k_escenario"],
-    "stats_funcion": ["k_stat"], "herencias": ["k_herencia"], "habilidades_comprar": ["k_habilidad"],
+    "stats_funcion": ["k_stat"], "objetivos_stats": ["personaje", "k_escenario"], "herencias": ["k_herencia"], "habilidades_comprar": ["k_habilidad"],
     "recompensas_items": ["k_item"], "distancias_aptitudes": ["k_distancia", "k_pista", "k_estilo"],
 }
 _STOP = {"y", "e", "de", "del", "el", "la", "los", "las", "a", "que", "tal", "pero", "ahora", "entonces",
@@ -133,7 +136,7 @@ class DialogueManager:
         # Reglas de seguimiento que solo tienen sentido con contexto
 
         tema_intent = (ctx.tema or {}).get("intent")
-        if intent is None and tema_intent in ("cartas_recomendadas", "mejor_escenario") and _RX_OTRO_ESC.search(self._norm):
+        if intent is None and tema_intent in ("cartas_recomendadas", "mejor_escenario", "objetivos_stats") and _RX_OTRO_ESC.search(self._norm):
             intent, fuente = "pedir_mas_detalle", "regla"          
         elif intent is None and tema_intent == "info_carta" and (
                 _RX_LB.search(self._norm) or _RX_MLB.search(self._norm) or _RX_SIN_LB.search(self._norm)):
@@ -157,10 +160,30 @@ class DialogueManager:
                 r"\b(?:cartas?|soportes?|mazo|deck)\b", self._norm):
             intent, fuente = "info_personaje", "regla"
 
-        if intent is None and self.gestor_confianza:
+        # Etapa 11: las continuaciones explícitas de cartas deben operar también
+        # con el modelo exploratorio V4, cuya política de confianza está pendiente.
+        if intent is None and (self.gestor_confianza or tema_intent == 'cartas_recomendadas'):
             continuacion = seguimiento(texto, ent, ctx, self._solo_entidad(texto))
             if continuacion:
                 intent, fuente = continuacion, "contexto"
+
+        # Etapa 11: órdenes explícitas reconocibles por reglas antes del SVM.
+        # «Mazo» no es una estadística ni un simple listado top-N.
+        pide_mazo = bool(re.search(r"\b(?:mazo|deck|build|armame|armar un mazo)\b", self._norm))
+        pide_objetivos = bool(re.search(
+            r"\b(?:objetivos? (?:de )?(?:stats?|estadisticas?)|"
+            r"(?:stats?|estadisticas?) (?:ideales?|objetivo|recomendad[ao]s?|metas?)|"
+            r"(?:cuanto|cuanta|cuantos) (?:speed|stamina|power|guts|wit) (?:necesito|debo)|"
+            r"(?:meta|valores? objetivo|cantidades? recomendadas?|numeros? objetivo) (?:de|para) (?:speed|stamina|power|guts|wit)|"
+            r"(?:guia|metas?) de (?:estadisticas?|stats?)|"
+            r"stats? (?:con los que|con que) (?:debo|deberia) terminar)\b",
+            self._norm))
+        if intent is None and tema_intent == 'objetivos_stats' and ent.get('k_escenario') and len(self._norm.split()) <= 12:
+            intent, conf, fuente = 'objetivos_stats', 1.0, 'contexto'
+        if intent is None and pide_objetivos:
+            intent, conf, fuente = "objetivos_stats", 1.0, "regla_objetivos"
+        elif intent is None and pide_mazo:
+            intent, conf, fuente = "cartas_recomendadas", 1.0, "regla_mazo"
 
         # 4) Clasificador entrenado
 
@@ -309,6 +332,20 @@ class DialogueManager:
             return self._respuesta_conocimiento([self.kb.fila("stat", stat)])
         return self._elegir("stats_funcion")
 
+    def _h_objetivos_stats(self, ent):
+        """Muestra las metas registradas de un personaje, sin inventar cifras por escenario."""
+        personaje = ent.get('personaje') or self.ctx.slots.get('personaje')
+        if not personaje:
+            return self._aclarar('objetivos_stats')
+        escenario = self._clave_escenario(ent.get('k_escenario')) or self.ctx.slots.get('escenario')
+        self.ctx.set_tema('objetivos_stats', personaje=personaje, escenario=escenario)
+        nombre = self.kb.nombre_personaje(personaje)
+        texto = f'Objetivos generales registrados para {nombre}: {self.kb.objetivos(personaje)}.'
+        if escenario:
+            texto += f' Escenario consultado: {ESCENARIOS.get(escenario, escenario)}.'
+        return (texto + ' Estos objetivos provienen de Characters y no están diferenciados '
+                'por escenario; no son valores mínimos universales para ganar.')
+
     def _h_cartas_soporte(self, ent):
         """Explica cartas de soporte y sus categorías."""
         filas = self._filas_mencionadas(ent, ["carta", "rareza"])
@@ -411,7 +448,15 @@ class DialogueManager:
             return ("No encontré cartas con estos filtros: " + descripcion +
                     ". No cambié tus preferencias anteriores. Puedes ajustar las restricciones.")
         self.ctx.preferencias = pref
-        self.ctx.set_tema("cartas_recomendadas", **f, personaje=personaje)
+        # Conservar modo mazo en seguimientos; cambiar de personaje crea una búsqueda nueva.
+        solicita_lista = bool(re.search(r"\b(?:mejores cartas|recomiendame cartas|lista de cartas|cartas recomendadas)\b", self._norm))
+        modo = ("mazo" if re.search(r"\b(?:mazo|deck|build|armame)\b", self._norm)
+                else None if solicita_lista
+                else (self.ctx.tema or {}).get("modo") if continuidad else None)
+        self.ctx.set_tema("cartas_recomendadas", **f, personaje=personaje, modo=modo)
+        if modo == "mazo":
+            resultado = construir_mazo(self.kb, f['escenario'], f['rareza'], personaje, pref, f['stat'])
+            return explicar_mazo(self.kb, resultado, personaje, f['escenario'], pref)
         return self._pagina_cartas(self.ctx.tema, 0)
 
     def _pagina_cartas(self, tema, pagina):
@@ -581,6 +626,7 @@ class DialogueManager:
     def _etiqueta_tema(self, t: Dict[str, Any]) -> str:
         """Construye una etiqueta legible del tema activo."""
         i = t["intent"]
+        if i == "objetivos_stats": return "los objetivos de estadísticas del personaje"
         if i == "stats_funcion": return f"la estadística {t['stat'].capitalize()}" if t.get("stat") else "las estadísticas"
         if i in ("info_personaje", "distancia_pista_recomendada"):
             n = self.kb.nombre_personaje(t["personaje"])
@@ -596,7 +642,11 @@ class DialogueManager:
         i, kb = t["intent"], self.kb
         todas = lambda cat: " ".join(f"{f['name'][0].upper() + f['name'][1:]}: {f['detail']}." for f in kb.filas(cat) if f["detail"])
         if i == "cartas_recomendadas":
+            if t.get('modo') == 'mazo':
+                return 'Este mazo ya contiene sus seis espacios posibles. Cambia distancia, escenario o rareza para generar otra propuesta.'
             return self._pagina_cartas(t, nivel + 1)
+        if i == "objetivos_stats":
+            return 'Las metas proceden de Characters; no se dispone de objetivos específicos por escenario.'
         if nivel > 0:
             return None
         if i == "stats_funcion":

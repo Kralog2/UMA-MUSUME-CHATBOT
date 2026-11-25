@@ -1,4 +1,7 @@
-"""Adaptador entre SVM calibrado y gestor de diálogo del compañero."""
+"""Adaptador de SVM calibrado a intención y Top-K del diálogo.
+
+Etapa 11: permite modelo de 18 intenciones; sus umbrales se revisarán en Etapa 12.
+"""
 from pathlib import Path
 import joblib
 import numpy as np

@@ -1,4 +1,4 @@
-# UMA MUSUME ChatBot v3.6
+# UMA MUSUME ChatBot v3.7
 
 Asistente conversacional académico en español especializado en **Uma Musume Pretty Derby**, desarrollado mediante procesamiento de lenguaje natural (NLP), aprendizaje supervisado y un sistema de recomendaciones basado en conocimiento.
 
@@ -347,6 +347,20 @@ La clasificación F2P procede de notas de DBCv3 y no equivale a una
 verificación actual de disponibilidad; la exclusión de cartas del propio
 personaje sigue pendiente de contrastación con fuentes del juego.
 
+## Etapa 11 — Armador de mazos y objetivos de estadísticas (v4.0)
+
+Se añadió un **mazo orientativo de seis cartas por roles** y la intención `objetivos_stats` (18 intenciones).
+El armador conserva restricciones, explica vacantes y no afirma óptimos.
+Los objetivos de `Characters` son generales y no están desglosados por escenario.
+La calibración de confianza V4 se revisará en la Etapa 12.
+
+```powershell
+python -m src.models.train_v4_intenciones
+python tests/test_etapa11_mazos.py
+python -m src.chat_console --modelo v4
+```
+
+Detalles: [Etapa 11](docs/ETAPA_11_MAZOS_OBJETIVOS.md).
 
 ## 7. Versiones del proyecto
 

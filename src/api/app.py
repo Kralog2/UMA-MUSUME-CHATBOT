@@ -27,6 +27,7 @@ from src.models.predictor_adapter import construir_predictor
 ROOT = Path(__file__).resolve().parents[2]
 MODEL_PATHS = {
     "v3": ROOT / "artifacts" / "modelo_v3.joblib",
+    "v4": ROOT / "artifacts" / "modelo_v4_etapa11.joblib",
     "original": ROOT / "artifacts" / "mejor_modelo.joblib",
     "reforzado": ROOT / "artifacts" / "modelo_reforzado_etapa3.joblib",
 }

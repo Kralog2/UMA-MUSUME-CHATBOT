@@ -29,8 +29,9 @@ class PruebasEstadoFiltros(unittest.TestCase):
         r = self.chat.responder("Ármame un mazo para Oguri Cap")
         self.assertIsNone(r["contexto"]["tema"]["stat"])
         self.assertEqual(r["contexto"]["tema"]["personaje"], "oguri_cap")
-        self.assertIn("Cartas recomendadas", r["respuesta"])
-        self.assertIn("no es un mazo optimizado", r["respuesta"])
+        # Etapa 11: «mazo» ahora solicita una composición real por roles.
+        self.assertIn("Mazo orientativo", r["respuesta"])
+        self.assertIn("6 espacios", r["respuesta"])
 
     def test_mazo_no_contamina_siguiente_turno(self):
         """Después de mencionar «mazo» es posible seguir recomendando."""
