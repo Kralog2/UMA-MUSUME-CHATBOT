@@ -1,13 +1,13 @@
 # UMA MUSUME ChatBot v4.0 — plan incremental
 
-## Estado actual: etapas 7–11 completadas
+## Estado actual: etapas 7–12 completadas
 - Se integró el frontend Streamlit del equipo en `frontend/app_frontend.py`.
 - Se conservó el avatar incrustado y se incluyó `frontend/avatar.png` como recurso separado.
 - Se agregó `frontend/requirements.txt` sin alterar las dependencias del backend.
-- Consola y API arrancan con el modelo `v3` si no se especifica otro; se conservan opciones históricas.
+- Consola y API arrancan con el modelo `v4` de la Etapa 12 si no se especifica otro; se conservan opciones históricas.
 - Se agregaron pruebas de contrato `tests/test_integracion_frontend.py`.
 
-**La Etapa 8 corrige los defectos 1–4; la 9 aborda los defectos 5–9 y la 10 atiende los defectos 16–19 y 21.** El supuesto de exclusión de cartas del propio personaje (20) queda pendiente de verificación. La etapa 11 está implementada y quedan pendientes 12–13. Consulta [`ETAPA_10_DATOS_F2P.md`](ETAPA_10_DATOS_F2P.md).
+**La Etapa 8 corrige los defectos 1–4; la 9 aborda los defectos 5–9 y la 10 atiende los defectos 16–19 y 21.** El supuesto de exclusión de cartas del propio personaje (20) queda pendiente de verificación. Las etapas 11 y 12 están implementadas; queda pendiente la Etapa 13. Consulta [`ETAPA_10_DATOS_F2P.md`](ETAPA_10_DATOS_F2P.md).
 
 ## Hoja de ruta
 | Etapa | Objetivo | Problemas |
@@ -17,8 +17,8 @@
 | 9 | Seguimientos, rarezas, negación y sustituciones | 5, 6, 7, 8, 9 |
 | 10 | Revisar datos de cartas y recomendador de F2P | 16, 17, 18, 19, 20, 21 |
 | 11 | Armado real de mazos por roles y objetivos de stats | 10, 14, 15 |
-| 12 | Mejorar NLP y confianza con pruebas fuera de muestra | 11, 12, 13 |
-| 13 | Evaluación de regresión de extremo a extremo y cierre v4.0 | 24 y cobertura de todos |
+| 12 | Mejorar NLP y confianza con comparación CV, calibración OOF y pruebas de regresión | 11, 12, 13 |
+| 13 | Evaluación independiente de extremo a extremo y cierre v4.0 | 24 y cobertura de todos |
 
 ## Ejecución local (dos terminales)
 1. Instalar el backend: `python -m pip install -r requirements.txt`.
@@ -38,3 +38,5 @@ La interfaz original utiliza selectores CSS de Streamlit que podrían requerir a
 
 
 Etapa 11: [Armador de mazos y objetivos de estadísticas](ETAPA_11_MAZOS_OBJETIVOS.md).
+
+Etapa 12: [NLP y confianza V4](ETAPA_12_NLP_CONFIANZA.md).

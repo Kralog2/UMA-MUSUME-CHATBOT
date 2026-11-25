@@ -1,416 +1,409 @@
-# UMA MUSUME ChatBot v3.7
+# UMA MUSUME ChatBot v3.8
 
-Asistente conversacional académico en español especializado en **Uma Musume Pretty Derby**, desarrollado mediante procesamiento de lenguaje natural (NLP), aprendizaje supervisado y un sistema de recomendaciones basado en conocimiento.
+Asistente conversacional académico en español especializado en **Uma Musume Pretty Derby**, desarrollado con procesamiento de lenguaje natural (NLP), aprendizaje supervisado, reglas de diálogo y una base de conocimiento local.
 
-**Estado actual:** Etapas 1 a 5 completadas. Pendiente: evaluación integral del chatbot (Etapa 6).
+> **Estado del proyecto (versión preliminar v3.8):** se completaron las etapas de desarrollo **1 a 12**, incluida la integración del frontend Streamlit y las mejoras de mazos, estadísticas, NLP y confianza. **La versión pública 4.0 aún no está cerrada**: falta incorporar la próxima actualización de la base de datos y realizar la **Etapa 13, evaluación integral final**, con pruebas nuevas y revisión humana. El modelo predictivo interno más reciente se identifica como `v4`; este nombre **no implica** que la aplicación esté publicada como versión 4.0.
 
 ## 1. Descripción del proyecto
 
-El proyecto tiene como objetivo facilitar la consulta de información sobre las mecánicas del videojuego y orientar al jugador durante el entrenamiento de personajes. El asistente identifica la intención de cada mensaje, recupera información de una base de conocimiento local y construye respuestas mediante reglas y plantillas. También mantiene el contexto para interpretar preguntas relacionadas a lo largo de una conversación.
+El proyecto busca ayudar a jugadores a consultar mecánicas, personajes, cartas de soporte y estrategias de entrenamiento. El sistema recibe un mensaje, identifica su intención, consulta información local y genera una respuesta mediante reglas y plantillas. Mantiene contexto por sesión para interpretar referencias y preferencias en varios turnos.
 
-El sistema emplea TF-IDF para representar el texto y una máquina de vectores de soporte lineal (SVM) con calibración de probabilidades para clasificar intenciones. Se comparó su desempeño con regresión logística mediante validación cruzada. No utiliza un modelo generativo externo ni necesita una clave de API comercial.
+El procesamiento de texto utiliza **TF-IDF de palabras y caracteres**, además de **enmascaramiento de entidades** (personajes, escenarios y rarezas). Un **SVM lineal calibrado** clasifica **18 intenciones**; su desempeño se compara experimentalmente con otras configuraciones. El gestor de confianza considera las probabilidades de las principales intenciones y su margen para responder, aclarar o pedir reformulación. No utiliza un modelo generativo externo ni requiere una clave de API comercial.
 
-### Arquitectura
+### Arquitectura general
 
 ```mermaid
 flowchart TD
-    U[Usuario] --> I[Consola o API FastAPI]
-    I --> D[Gestor de diálogo]
-    D --> C[Resolución de contexto]
-    D --> N[TF-IDF y SVM calibrado]
-    N --> F[Gestor de confianza]
-    C --> D
-    F --> D
-    D --> K[Base de conocimiento DBCv3]
-    D --> R[Recomendador de cartas]
-    K --> R
-    R --> D
-    D --> S[Respuesta y actualización del contexto]
+    U[Jugador] --> FE[Frontend Streamlit]
+    U --> CO[Consola Python]
+    FE --> API[API FastAPI: chat y sesiones]
+    API --> DM[Gestor de diálogo]
+    CO --> DM
+    DM --> CT[Contexto y seguimiento]
+    DM --> NLP[Enmascaramiento + TF-IDF]
+    NLP --> SVM[SVM calibrado: 18 intenciones]
+    SVM --> CF[Gestor de confianza]
+    CF --> DM
+    DM --> KB[Base de conocimiento local]
+    KB --> RE[Recomendador y armador de mazos]
+    RE --> DM
+    DM --> OUT[Respuesta y actualización del contexto]
+    OUT --> API
+    OUT --> CO
 ```
 
 ## 2. Alcance y limitaciones
 
 ### Funcionalidades disponibles
 
-- Clasificación de 17 intenciones en español, incluyendo consultas sobre personajes, cartas, estadísticas, habilidades, herencias, escenarios, recompensas, saludos y despedidas.
-- Consulta de fichas de personajes, información de cartas de soporte y mecánicas registradas en DBCv3.
-- Gestión de incertidumbre mediante las tres intenciones más probables (Top-3), confianza y margen de clasificación.
-- Aclaraciones específicas y selección de alternativas por número; conservación de entidades y preferencias entre turnos.
-- Recomendaciones de cartas según personaje, distancia, estilo, pista, escenario, estadística y rareza; exclusión explícita de SSR y priorización de evidencia F2P cuando se solicita.
-- Justificación de recomendaciones con datos del catálogo y paginación sin repetir opciones dentro del mismo ranking.
-- Interacción por consola y API HTTP con sesiones independientes y reinicio de conversación.
+- **18 intenciones**, entre ellas información de personajes y cartas, estadísticas, **objetivos de estadísticas**, habilidades, escenarios, herencias, recomendaciones y consultas fuera del dominio.
+- Reconocimiento de entidades, manejo de ambigüedad, aclaraciones numeradas y contexto entre turnos; seguimiento de personaje, escenario, distancia, rareza y preferencias F2P.
+- Recomendación individual de cartas por compatibilidad de personaje, escenario, distancia, estilo, pista y otras restricciones, con explicaciones basadas en los datos registrados.
+- Priorización de cartas con **evidencia estructurada F2P**; F2P no se trata como sinónimo de rareza SR. Manejo de negaciones de SSR y alternativas orientativas SSR → SR.
+- **Armador orientativo de hasta seis cartas** por roles de entrenamiento; muestra espacios vacantes si faltan cartas compatibles y no relaja filtros silenciosamente.
+- Consulta de objetivos generales de **Speed, Stamina, Power, Guts y Wit** registrados por personaje, sin afirmar que sean metas específicas por escenario.
+- Modelo interno `v4` mejorado con enmascaramiento de entidades y n-gramas de caracteres, con una política de confianza ajustada para sus 18 intenciones.
+- Tres formas de uso: **interfaz web Streamlit**, **consola** y **API HTTP FastAPI**; sesiones independientes y reinicio de conversación.
 
-### Base de datos activa
+### Datos y modelos disponibles
 
-| Elemento | Cantidad |
-| --- | ---: |
-| Intenciones | 17 |
-| Ejemplos de entrenamiento DBCv3 | 510 |
-| Ejemplos adicionales de refuerzo | 73 |
-| Total de entrenamiento del modelo V3 seleccionado | 583 |
-| Ejemplos de prueba DBCv3 | 170 |
+| Recurso | Estado actual |
+| --- | --- |
+| Intenciones del modelo más reciente | **18** |
+| Entrenamiento del modelo interno V4 | **613 ejemplos**: 510 de DBCv3 + 73 de refuerzo + 30 de `objetivos_stats` |
+| Datos de prueba heredados | 170 ejemplos de DBCv3 y un conjunto adicional de 68, ya usados en evaluaciones anteriores |
+| Prueba focalizada de `objetivos_stats` | 10 ejemplos sintéticos |
 | Personajes | 32 |
 | Cartas de soporte | 33 |
-| Registros de efectos de cartas | 53 |
+| Registros de efectos | 53 |
 | Registros de conocimiento | 41 |
+| Base de conocimiento editable más reciente | `data/source/DBCv4_etapa10.xlsx` |
+| Modelos históricos | `original`, `reforzado`, `v3` |
+| Modelo interno predeterminado | `v4` → `artifacts/modelo_v4_etapa12.joblib` |
 
-La fuente activa es `data/source/DBCv3.xlsx`. Los datos exportados se encuentran en `data/raw/` y `data/game/`. La versión anterior se conserva en `data/versions/dbc_v2/` para reproducir los experimentos históricos.
+**Importante:** `DBCv4_etapa10.xlsx` corresponde a la versión de la **base de datos** y `--modelo v4` al identificador técnico del **clasificador**. La versión pública del proyecto sigue siendo **v3.8**. La nueva intención se incorpora en archivos suplementarios, sin modificar las hojas de entrenamiento originales del Excel.
 
-### Limitaciones actuales
+### Limitaciones conocidas
 
-- El asistente está restringido a las intenciones y conocimientos disponibles; puede confundir consultas fuera del dominio o mensajes ambiguos, incluso con confianza alta.
-- La memoria es limitada y las referencias se resuelven mediante reglas; no existe comprensión ilimitada del lenguaje ni garantía de mantener cualquier conversación.
-- Los datos del juego no se actualizan automáticamente ni se han verificado en su totalidad contra la versión vigente del videojuego.
-- El ranking de cartas es heurístico, no predice la probabilidad de ganar y no optimiza un mazo completo ni sus sinergias.
-- No conoce el inventario, niveles reales ni recursos del jugador; F2P no equivale a SR y la evidencia de disponibilidad gratuita es incompleta. Los bonos mostrados corresponden al máximo nivel registrado o al mayor disponible.
-- Las sesiones HTTP se mantienen en memoria: expiran tras 30 minutos de inactividad y se pierden al reiniciar el servidor. La API está orientada a demostraciones locales, sin autenticación ni persistencia distribuida.
-- Las pruebas actuales verifican funcionalidades concretas; aún falta una evaluación integral con conversaciones nuevas y valoración humana de la calidad de las respuestas.
+- El chatbot está limitado a su catálogo de entidades, clases y conocimientos; puede equivocarse con frases ambiguas, preguntas fuera del dominio o errores ortográficos no contemplados.
+- La continuidad conversacional depende de reglas y estados finitos; no equivale a memoria o comprensión ilimitadas.
+- Las recomendaciones y mazos son **heurísticos**: no optimizan todas las sinergias, habilidades, estadísticas finales ni probabilidades de victoria.
+- No conoce el inventario, nivel real ni recursos del jugador. Las sustituciones SSR → SR son **orientativas por rol**, no equivalencias exactas.
+- La clasificación F2P se fundamenta en notas de la base; aún requiere contraste externo. Los objetivos de estadísticas no están desglosados por escenario.
+- La regla de exclusión de ciertas cartas homónimas del personaje entrenado permanece pendiente de verificación contra las reglas del juego.
+- Las sesiones del servidor se mantienen **en memoria**: expiran tras 30 minutos de inactividad y desaparecen al reiniciar la API. No hay autenticación ni persistencia compartida.
+- Las métricas históricas no constituyen una **evaluación final ciega**. La actualización pendiente de la base de datos, la evaluación humana y el cierre académico corresponden a la Etapa 13.
 
 ## 3. Requisitos del sistema
 
-| Requisito | Descripción |
+| Elemento | Requisito o recomendación |
 | --- | --- |
-| Sistema operativo | Windows 10/11 (entorno de trabajo recomendado para el equipo). |
-| Python | 3.11 recomendado; las verificaciones de V3 se realizaron con Python 3.13.5. |
-| Editor | Visual Studio Code recomendado; puede utilizarse cualquier editor o terminal. |
-| Dependencias | Instaladas desde `requirements.txt`, especialmente scikit-learn 1.8.0. |
-| Navegador | Necesario únicamente para probar Swagger UI o utilizar el frontend. |
-| Conexión a Internet | Para descargar dependencias; no se requiere durante la ejecución local con los datos y modelos disponibles. |
-| Hardware | CPU convencional; no se requiere GPU. No se han medido requisitos mínimos de RAM ni almacenamiento. |
+| Sistema operativo | Windows 10/11 recomendado; también puede utilizarse un entorno compatible con Python. |
+| Python | **3.11 o posterior** compatible con las dependencias; los artefactos `joblib` requieren cuidado con las versiones instaladas. |
+| Entorno de trabajo | Visual Studio Code y PowerShell recomendados en Windows. |
+| Backend | `requirements.txt`: NumPy, pandas, scikit-learn **1.8.0**, joblib, openpyxl, FastAPI, Uvicorn y HTTPX. |
+| Frontend | `frontend/requirements.txt`: **Streamlit, Requests y Pillow**. |
+| Navegador | Necesario para Streamlit y opcional para Swagger UI. |
+| Hardware | CPU convencional; no se requiere GPU. No se han medido mínimos oficiales de memoria. |
+| Internet | Para instalar dependencias; el procesamiento local no requiere conectividad externa. |
 
-Las dependencias principales son NumPy, pandas, scikit-learn, joblib, openpyxl, FastAPI, Uvicorn y HTTPX. No es necesario instalar un servidor de bases de datos: el proyecto utiliza CSV, JSON y Excel como fuentes locales.
+No se necesita MySQL ni otro servidor de base de datos: el proyecto utiliza CSV, JSON y Excel locales. **No cargues modelos `.joblib` de fuentes desconocidas.**
 
 ## 4. Instalación y ejecución
 
-Todos los comandos siguientes se ejecutan en PowerShell desde la carpeta raíz del proyecto (la que contiene `README.md`, `requirements.txt` y `src/`).
+Todos los comandos se ejecutan **desde la raíz del proyecto**, donde se encuentran `src/`, `frontend/`, `requirements.txt` y este README.
 
-### 4.1. Preparar el entorno
+### 4.1. Preparar Python y el entorno virtual (Windows / PowerShell)
 
-1. Descargar o extraer el proyecto y abrir su carpeta en VS Code.
-2. Abrir una terminal PowerShell y verificar Python:
+1. Extrae el proyecto y abre su carpeta en VS Code.
+2. Comprueba Python y crea el entorno virtual (solo la primera vez):
 
 ```powershell
 py -3.11 --version
-```
-
-3. Crear y activar un entorno virtual (solo es necesario crearlo una vez):
-
-```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Si PowerShell bloquea la activación, permitirla únicamente en la terminal actual y repetirla:
+Si PowerShell bloquea la activación, ejecuta esto **en la terminal actual** y vuelve a activarlo:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 ```
 
-4. Instalar las dependencias:
+3. Instala las dependencias del backend **y del frontend**:
 
 ```powershell
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+python -m pip install -r frontend/requirements.txt
 ```
 
-En VS Code se recomienda seleccionar el intérprete `.venv\Scripts\python.exe` mediante **Python: Select Interpreter**. En cada terminal nueva se debe activar el entorno nuevamente.
+4. En VS Code selecciona `.venv\Scripts\python.exe` usando **Python: Select Interpreter**. Activa `.venv` en cada terminal nueva.
 
-### 4.2. Ejecutar el chatbot por consola
+### 4.2. Ejecutar la aplicación web completa (opción recomendada)
 
-Los modelos entrenados están incluidos en `artifacts/`. No es necesario volver a entrenarlos para usar el chatbot.
+Abre **dos terminales** en la raíz del proyecto, ambas con el entorno virtual activado.
+
+**Terminal 1 — Backend FastAPI**
 
 ```powershell
-python -m src.chat_console --modelo v3
-```
-
-Escribir los mensajes cuando aparezca `Tú:`. Para comprobar el contexto, introducir consecutivamente:
-
-```text
-Háblame de Gold Ship
-¿Qué cartas me recomiendas para ella?
-Para largas y que sean F2P
-¿Y si no tengo SSR?
-Dame más opciones
-```
-
-El chatbot muestra la respuesta, la intención, la confianza y la fuente de resolución. Ante una aclaración pendiente, seleccionar una de las opciones presentadas o reformular la pregunta.
-
-- `/reiniciar`: borra el contexto de la conversación actual.
-- `salir`: finaliza el chatbot.
-
-**Importante:** especificar `--modelo v3` para utilizar la versión actual. Si se omite, la consola utiliza el modelo original por compatibilidad histórica.
-
-### 4.3. Ejecutar la API para el frontend
-
-```powershell
-$env:UMABOT_MODELO = "v3"
+$env:UMABOT_MODELO = "v4"
 python -m uvicorn src.api.app:app --reload --host 127.0.0.1 --port 8000
 ```
 
-Mantener esta terminal abierta mientras se utiliza la API. Abrir [Swagger UI](http://127.0.0.1:8000/docs) para realizar peticiones desde el navegador. Para detener el servidor, presionar `Ctrl+C`.
+**Terminal 2 — Frontend Streamlit**
 
-| Método | Endpoint | Propósito |
+```powershell
+python -m streamlit run frontend/app_frontend.py
+```
+
+Abre la dirección que muestre Streamlit, normalmente **http://localhost:8501**. La API se ejecuta en **http://127.0.0.1:8000** y su documentación interactiva está en **http://127.0.0.1:8000/docs**.
+
+El frontend de esta entrega apunta a `API_URL = "http://127.0.0.1:8000"` en `frontend/app_frontend.py`. Si frontend y backend están en computadoras distintas, adapta esa dirección. Mantén ambos procesos en ejecución; para detenerlos utiliza `Ctrl+C` en sus terminales.
+
+**Prueba recomendada en una misma sesión:**
+
+```text
+Háblame de Gold Ship
+Ármame un mazo para ella
+¿Y para carreras largas y F2P?
+¿Y si no tengo ninguna SSR?
+¿Cuáles son las estadísticas ideales?
+¿Y para URA Finale?
+Ahora háblame de Oguri Cap
+```
+
+El frontend conserva el `session_id` y permite reiniciar el chat. Ante una aclaración del bot, responde con la opción indicada o reformula el mensaje.
+
+### 4.3. Ejecutar únicamente la consola
+
+```powershell
+python -m src.chat_console
+```
+
+**Por defecto utiliza el modelo interno V4 de la Etapa 12.** Para realizar comparaciones históricas:
+
+```powershell
+python -m src.chat_console --modelo v3
+python -m src.chat_console --modelo reforzado
+python -m src.chat_console --modelo original
+```
+
+Los modelos ya vienen entrenados en `artifacts/`, por lo que **no necesitas entrenarlos** para ejecutar el chat. Usa `/reiniciar` para borrar el contexto y `salir` para terminar la sesión.
+
+### 4.4. Probar directamente la API (opcional)
+
+Con el backend activo, abre `http://127.0.0.1:8000/docs` y utiliza **Try it out**.
+
+| Método | Ruta | Función |
 | --- | --- | --- |
-| GET | `/api/health` | Comprobar el estado y modelo activo. |
-| POST | `/api/chat` | Enviar un mensaje y recibir la respuesta. |
-| POST | `/api/reset` | Reiniciar una sesión existente. |
+| `GET` | `/api/health` | Estado del servicio y modelo activo. |
+| `POST` | `/api/chat` | Enviar mensaje y continuar una sesión. |
+| `POST` | `/api/reset` | Reiniciar el contexto de una sesión existente. |
 
-En Swagger UI, abrir `POST /api/chat`, presionar **Try it out**, introducir el siguiente JSON y pulsar **Execute**:
-
-```json
-{"mensaje": "Háblame de Gold Ship"}
-```
-
-Copiar el `session_id` devuelto y utilizarlo en las siguientes peticiones:
+Primera petición:
 
 ```json
-{"session_id": "UUID_RECIBIDO", "mensaje": "¿Qué cartas me recomiendas para ella?"}
+{"mensaje":"Háblame de Gold Ship"}
 ```
 
-Para reiniciar, enviar a `POST /api/reset`:
+Después, reutiliza el `session_id` que devuelva el servidor:
 
 ```json
-{"session_id": "UUID_RECIBIDO"}
+{"session_id":"UUID_RECIBIDO","mensaje":"Ármame un mazo para ella"}
 ```
 
-El frontend puede utilizar `respuesta`, `intencion`, `confianza`, `fuente`, `contexto` y `diagnostico_confianza`. Este último puede ser nulo cuando la respuesta se resuelve mediante reglas. La API acepta por defecto orígenes `http://localhost:3000` y `http://127.0.0.1:3000`; otros orígenes locales pueden configurarse con `UMABOT_CORS_ORIGINS` (lista separada por comas). Sin `UMABOT_MODELO`, la API carga el modelo reforzado anterior, no V3.
+Para reiniciar:
 
-Consultar el [contrato HTTP y ejemplo de integración Next.js](docs/ETAPA_4_API_FRONTEND.md) y las ampliaciones de confianza y contexto en la documentación de la Etapa 5. El frontend se desarrolla por separado; este repositorio proporciona el servicio y la consola.
+```json
+{"session_id":"UUID_RECIBIDO"}
+```
 
-### 4.4. Actualizar los datos y reentrenar (opcional)
+Las respuestas del chat incluyen `respuesta`, `intencion`, `confianza`, `fuente`, `contexto` y, cuando aplica, `diagnostico_confianza`. La configuración CORS se puede modificar mediante `UMABOT_CORS_ORIGINS`, separando los orígenes con comas. Para los detalles del contrato consulta [Etapa 4 — API y frontend](docs/ETAPA_4_API_FRONTEND.md).
 
-Realizar este procedimiento únicamente si se modifica el Excel o se desea reproducir el entrenamiento. Respaldar los datos y artefactos antes de regenerarlos.
+### 4.5. Entrenamiento y actualización de datos (opcional)
+
+La base actual **ya está exportada**. Si necesitas regenerar los CSV y JSON desde el Excel (por ejemplo, cuando llegue una nueva base), **haz primero una copia de seguridad** y revisa las rutas y nuevas columnas:
 
 ```powershell
 python scripts/export_from_xlsx.py
-python -m src.models.train_v3
 ```
 
-El exportador valida y genera los archivos locales. El entrenamiento compara V3 base y V3 reforzado mediante validación cruzada y guarda el modelo seleccionado en `artifacts/modelo_v3.joblib`. Los scripts históricos utilizan la copia de los datos V2. No utilizar conjuntos de prueba ya evaluados para seleccionar nuevos cambios.
-
-Cargar archivos `.joblib` únicamente de fuentes confiables. Si se presentan incompatibilidades al cargar un modelo, verificar la versión de scikit-learn y, si es necesario, reentrenar en el entorno local.
-
-### 4.5. Ejecutar las pruebas
+Para reproducir los experimentos de entrenamiento históricos y el modelo interno más reciente:
 
 ```powershell
-python tests/run_conversation_tests.py --modelo v3
-python tests/test_confidence.py
-python tests/test_context.py
-python tests/test_recommendations.py
-$env:UMABOT_MODELO = "v3"
+# Modelo V3 anterior (17 intenciones)
+python -m src.models.train_v3
+
+# Experimento de la nueva intención (18 intenciones)
+python -m src.models.train_v4_intenciones
+
+# Modelo más reciente: NLP de palabras + caracteres + entidades
+python -m src.models.train_v4_nlp
+```
+
+Los ejemplos adicionales de `objetivos_stats` están en `data/raw/objetivos_stats_train.csv` y `data/raw/objetivos_stats_test.csv`. **No uses los conjuntos de prueba históricos para seleccionar ajustes nuevos**. No se recomienda reentrenar antes de recibir y validar la actualización pendiente del equipo.
+
+### 4.6. Ejecutar las pruebas
+
+Pruebas unitarias y de integración:
+
+```powershell
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+Pruebas conversacionales y HTTP:
+
+```powershell
+python tests/run_conversation_tests.py --modelo v4
+$env:UMABOT_MODELO = "v4"
 python tests/test_api.py
 ```
 
-Las pruebas HTTP utilizan el cliente de pruebas de FastAPI, por lo que no requieren iniciar Uvicorn previamente. Las evidencias de las últimas ejecuciones se conservan en `data/processed/etapa54/`.
+Pruebas específicas de las últimas etapas:
+
+```powershell
+python tests/test_etapa8_estado_filtros.py
+python tests/test_etapa9_seguimientos.py
+python tests/test_etapa10_f2p.py
+python tests/test_etapa11_mazos.py
+python tests/test_etapa12_nlp.py
+```
+
+Las pruebas HTTP usan el cliente de pruebas de FastAPI y no necesitan un servidor Uvicorn en ejecución. Los resultados históricos de clasificación y las evidencias se encuentran en `data/processed/`. También puedes consultar la evaluación diagnóstica previa (Etapa 6), que **no representa todavía el cierre de v4.0**.
 
 ## 5. Estructura del proyecto
 
 ```text
 UMA-MUSUME-CHATBOT/
-├── artifacts/           # Tres modelos entrenados
+├── artifacts/                    # Modelos original, reforzado, V3 y V4
 ├── data/
-│   ├── raw/             # Entrenamiento, prueba y refuerzo
-│   ├── game/            # Catálogo y plantillas de respuesta
-│   ├── challenge/       # Evaluación adicional de la Etapa 3
-│   ├── processed/       # Métricas, errores y pruebas
-│   ├── source/          # Archivos Excel de origen
-│   ├── versions/        # Respaldo de DBCv2
-│   └── legacy/          # Datos históricos del compañero
-├── docs/                # Documentación técnica por etapa
-├── notebooks/           # Espacio para experimentación
-├── scripts/             # Exportación de Excel
+│   ├── raw/                     # Datasets, refuerzo y objetivos_stats
+│   ├── game/                    # Personajes, cartas, efectos, JSON de intenciones
+│   ├── challenge/               # Evaluación adicional histórica
+│   ├── processed/               # Métricas, resultados y políticas de confianza
+│   ├── source/                  # Excel DBCv3 y DBCv4_etapa10
+│   ├── versions/                # Versiones históricas de los datos
+│   └── legacy/                  # Datos originales del equipo
+├── docs/                        # Documentación detallada de cada etapa
+├── frontend/
+│   ├── app_frontend.py          # Interfaz Streamlit
+│   ├── avatar.png               # Recurso gráfico
+│   └── requirements.txt         # Dependencias visuales
+├── notebooks/                   # Experimentación académica
+├── scripts/                     # Exportación de Excel
 ├── src/
-│   ├── api/             # FastAPI y sesiones
-│   ├── conversation/    # Diálogo, confianza, contexto y recomendación
-│   ├── evaluation/      # Diagnósticos y métricas
-│   ├── models/          # Entrenamiento y adaptador predictivo
-│   ├── preprocessing/   # Vectorización de texto
-│   ├── utils/           # Carga de datos
-│   └── chat_console.py  # Interfaz de consola
-├── tests/               # Pruebas automáticas
+│   ├── api/                     # FastAPI y sesiones
+│   ├── conversation/            # Diálogo, contexto, recomendador y mazos
+│   ├── evaluation/              # Experimentos, métricas, evaluación
+│   ├── models/                  # Entrenamiento y predictor
+│   ├── preprocessing/           # TF-IDF y enmascaramiento de entidades
+│   ├── utils/                   # Carga de datos
+│   └── chat_console.py          # Consola
+├── tests/                       # Pruebas automatizadas
+├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
 ## 6. Etapas de desarrollo
 
-### Etapa 1 — Integración del NLP y gestor conversacional
+La numeración es **continua desde el inicio del proyecto**. Las etapas 7 a 12 representan el desarrollo en preparación de v4.0, aunque el proyecto se distribuye por ahora como **v3.8**.
 
-Se unificó el clasificador TF-IDF + SVM calibrado con el gestor de diálogo, contexto y conocimiento desarrollado por el equipo. Se sustituyó el predictor provisional mediante `predictor_adapter.py`, se organizaron los datos y se habilitó una consola funcional. El modelo inicial se entrenó con 425 ejemplos y se comprobó con las 34 pruebas conversacionales originales.
+### Etapa 1 — Integración del NLP y el gestor conversacional
 
-Referencias: [documentación del dataset](docs/DATASET.md), `src/models/train.py`, `src/models/predictor_adapter.py` y `src/chat_console.py`. No existe un informe independiente de Etapa 1 en la carpeta `docs/` de esta entrega.
+Se conectó TF-IDF y SVM calibrado con el gestor de diálogo, contexto y base de conocimiento. Se organizó el código y se habilitó el chat por consola. Referencias: [dataset](docs/DATASET.md), `src/models/train.py` y `src/models/predictor_adapter.py`.
 
 ### Etapa 2 — Diagnóstico y evaluación del NLP
 
-Se compararon regresión logística, SVM lineal y SVM calibrado mediante validación cruzada, se analizaron errores y matrices de confusión y se auditaron duplicados y similitudes entre datasets. También se estudió la relación entre cobertura y exactitud al aplicar distintos umbrales de confianza. Se conservaron el modelo y la política desplegados.
+Se compararon clasificadores con validación cruzada, se auditaron duplicados y se estudiaron matrices de confusión y errores. [Documentación de la Etapa 2](docs/ETAPA_2_DIAGNOSTICO.md).
 
-Documentación: [Etapa 2 — Diagnóstico reproducible](docs/ETAPA_2_DIAGNOSTICO.md).
+### Etapa 3 — Refuerzo y evaluación adicional
 
-### Etapa 3 — Refuerzo del entrenamiento y nueva evaluación
+Se sumaron 73 ejemplos de entrenamiento y se creó un conjunto adicional de 68 preguntas para analizar errores y registrar una versión reforzada. [Documentación de la Etapa 3](docs/ETAPA_3_REFUERZO_EVALUACION.md).
 
-Se añadieron 73 ejemplos etiquetados para reforzar las intenciones problemáticas, generando un segundo modelo con 498 ejemplos de entrenamiento. Se prepararon 68 preguntas adicionales, cuatro por intención, separadas del entrenamiento para evaluar la nueva variante. El refuerzo mejoró el F1 macro de validación cruzada de 70.31 % a 73.39 %; las preguntas adicionales produjeron 82.35 % de exactitud. Se conservaron los modelos y datos anteriores.
+### Etapa 4 — Servicio HTTP FastAPI
 
-Documentación: [Etapa 3 — Refuerzo y evaluación](docs/ETAPA_3_REFUERZO_EVALUACION.md).
+Se incorporaron `/api/health`, `/api/chat` y `/api/reset`, sesiones aisladas, validación y pruebas HTTP. [Documentación de la Etapa 4](docs/ETAPA_4_API_FRONTEND.md).
 
-### Etapa 4 — API para integración con el frontend
+### Etapa 5 — Base DBCv3, confianza, contexto y recomendaciones
 
-Se incorporó FastAPI para comunicar el chatbot con interfaces externas mediante HTTP. Se implementaron endpoints de salud, conversación y reinicio, sesiones aisladas por UUID, validación de entradas y configuración CORS. Se agregaron pruebas de integración y una guía para el frontend.
+Se actualizó el dataset, se entrenó V3 con 583 ejemplos, se incorporaron decisiones por confianza y margen, aclaraciones, persistencia de preferencias y un recomendador por compatibilidad. Documentación detallada: [5.1 Base y entrenamiento](docs/ETAPA_5_1_DBCV3.md), [5.2 Confianza](docs/ETAPA_5_2_CONFIANZA.md), [5.3 Contexto](docs/ETAPA_5_3_CONTEXTO.md) y [5.4 Recomendaciones](docs/ETAPA_5_4_RECOMENDACIONES.md).
 
-Documentación: [Etapa 4 — API y frontend](docs/ETAPA_4_API_FRONTEND.md).
+### Etapa 6 — Evaluación diagnóstica del sistema
 
-### Etapa 5 — Actualización V3, confianza, contexto y calidad de respuestas
+Se incorporaron herramientas para medir clasificación, confianza, conversaciones, API y tiempos de respuesta. La rúbrica de calidad humana quedó pendiente; **este diagnóstico no constituye la evaluación integral final de v4.0**. [Documentación de la Etapa 6](docs/ETAPA_6_EVALUACION_INTEGRAL.md).
 
-Esta etapa consolidó el sistema actual. Se integró DBCv3, se corrigió el exportador de Excel y se compararon las variantes de 510 y 583 ejemplos, seleccionando el SVM calibrado reforzado por su F1 macro en validación cruzada. Después se implementó el gestor de confianza, que acepta clasificaciones con probabilidad estimada de al menos 45 % y margen mínimo de 20 puntos porcentuales; ante incertidumbre solicita aclarar o reformular. El límite de 25 % para distinguir ambas acciones es heurístico.
+### Etapa 7 — Integración del frontend Streamlit
 
-El gestor de contexto se amplió para recordar preferencias, recuperar referencias implícitas, resolver selecciones pendientes y permitir cambios de tema. Finalmente, se incorporó un recomendador que utiliza aptitudes y filtros para ordenar cartas, explica sus beneficios y conserva las restricciones al solicitar más opciones. Se documentaron en español los módulos y funciones nuevos o modificados durante estas mejoras.
+Se integró la interfaz visual del equipo y su avatar, se prepararon dependencias adicionales y se validó el contrato con FastAPI. [Plan de integración y desarrollo](docs/VERSION_4_0_PLAN.md).
 
-Documentación detallada de los componentes de esta etapa:
+### Etapa 8 — Corrección de estado y filtros
 
-- [Actualización DBCv3 y entrenamiento](docs/ETAPA_5_1_DBCV3.md).
-- [Gestor de confianza](docs/ETAPA_5_2_CONFIANZA.md).
-- [Contexto conversacional avanzado](docs/ETAPA_5_3_CONTEXTO.md).
-- [Personalización de recomendaciones](docs/ETAPA_5_4_RECOMENDACIONES.md).
+Se impidió que «mazo» se interpretara como estadística, se corrigieron filtros que quedaban heredados entre personajes, se redujo la confusión entre carta y personaje homónimos y se protegió el contexto ante búsquedas fallidas. [Documentación de la Etapa 8](docs/ETAPA_8_ESTADO_FILTROS.md).
 
-### Etapa 6: evaluación integral (experimental)
+### Etapa 9 — Seguimientos, negaciones y sustituciones
 
-Se incorporó un evaluador reproducible para clasificación, confianza, conversaciones,
-recomendaciones y API sin modificar los modelos ni los datos de entrenamiento.
+Se mejoraron los cambios contextuales de escenario y rareza; se distinguió entre no tener ninguna SSR y no tener todas, y se ofrecieron sustitutos orientativos SR por rol. [Documentación de la Etapa 9](docs/ETAPA_9_SEGUIMIENTOS_NEGACIONES.md).
 
-```powershell
-$env:UMABOT_MODELO = "v3"
-python -m src.evaluation.evaluacion_integral --modelo v3 --peticiones 25
-python -m unittest discover -s tests -p 'test_evaluacion_integral.py'
-```
+### Etapa 10 — Datos F2P estructurados
 
-Resultados: [`data/processed/etapa6/v3/`](data/processed/etapa6/v3/).
-Metodología y limitaciones: [`docs/ETAPA_6_EVALUACION_INTEGRAL.md`](docs/ETAPA_6_EVALUACION_INTEGRAL.md).
-Los conjuntos y conversaciones de esta etapa no son datos ciegos nuevos; la
-evaluación humana de calidad debe completarse antes de declarar validada la utilidad.
+Se creó `DBCv4_etapa10.xlsx`, con los campos `f2p` y `f2p_fuente`, separando disponibilidad F2P de rareza SR. Se mejoró la prioridad de las cartas documentadas y el diagnóstico de filtros sin resultados. [Documentación de la Etapa 10](docs/ETAPA_10_DATOS_F2P.md).
 
-### Etapa 7: Integración Streamlit (inicio del plan v4.0)
+### Etapa 11 — Armador de mazos y objetivos de estadísticas
 
-El frontend entregado por el equipo se encuentra en `frontend/app_frontend.py`. La consola y la API utilizan el modelo V3 por defecto. Para instalar el frontend y arrancar ambos servicios, consulta [Plan e integración v4.0](docs/VERSION_4_0_PLAN.md).
+Se incorporó un armador orientativo de seis espacios por roles, conservando restricciones. Se añadió `objetivos_stats` como **intención número 18**, con 30 ejemplos de entrenamiento y 10 de comprobación, y un modelo exploratorio de 18 clases. [Documentación de la Etapa 11](docs/ETAPA_11_MAZOS_OBJETIVOS.md).
 
-### Etapa 8 — Corrección de estado y filtros (desarrollo v4.0)
+### Etapa 12 — Mejoras de NLP y gestión de confianza
 
-Se corrigió el error por el término «mazo» al interpretarse como estadística,
-la persistencia de restricciones al cambiar de personaje, la asignación
-accidental de cartas homónimas y el guardado de consultas sin resultados.
-El recomendador sigue generando listas de cartas, no mazos optimizados.
+Se compararon representaciones basadas en palabras, caracteres y enmascaramiento de entidades. La variante combinada fue seleccionada y calibrada, y se ajustaron umbrales de aceptación específicos para el modelo V4. Consola y API ahora utilizan **`v4` por defecto**, con posibilidad de seleccionar modelos históricos. Se corrigieron regresiones de conversación y se conservaron el frontend y los endpoints. [Documentación de la Etapa 12](docs/ETAPA_12_NLP_CONFIANZA.md).
 
-```powershell
-python tests/test_etapa8_estado_filtros.py
-python tests/run_conversation_tests.py --modelo v3
-```
+### Etapa 13 — Evaluación final y cierre de v4.0 (pendiente)
 
-Detalles, pruebas y limitaciones: [`docs/ETAPA_8_ESTADO_FILTROS.md`](docs/ETAPA_8_ESTADO_FILTROS.md).
+**No iniciada.** Se realizará después de recibir, auditar e integrar la actualización de datos del equipo. Deberá incluir una evaluación nueva de las **18 intenciones**, conversaciones de varios turnos, comprobación de mazos y recomendaciones, pruebas con Streamlit, valoración humana y documentación de resultados. Solo tras completar y revisar estas evidencias se considerará el cierre de la versión 4.0.
 
-### Etapa 9 — Seguimientos, negaciones, rarezas y sustituciones (v4.0)
+## 7. Historial de versiones
 
-Se corrigieron las continuaciones de escenario y rareza en preguntas breves; ahora
-las negaciones de SSR distinguen entre **no tener ninguna** y **no tener todas**.
-Las solicitudes de alternativas proponen pares orientativos SSR→SR por rol y
-no inventan qué cartas posee el jugador. «Háblame de Gold Ship» se reconoce
-como una consulta nueva.
+La numeración de publicación describe el **estado del proyecto**; los identificadores `original`, `reforzado`, `v3` y `v4` son nombres de **modelos predictivos**, no equivalen necesariamente a versiones públicas independientes.
 
-```powershell
-python tests/test_etapa9_seguimientos.py
-python -m unittest discover -s tests -p "test_*.py"
-python tests/run_conversation_tests.py --modelo v3
-```
-
-Metodología, cambios y limitaciones: [`docs/ETAPA_9_SEGUIMIENTOS_NEGACIONES.md`](docs/ETAPA_9_SEGUIMIENTOS_NEGACIONES.md).
-
-### Etapa 10 — Datos estructurados y recomendaciones F2P (v4.0)
-
-La disponibilidad F2P ya no se infiere de buscar literalmente `f2p` en las notas:
-la fuente activa `data/source/DBCv4_etapa10.xlsx` registra `f2p` y
-`f2p_fuente` en la hoja `Cards`, separando **rareza** de **accesibilidad**.
-Se conservó DBCv3 como respaldo, sin reentrenar el clasificador V3.
-
-Cuando el jugador solicita F2P, las seis cartas con evidencia positiva
-registrada se priorizan frente a cartas de disponibilidad desconocida.
-`sin_ssr` y la rareza explícita continúan siendo restricciones estrictas.
-Ahora la rareza desempata cuando compatibilidad y bonos coinciden. Los
-mensajes sin resultados explican sus filtros, sin eliminar restricciones.
-
-```powershell
-python scripts/export_from_xlsx.py
-python tests/test_etapa10_f2p.py
-python -m unittest discover -s tests -p "test_*.py"
-python tests/run_conversation_tests.py --modelo v3
-```
-
-Consulta [`docs/ETAPA_10_DATOS_F2P.md`](docs/ETAPA_10_DATOS_F2P.md).
-La clasificación F2P procede de notas de DBCv3 y no equivale a una
-verificación actual de disponibilidad; la exclusión de cartas del propio
-personaje sigue pendiente de contrastación con fuentes del juego.
-
-## Etapa 11 — Armador de mazos y objetivos de estadísticas (v4.0)
-
-Se añadió un **mazo orientativo de seis cartas por roles** y la intención `objetivos_stats` (18 intenciones).
-El armador conserva restricciones, explica vacantes y no afirma óptimos.
-Los objetivos de `Characters` son generales y no están desglosados por escenario.
-La calibración de confianza V4 se revisará en la Etapa 12.
-
-```powershell
-python -m src.models.train_v4_intenciones
-python tests/test_etapa11_mazos.py
-python -m src.chat_console --modelo v4
-```
-
-Detalles: [Etapa 11](docs/ETAPA_11_MAZOS_OBJETIVOS.md).
-
-## 7. Versiones del proyecto
-
-La siguiente numeración identifica las tres generaciones de clasificadores conservadas en el proyecto y resume sus avances acumulados en desarrollo. No son etiquetas Git verificadas ni tres copias independientes de la aplicación: los tres modelos utilizan actualmente DBCv3 y el código conversacional compartido. La política nueva de confianza se activa con V3.
-
-| Versión | Avances respecto a la anterior |
+| Versión del proyecto | Avances respecto a la anterior |
 | --- | --- |
-| **v1.0 — Original** | Primera versión funcional: integración de TF-IDF y SVM calibrado con el gestor de diálogo y base de conocimiento; ejecución por consola. |
-| **v2.0 — Reforzada** | Se añadieron 73 ejemplos de refuerzo, diagnósticos reproducibles, evaluación adicional y API HTTP con sesiones independientes. |
-| **v3.0 — Actual** | Se integró DBCv3 y se reentrenó con 583 ejemplos; se incorporaron confianza por margen, aclaraciones pendientes, contexto avanzado y recomendaciones personalizadas y justificadas. |
+| **v1.0** | Primera integración del clasificador supervisado, gestor conversacional y consola. |
+| **v2.0** | Refuerzo de datos, pruebas adicionales y servicio FastAPI con sesiones. |
+| **v3.0** | Base DBCv3, confianza, contexto y recomendaciones personalizadas. |
+| **v3.7** | Integración del frontend, correcciones de contexto, F2P estructurado y armador de mazos con objetivos de estadísticas. |
+| **v3.8 — Actual** | Mejora de NLP mediante enmascaramiento y n-gramas de caracteres, nuevo SVM calibrado de 18 intenciones, ajuste de confianza y activación del modelo interno V4 por defecto. |
+| **v4.0 — Pendiente** | Incorporación de la nueva base y evaluación integral final; todavía no se declara publicada. |
 
-Para comparar los clasificadores desde la consola:
+### Modelos disponibles para experimentación
 
-| Versión | Argumento `--modelo` | Artefacto |
+| Argumento | Artefacto | Observación |
 | --- | --- | --- |
-| v1.0 | `original` | `artifacts/mejor_modelo.joblib` |
-| v2.0 | `reforzado` | `artifacts/modelo_reforzado_etapa3.joblib` |
-| v3.0 | `v3` | `artifacts/modelo_v3.joblib` |
+| `original` | `artifacts/mejor_modelo.joblib` | Baseline histórico. |
+| `reforzado` | `artifacts/modelo_reforzado_etapa3.joblib` | Refuerzo inicial. |
+| `v3` | `artifacts/modelo_v3.joblib` | 17 intenciones y política de confianza V3. |
+| **`v4`** | `artifacts/modelo_v4_etapa12.joblib` | **18 intenciones; modelo predeterminado de la aplicación v3.8.** |
 
-## 8. Resultados y estado de evaluación
+Se conserva también `artifacts/modelo_v4_etapa11.joblib` para reproducir el experimento exploratorio de la Etapa 11.
 
-| Métrica del clasificador V3 | Validación cruzada (510 ejemplos de referencia) | Prueba DBCv3 (170 ejemplos) |
+## 8. Resultados y evaluación disponible
+
+### Comparación de representaciones de NLP (Etapa 12)
+
+Validación cruzada estratificada de cinco particiones sobre los **613 ejemplos de entrenamiento**:
+
+| Variante | Accuracy fuera de partición | F1 macro fuera de partición |
 | --- | ---: | ---: |
-| Accuracy | 78.04 % | 92.35 % |
-| Precision macro | 79.13 % | 93.04 % |
-| Recall macro | 78.04 % | 92.35 % |
-| F1 macro | 78.32 % | 92.17 % |
-| Top-3 Accuracy | 92.16 % | 99.41 % |
+| TF-IDF de palabras (1–2) | 76.02 % | 75.44 % |
+| Palabras + caracteres (3–5) | 79.12 % | 78.66 % |
+| **Enmascaramiento + palabras + caracteres** | **81.40 %** | **81.33 %** |
 
-La prueba de DBCv3 incluye 136 preguntas utilizadas en evaluaciones anteriores. En el desafío de 68 preguntas previamente evaluado, V3 obtuvo 80.88 % de exactitud. Por tanto, no debe interpretarse el 92.35 % como rendimiento independiente en producción.
+En el ajuste de confianza del modelo V4 se seleccionaron: **confianza mínima 0.50**, **margen mínimo 0.25** y límite inferior heurístico **0.25** para reformulación. Durante la selección se observó **65.74 % de cobertura directa** y **93.55 % de exactitud entre aceptadas**; al tratarse de los datos empleados para elegir la política, **no son estimaciones ciegas**.
 
-La selección de la política de confianza sobre predicciones fuera de partición produjo 67.25 % de cobertura y 90.96 % de exactitud entre mensajes aceptados directamente. Estos son resultados de ajuste de la política, no la exactitud global del clasificador ni una evaluación independiente del diálogo.
+### Comprobaciones históricas y funcionales
 
-| Pruebas de regresión de Etapa 5.4 | Resultado registrado |
+La Etapa 12 registró en conjuntos **ya utilizados previamente** una exactitud de **95.29 %** sobre 170 preguntas de DBCv3, **86.76 %** sobre 68 preguntas adicionales y **80.00 %** sobre diez ejemplos focalizados de `objetivos_stats`. **Estas cifras no deben presentarse como evaluación final independiente.**
+
+| Pruebas registradas en la Etapa 12 | Resultado |
 | --- | ---: |
+| Nuevas pruebas de NLP y confianza | 8/8 |
+| Pruebas unitarias y de integración | 65/65 |
 | Turnos conversacionales originales | 34/34 |
-| Gestor de confianza | 4/4 |
-| Contexto avanzado | 6/6 |
-| Recomendaciones | 6/6 |
 | Grupos de pruebas HTTP | 4/4 |
 
-Resultados disponibles en `data/processed/etapa51/`, `data/processed/etapa52/` y `data/processed/etapa54/`.
+Las pruebas funcionales comprueban escenarios concretos; **no demuestran por sí solas la calidad estratégica de las recomendaciones ni la generalización a usuarios reales**. Metodología y evidencias: [Etapa 12](docs/ETAPA_12_NLP_CONFIANZA.md) y `data/processed/etapa12/`.
 
-## 9. Próxima etapa
+## 9. Trabajo pendiente antes de publicar v4.0
 
-1. Analizar errores/near-duplicados y evaluar frases nuevas sin tocar test antiguo.
-2. Afinar el rechazo `fuera_dominio` frente a `desconocido` con validación.
-3. Crear API por sesión para frontend y tests de integración HTTP.
-4. Completar notebook de comparación de dos clasificadores y documentación de procedencia.
+1. Recibir la nueva base de datos, verificar su esquema, procedencia, consistencia y compatibilidad con el catálogo e intenciones actuales.
+2. Actualizar los archivos derivados, preservar un respaldo y decidir si es necesario reentrenar y recalibrar la política de confianza.
+3. Definir y reservar **nuevas** preguntas y conversaciones de evaluación para las 18 intenciones, evitando solapamiento y ajustes sobre datos de prueba.
+4. Evaluar clasificación, detección fuera del dominio, gestión de confianza, seguimiento contextual, mazos, recomendaciones y experiencia de uso desde Streamlit.
+5. Completar la evaluación humana y el reporte de cierre. **Hasta entonces, el proyecto se identifica como v3.8.**
 
-## 10. Documentación y procedencia
+## 10. Documentación, procedencia y aviso
 
-Consultar [DATASET.md](docs/DATASET.md) para la organización y procedencia de los datos y los informes enlazados en cada etapa para reproducir experimentos y revisar decisiones técnicas. La verificación completa de fuentes y contenidos del videojuego sigue pendiente. Este es un proyecto académico no oficial y no está afiliado a los desarrolladores del videojuego.
+Toda la documentación detallada se encuentra en [`docs/`](docs/). Consulta [`docs/DATASET.md`](docs/DATASET.md) y los documentos vinculados en cada etapa para revisar metodología, decisiones y limitaciones. Los resultados experimentales se conservan en `data/processed/` cuando corresponda.
+
+Proyecto académico no oficial, sin afiliación con los desarrolladores de **Uma Musume Pretty Derby**. La información del catálogo debe contrastarse con las reglas y actualizaciones del juego antes de utilizarla como referencia definitiva.

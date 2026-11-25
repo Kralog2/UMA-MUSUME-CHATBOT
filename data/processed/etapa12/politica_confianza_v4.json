@@ -1,0 +1,9 @@
+{
+  "minimo": 0.5,
+  "margen_minimo": 0.25,
+  "minimo_aclaracion": 0.25,
+  "cobertura_cv": 0.6574225122349103,
+  "exactitud_aceptadas_cv": 0.9354838709677419,
+  "variante": "mascara_palabras_caracteres",
+  "criterio": "OOF 5 folds; cobertura >= 65%; no test final"
+}

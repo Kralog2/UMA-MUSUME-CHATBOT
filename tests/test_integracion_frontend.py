@@ -26,12 +26,12 @@ class IntegracionFrontendTests(unittest.TestCase):
             self.assertIn(fragmento, codigo)
         ast.parse(codigo)
 
-    def test_modelo_v3_predeterminado(self):
-        """Comprueba que consola y API utilizan V3 salvo selección explícita."""
+    def test_modelo_v4_predeterminado(self):
+        """Comprueba que consola y API utilizan V4 salvo selección explícita."""
         api = (ROOT / "src/api/app.py").read_text(encoding="utf-8")
         consola = (ROOT / "src/chat_console.py").read_text(encoding="utf-8")
-        self.assertIn('os.getenv("UMABOT_MODELO", "v3")', api)
-        self.assertIn('default="v3"', consola)
+        self.assertIn('os.getenv("UMABOT_MODELO", "v4")', api)
+        self.assertIn('default="v4"', consola)
 
 
 if __name__ == "__main__":

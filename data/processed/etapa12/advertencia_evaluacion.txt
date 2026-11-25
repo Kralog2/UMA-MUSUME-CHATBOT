@@ -1,0 +1,1 @@
+Estos conjuntos fueron utilizados en etapas anteriores. Son controles de regresión, NO evaluaciones independientes. No ajustar características ni umbrales con ellos.

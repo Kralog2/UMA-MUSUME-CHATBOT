@@ -1,0 +1,9 @@
+texto,intencion,prediccion
+¿Quién es ideal para un jugador sin experiencia?,uma_facil_entrenar,fuera_dominio
+¿Qué tipos de cartas existen en el juego?,cartas_soporte,fuera_dominio
+¿Y para el otro escenario es lo mismo?,pedir_mas_detalle,mejor_escenario
+¿Qué hay?,saludo,mejor_escenario
+dime una uma facilita pa pasar ura finale,uma_facil_entrenar,mejor_escenario
+que diferencia hay entre correr en pasto y correr en arena,distancias_aptitudes,distancia_pista_recomendada
+como influye la letra de aptitud en la velocidad de mi uma,distancias_aptitudes,stats_funcion
+dime las metas de stats de Tokai Teio,info_personaje,objetivos_stats

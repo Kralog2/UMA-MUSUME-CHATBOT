@@ -1,4 +1,7 @@
-"""Ejecuta las conversaciones de conversation_tests.json contra el gestor de diálogo."""
+"""Ejecuta conversaciones de regresión con modelos antiguos o V4 de Etapa 12.
+
+Revisa intención, contenido y estado conversacional en cada turno.
+"""
 
 import json
 import sys
@@ -14,10 +17,11 @@ from src.models.predictor_adapter import construir_predictor
 
 
 def main():
+    """Carga el modelo solicitado y ejecuta todos los turnos de regresión."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--modelo", choices=["original", "reforzado", "v3"], default="original")
+    parser.add_argument("--modelo", choices=["original", "reforzado", "v3", "v4"], default="original")
     args = parser.parse_args()
-    ruta = RAIZ / "artifacts" / {"original":"mejor_modelo.joblib","reforzado":"modelo_reforzado_etapa3.joblib","v3":"modelo_v3.joblib"}[args.modelo]
+    ruta = RAIZ / "artifacts" / {"original":"mejor_modelo.joblib","reforzado":"modelo_reforzado_etapa3.joblib","v3":"modelo_v3.joblib","v4":"modelo_v4_etapa12.joblib"}[args.modelo]
     dm = DialogueManager(construir_predictor(ruta), RAIZ / "data" / "game", seed=0)
     casos = json.load(open(RAIZ / "tests" / "conversation_tests.json", encoding="utf-8"))
     fallos = pasos = 0

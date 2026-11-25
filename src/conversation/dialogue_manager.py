@@ -1,5 +1,6 @@
 """Gestor de diálogo, contexto y recomendaciones del chatbot.
 
+Etapa 12: adapta confianza V4 y permite continuidad contextual comprobable.
 Etapa 11: incorpora mazos orientativos y la intención objetivos_stats.
 
 Etapas 8–10: valida filtros, preserva el estado, separa F2P de rareza y distingue continuaciones,
@@ -71,7 +72,16 @@ class DialogueManager:
         """Inicializa los componentes y el estado necesarios para operar."""
         d = Path(directorio_datos)
         self.predictor = predictor
-        self.gestor_confianza = ConfidenceManager() if getattr(predictor, "politica_v3", False) and umbral is None else None
+        if umbral is None and getattr(predictor, 'politica_v4', False):
+            politica = predictor.configuracion_confianza
+            self.gestor_confianza = ConfidenceManager(
+                minimo=politica['minimo'],
+                margen_minimo=politica['margen_minimo'],
+                minimo_aclaracion=politica['minimo_aclaracion'])
+        elif getattr(predictor, 'politica_v3', False) and umbral is None:
+            self.gestor_confianza = ConfidenceManager()
+        else:
+            self.gestor_confianza = None
         self.diagnostico = None
         self.kb = KnowledgeBase(d)
         self.resp: Dict[str, Any] = json.loads((d / "responses_extra.json").read_text(encoding="utf-8"))
@@ -160,6 +170,13 @@ class DialogueManager:
                 r"\b(?:cartas?|soportes?|mazo|deck)\b", self._norm):
             intent, fuente = "info_personaje", "regla"
 
+        # Etapa 12: si se preguntan aptitudes de alguien que figura solo como
+        # carta de soporte, informar esa limitación en lugar de escoger un tema
+        # ambiguo. No se infiere que la carta sea un personaje entrenable.
+        if intent is None and ent.get('card') and not ent.get('personaje') and re.search(
+                r'\b(?:que|cuales) aptitudes (?:tiene|posee)\b', self._norm):
+            intent, conf, fuente = 'info_personaje', 1.0, 'regla_catalogo'
+
         # Etapa 11: las continuaciones explícitas de cartas deben operar también
         # con el modelo exploratorio V4, cuya política de confianza está pendiente.
         if intent is None and (self.gestor_confianza or tema_intent == 'cartas_recomendadas'):
@@ -196,9 +213,29 @@ class DialogueManager:
                 intent, conf, fuente = tema_intent, 1.0, "contexto"   
             elif candidatos:
                 self.diagnostico = self.gestor_confianza.evaluar(candidatos)
-                if self.diagnostico["accion"] != "aceptar":
+                # Etapa 12: recuperar tema anterior SOLO con evidencia de continuación,
+                # entre las dos primeras clases y sin una nueva entidad de personaje.
+                # No forzar una etiqueta basándonos únicamente en su probabilidad.
+                indices = dict(candidatos[:2])
+                marcador = bool(re.match(r'^(?:y|para|pero|entonces|respecto a|sobre eso)\b', self._norm))
+                misma_entidad = (not ent.get('personaje') or
+                                 ent['personaje'] == ctx.slots.get('personaje'))
+                continuar = (self.diagnostico['accion'] == 'aclarar' and
+                             tema_intent in indices and tema_intent in ENTIDAD_REPETIBLE and
+                             len(self._norm.split()) <= 12 and marcador and misma_entidad and
+                             not re.search(r'\b(?:hablame|cuentame|dime|explicame)\b',self._norm))
+                if continuar:
+                    intent, conf, fuente = tema_intent, indices[tema_intent], 'contexto_confianza'
+                    self.diagnostico['accion'] = 'aceptar_contexto'
+                    self.diagnostico['motivo'] = 'continuidad con tema previo y top-2'
+                if self.diagnostico['accion'] not in ('aceptar', 'aceptar_contexto'):
                     # No contaminar slots ni tema con una clasificación incierta.
-                    if self.diagnostico["accion"] == "aclarar":
+                    if self.diagnostico["accion"] == "aclarar" and ctx.desconocidos_seguidos >= 1 and not ent:
+                        # Dos mensajes consecutivos sin información reconocible:
+                        # ofrecer ayuda en vez de repetir alternativas al azar.
+                        respuesta = self._h_desconocido(ent)
+                        fuente = "ayuda_contextual"
+                    elif self.diagnostico["accion"] == "aclarar":
                         respuesta = self._pregunta_confianza(candidatos)
                         opciones = [i for i, _ in candidatos[:2]]
                         if all(i in ETIQUETAS for i in opciones):

@@ -1,8 +1,10 @@
-"""Adaptador de SVM calibrado a intención y Top-K del diálogo.
+"""Carga los modelos supervisados y adapta sus salidas al gestor de diálogo.
 
-Etapa 11: permite modelo de 18 intenciones; sus umbrales se revisarán en Etapa 12.
+Etapa 12: reconoce la política de confianza específica de V4 y conserva
+la compatibilidad con los modelos históricos y la interfaz Top-K.
 """
 from pathlib import Path
+import json
 import joblib
 import numpy as np
 
@@ -34,5 +36,12 @@ def construir_predictor(ruta_modelo=None):
 
     predictor.top_k=top_k
     predictor.politica_v3=ruta.name == "modelo_v3.joblib"
+    predictor.politica_v4=ruta.name == "modelo_v4_etapa12.joblib"
+    predictor.configuracion_confianza = None
+    if predictor.politica_v4:
+        politica=ROOT / 'data/processed/etapa12/politica_confianza_v4.json'
+        if not politica.is_file():
+            raise FileNotFoundError(f"Falta la política de confianza V4: {politica}")
+        predictor.configuracion_confianza=json.loads(politica.read_text(encoding='utf-8'))
     predictor.modelo=modelo
     return predictor

@@ -1,0 +1,7 @@
+modelo,conjunto,n,accuracy,f1_macro
+v4_etapa11,dbc_v3_test_170_historico,170,0.9,0.853024100331948
+v4_etapa11,reto_etapa3_68_historico,68,0.8235294117647058,0.7833493666827
+v4_etapa11,objetivos_10_sintetico,10,0.7,0.20588235294117646
+v4_etapa12,dbc_v3_test_170_historico,170,0.9529411764705882,0.9028149718462457
+v4_etapa12,reto_etapa3_68_historico,68,0.8676470588235294,0.8692513368983957
+v4_etapa12,objetivos_10_sintetico,10,0.8,0.2962962962962963

@@ -1,0 +1,4 @@
+texto,intencion,prediccion
+Para este personaje dime objetivos de stats,objetivos_stats,info_personaje
+¿Cuál es la meta de Guts para mi uma?,objetivos_stats,distancia_pista_recomendada
+¿Qué cantidades recomiendan para Speed y Power?,objetivos_stats,stats_funcion
